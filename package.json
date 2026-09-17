@@ -1,0 +1,9 @@
+{
+  "name": "lora25-urban-legacy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:smoke": "node --test tests/bootstrap-smoke.test.js"
+  }
+}
