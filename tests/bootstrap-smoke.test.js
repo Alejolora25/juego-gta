@@ -46,7 +46,7 @@ test('boss lock-on remains wired through HTML, controls, HUD and bootstrap', asy
   assert.match(bootstrap, /controls\.onLock=locked=>combatLock=locked/);
 });
 
-test('stage three renderer uses the adaptive visual profile without changing gameplay', async () => {
+test('adaptive renderer uses the visual profile without changing gameplay', async () => {
   const bootstrap = await read('src/presentation/GameBootstrap.js');
   assert.match(bootstrap, /selectVisualProfile/);
   assert.match(bootstrap, /visualProfile\.pixelRatio/);
@@ -56,4 +56,16 @@ test('stage three renderer uses the adaptive visual profile without changing gam
   assert.match(bootstrap, /visualProfile\.fogDensity/);
   assert.match(bootstrap, /THREE\.ACESFilmicToneMapping/);
   assert.match(bootstrap, /THREE\.SRGBColorSpace/);
+});
+
+test('visual stage keeps the existing world contract and current map', async () => {
+  const world = await read('src/infrastructure/rendering/WorldFactory.js');
+  assert.match(world, /return\{player,limbs,npcs,boss,obstacles,mat\}/);
+  assert.match(world, /player\.position\.set\(0,0,120\)/);
+  assert.match(world, /boss\.position\.set\(0,0,-112\)/);
+  assert.match(world, /MeshStandardMaterial/);
+  assert.match(world, /MeshPhysicalMaterial/);
+  assert.match(world, /CanvasTexture/);
+  assert.match(world, /SRGBColorSpace/);
+  assert.match(world, /toneMapped:false/);
 });
