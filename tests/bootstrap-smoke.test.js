@@ -45,3 +45,15 @@ test('boss lock-on remains wired through HTML, controls, HUD and bootstrap', asy
   assert.match(hud, /this\.\$\(['"]lock['"]\)/);
   assert.match(bootstrap, /controls\.onLock=locked=>combatLock=locked/);
 });
+
+test('stage three renderer uses the adaptive visual profile without changing gameplay', async () => {
+  const bootstrap = await read('src/presentation/GameBootstrap.js');
+  assert.match(bootstrap, /selectVisualProfile/);
+  assert.match(bootstrap, /visualProfile\.pixelRatio/);
+  assert.match(bootstrap, /visualProfile\.shadowMapSize/);
+  assert.match(bootstrap, /visualProfile\.shadowRadius/);
+  assert.match(bootstrap, /visualProfile\.exposure/);
+  assert.match(bootstrap, /visualProfile\.fogDensity/);
+  assert.match(bootstrap, /THREE\.ACESFilmicToneMapping/);
+  assert.match(bootstrap, /THREE\.SRGBColorSpace/);
+});
