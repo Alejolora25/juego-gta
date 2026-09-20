@@ -69,3 +69,12 @@ test('visual stage keeps the existing world contract and current map', async () 
   assert.match(world, /SRGBColorSpace/);
   assert.match(world, /toneMapped:false/);
 });
+
+
+test('startup failures are visible instead of leaving a dead play button', async () => {
+  const html = await read('index.html');
+  assert.match(html, /addEventListener\(["']error["']/);
+  assert.match(html, /addEventListener\(["']unhandledrejection["']/);
+  assert.match(html, /Error cargando motor/);
+  assert.match(html, /getElementById\(["']loading["']\)/);
+});
