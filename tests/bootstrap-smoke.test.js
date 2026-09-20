@@ -78,3 +78,17 @@ test('startup failures are visible instead of leaving a dead play button', async
   assert.match(html, /Error cargando motor/);
   assert.match(html, /getElementById\(["']loading["']\)/);
 });
+
+
+test('stage 2 map exposes Pasto and Europe districts without Rapier', async () => {
+  const world = await read('src/infrastructure/rendering/WorldFactory.js');
+  const boot = await read('src/presentation/GameBootstrap.js');
+  assert.match(world, /Pasto Centro/);
+  assert.match(world, /Canales/);
+  assert.match(world, /Distrito Industrial/);
+  assert.match(world, /Mirador Blanco/);
+  assert.match(world, /Arena Firewall/);
+  assert.match(world, /return\{player,limbs,npcs,boss,obstacles,mat,sectors\}/);
+  assert.match(boot, /Math\.abs\(x\)>185/);
+  assert.doesNotMatch(world + boot, /Rapier|RAPIER/);
+});
