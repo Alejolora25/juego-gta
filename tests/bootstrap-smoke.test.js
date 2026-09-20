@@ -60,7 +60,7 @@ test('adaptive renderer uses the visual profile without changing gameplay', asyn
 
 test('visual stage keeps the existing world contract and current map', async () => {
   const world = await read('src/infrastructure/rendering/WorldFactory.js');
-  assert.match(world, /return\{player,limbs,npcs,boss,obstacles,mat\}/);
+  assert.match(world, /return\\{player,limbs,npcs,boss,obstacles,mat(?:,sectors)?\\}/);
   assert.match(world, /player\.position\.set\(0,0,120\)/);
   assert.match(world, /boss\.position\.set\(0,0,-112\)/);
   assert.match(world, /MeshStandardMaterial/);
