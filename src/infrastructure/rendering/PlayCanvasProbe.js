@@ -6,6 +6,8 @@ import {configureStage4Lighting,createStage4Sky} from './Stage4Lighting.js';
 import {Stage4AssetPipeline} from './Stage4AssetPipeline.js';
 import {Stage4CharacterSystem} from './Stage4CharacterSystem.js';
 import {STAGE4_ASSETS} from './Stage4AssetCatalog.js';
+import {Stage4LodManager} from './Stage4LodManager.js';
+import {Stage4PerformanceBudget} from './Stage4PerformanceBudget.js';
 
 export class PlayCanvasProbe {
  constructor(canvas){this.canvas=canvas;this.app=null;this.backend='uninitialized';}
@@ -35,7 +37,12 @@ export class PlayCanvasProbe {
   const npcRecords=[];
   for(const [id,name,position] of [['stage4-juan','Juan',[-2.4,0,-1]],['stage4-sara','Sara',[0,0,-2.8]],['stage4-david','David',[2.4,0,-1]]])npcRecords.push(await characters.spawn({id,name,url:cfg.url,role:'npc',position,scale:[.9,.9,.9]}));
   const wardenRecord=await characters.spawn({id:'stage4-warden',name:'Stage4WardenProbe',url:cfg.url,role:'boss',position:[2.2,0,-4.2],scale:[1.15,1.15,1.15]});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,world,environment,lighting,sky};
+  const mobile=matchMedia('(max-width: 800px)').matches;
+  const lod=new Stage4LodManager(mobile?{near:20,mid:48,far:90}:{near:32,mid:75,far:140});
+  const performance=new Stage4PerformanceBudget({mobile});
+  const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
+  this.app.on('update',dt=>{performance.frame(dt);lod.update(camera.getPosition(),dynamicEntities);});
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
 }
