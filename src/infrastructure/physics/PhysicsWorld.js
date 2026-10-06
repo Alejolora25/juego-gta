@@ -31,7 +31,8 @@ export class PhysicsWorld{
   this.staticColliders.push(collider);return collider;
  }
  addObstacles(obstacles=[]){obstacles.forEach(o=>this.addObstacle(o));return this.staticColliders}
- canMoveTo(position,bounds=185){if(!this.ready)return null;if(Math.abs(position.x)>bounds||Math.abs(position.z)>bounds)return false;const radius=.55;for(const c of this.staticColliders){const p=c.parent()?.translation?.();if(!p)continue;const h=c.halfExtents?.();if(!h)continue;if(Math.abs(position.x-p.x)<h.x+radius&&Math.abs(position.z-p.z)<h.z+radius)return false}return true}
+ resolveMovement(current,desired,bounds=185){if(!this.ready)return null;const radius=.55,clamp=v=>Math.max(-bounds,Math.min(bounds,v));const blocked=(x,z)=>{for(const c of this.staticColliders){const p=c.parent()?.translation?.();if(!p)continue;const h=c.halfExtents?.();if(!h)continue;if(Math.abs(x-p.x)<h.x+radius&&Math.abs(z-p.z)<h.z+radius)return true}return false};let x=clamp(desired.x),z=clamp(desired.z);if(!blocked(x,z))return{x,z};if(!blocked(x,current.z))return{x,z:current.z};if(!blocked(current.x,z))return{x:current.x,z};return{x:current.x,z:current.z}}
+ canMoveTo(position,bounds=185){const r=this.resolveMovement(position,position,bounds);return r===null?null:r.x===position.x&&r.z===position.z}
  syncPlayer(position){if(this.playerBody)this.playerBody.setNextKinematicTranslation({x:position.x,y:position.y+1,z:position.z})}
  step(dt){if(!this.ready)return;this.world.timestep=Math.min(Math.max(dt,1/120),1/30);this.world.step()}
 }
