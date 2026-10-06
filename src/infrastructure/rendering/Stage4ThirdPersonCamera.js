@@ -12,6 +12,6 @@ export class Stage4ThirdPersonCamera {
  }
  lockTarget(player,boss,weight=.34){
   const a=player.getPosition(),b=boss.getPosition(),w=Math.max(0,Math.min(1,weight));
-  this.camera.lookAt(a.x+(b.x-a.x)*w,a.y+this.targetHeight+(b.y-a.y)*w,a.z+(b.z-a.z)*w);
+  this.camera.lookAt(a.x+(b.x-a.x)*w,2.15,a.z+(b.z-a.z)*w);
  }
 }
