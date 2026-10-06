@@ -96,6 +96,6 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
 test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/GameBootstrap.js');assert.match(boot,/Math\.atan2\(dx,-dz\)-cameraYaw/);assert.match(boot,/hud\.objective/);});
 test('mission NPCs remain outside their landmark building footprints',async()=>{const world=await read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
 
-test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-1/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
+test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-2/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
 
 test('GPS arrow maps camera-forward bearing to visual up and compass clutter is removed',async()=>{const html=await read('index.html');const hud=await read('src/presentation/HudController.js');assert.doesNotMatch(html,/id=["']compass["']/);assert.doesNotMatch(html,/id=["']heading["']/);assert.match(hud,/angle-Math\.PI\/2/);});
