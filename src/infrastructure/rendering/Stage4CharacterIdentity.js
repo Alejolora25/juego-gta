@@ -16,6 +16,9 @@ export function applyStage4Identity(entity,role){
   piece(root,'AlejandroJacket','box',[.78,.72,.34],[0,1.45,.08],navy);
   piece(root,'AlejandroTechPanel','box',[.34,.18,.05],[0,1.55,-.31],cyan);
   piece(root,'AlejandroBackpack','box',[.58,.62,.22],[0,1.42,.32],navy);
+  piece(root,'AlejandroShoulderL','capsule',[.16,.42,.16],[-.48,1.48,.02],navy);
+  piece(root,'AlejandroShoulderR','capsule',[.16,.42,.16],[.48,1.48,.02],navy);
+  piece(root,'AlejandroWristTech','box',[.18,.12,.18],[.48,1.03,-.08],cyan);
  }
  if(role==='boss'){
   const armor=material(new pc.Color(.035,.045,.06),{metalness:.82,gloss:.72});
@@ -25,6 +28,13 @@ export function applyStage4Identity(entity,role){
   piece(root,'WardenShoulderR','box',[.48,.26,.58],[.67,1.83,.02],armor);
   piece(root,'WardenVisor','box',[.68,.12,.09],[0,2.35,-.35],red);
   piece(root,'WardenCore','box',[.28,.24,.06],[0,1.58,-.45],red);
+  piece(root,'WardenHelmet','sphere',[.72,.52,.68],[0,2.3,.02],armor);
+  piece(root,'WardenCrownL','cone',[.16,.58,.16],[-.38,2.72,.08],armor).setLocalEulerAngles(0,0,-18);
+  piece(root,'WardenCrownR','cone',[.16,.58,.16],[.38,2.72,.08],armor).setLocalEulerAngles(0,0,18);
+  piece(root,'WardenForearmL','capsule',[.23,.62,.23],[-.73,1.25,.02],armor);
+  piece(root,'WardenForearmR','capsule',[.23,.62,.23],[.73,1.25,.02],armor);
+  piece(root,'WardenPowerL','sphere',[.14,.14,.14],[-.73,1.15,-.2],red);
+  piece(root,'WardenPowerR','sphere',[.14,.14,.14],[.73,1.15,-.2],red);
  }
  return entity;
 }
