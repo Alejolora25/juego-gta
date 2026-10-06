@@ -29,7 +29,7 @@ test('stage 4 PlayCanvas engine initializes in a real browser',async({page})=>{
   const m=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4');
   const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);
   const probe=new m.PlayCanvasProbe(canvas);
-  try{await probe.init();const started=probe.start();await new Promise(r=>setTimeout(r,120));return {ok:true,backend:started.backend,actor:started.actor.name};}
+  try{await probe.init();const started=await probe.start();await new Promise(r=>setTimeout(r,120));return {ok:true,backend:started.backend,actor:started.actor.name};}
   catch(e){return {ok:false,error:e?.message||String(e)};}finally{probe.destroy();canvas.remove();}
  });
  expect(result.ok,result.error).toBe(true);expect(['webgpu','webgl2']).toContain(result.backend);expect(result.actor).toBe('Stage4ActorProbe');expect(errors).toEqual([]);
