@@ -11,10 +11,11 @@ import {Stage4PerformanceBudget} from './Stage4PerformanceBudget.js';
 import {Stage4ThirdPersonCamera} from './Stage4ThirdPersonCamera.js';
 import {Stage4PlayerController} from './Stage4PlayerController.js';
 import {PhysicsWorld} from '../physics/PhysicsWorld.js?v=20261006-1';
+import {Stage4ControlsBridge} from '../input/Stage4ControlsBridge.js';
 import {STAGE4_CHARACTER_PROFILES as profiles} from './Stage4CharacterProfiles.js';
 
 export class PlayCanvasProbe {
- constructor(canvas){this.canvas=canvas;this.app=null;this.backend='uninitialized';}
+ constructor(canvas,{controls=null}={}){this.canvas=canvas;this.controls=controls;this.app=null;this.backend='uninitialized';}
  async init(){
   const device=await pc.createGraphicsDevice(this.canvas,{deviceTypes:['webgpu','webgl2'],antialias:true,alpha:false,powerPreference:'high-performance'});
   this.backend=device.isWebGPU?'webgpu':'webgl2';
@@ -50,8 +51,9 @@ const physics=new PhysicsWorld();
 const playerController=new Stage4PlayerController(actorRecord.entity,characters,{resolveMovement:(from,to)=>physics.ready?physics.resolveMovement(from,to):to});
 const ensurePhysics=async()=>{try{await physics.init();physics.addFloor(420);physics.addPlayer(actorRecord.entity.getPosition());physics.addBoss(wardenRecord.entity.getPosition());physics.addObstacles(world.obstacles);return true;}catch(error){console.warn('Stage 4 Rapier unavailable; using renderer movement fallback.',error);return false;}};
 void ensurePhysics();
-  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);thirdPersonCamera.update(actorRecord.entity,dt);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,physics,ensurePhysics,world,environment,lighting,sky};
+const controlsBridge=this.controls?new Stage4ControlsBridge(this.controls,thirdPersonCamera):null;
+  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);if(controlsBridge)controlsBridge.update(playerController,dt);thirdPersonCamera.update(actorRecord.entity,dt);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,physics,ensurePhysics,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
 }
