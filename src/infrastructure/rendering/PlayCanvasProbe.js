@@ -50,7 +50,7 @@ const physics=new PhysicsWorld();
 const playerController=new Stage4PlayerController(actorRecord.entity,characters,{resolveMovement:(from,to)=>physics.ready?physics.resolveMovement(from,to):to});
 const ensurePhysics=async()=>{try{await physics.init();physics.addFloor(420);physics.addPlayer(actorRecord.entity.getPosition());physics.addBoss(wardenRecord.entity.getPosition());physics.addObstacles(world.obstacles);return true;}catch(error){console.warn('Stage 4 Rapier unavailable; using renderer movement fallback.',error);return false;}};
 void ensurePhysics();
-  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);thirdPersonCamera.update(actorRecord.entity,dt);});
+  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);thirdPersonCamera.update(actorRecord.entity,dt);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
   this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,physics,ensurePhysics,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
