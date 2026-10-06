@@ -84,3 +84,6 @@ test('Stage 4 characters use independent role-based asset slots',async()=>{const
 
 
 test('Stage 4 character PBR gloss values stay normalized',async()=>{const source=await fs.readFile('src/infrastructure/rendering/Stage4CharacterProfiles.js','utf8');const values=[...source.matchAll(/gloss:(\.?\d+(?:\.\d+)?)/g)].map(m=>Number(m[1]));assert.equal(values.length,5);for(const value of values){assert.ok(value>=0&&value<=1,'gloss must stay in normalized PBR range: '+value);}});
+
+
+test('Stage 4 gives Alejandro and Warden distinct original visual identities',async()=>{const [identity,system]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4CharacterIdentity.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8')]);for(const token of ['AlejandroJacket','AlejandroTechPanel','AlejandroBackpack','WardenChestArmor','WardenShoulderL','WardenShoulderR','WardenVisor','WardenCore'])assert.match(identity,new RegExp(token));assert.match(system,/applyStage4Identity\(entity,role\)/);});
