@@ -78,3 +78,6 @@ test('Stage 4 city uses shared PBR materials windows vegetation and road marking
 
 
 test('Stage 4 asset pipeline deduplicates concurrent GLB loads and cleans failures',async()=>{const source=await fs.readFile('src/infrastructure/rendering/Stage4AssetPipeline.js','utf8');assert.match(source,/this\.pending=new Map\(\)/);assert.match(source,/if\(this\.pending\.has\(name\)\)return this\.pending\.get\(name\)/);assert.match(source,/this\.pending\.delete\(name\)/);assert.match(source,/this\.app\.assets\.remove\(asset\)/);assert.match(source,/isLoading\(name\)/);});
+
+
+test('Stage 4 characters use independent role-based asset slots',async()=>{const [catalog,probe]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4AssetCatalog.js','utf8'),fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8')]);for(const role of ['player','npc','warden'])assert.match(catalog,new RegExp(role+':'));assert.match(catalog,/stage4AssetFor/);assert.match(probe,/stage4AssetFor\('player'\)/);assert.match(probe,/stage4AssetFor\('npc'\)/);assert.match(probe,/stage4AssetFor\('boss'\)/);assert.doesNotMatch(probe,/STAGE4_ASSETS\.humanoid/);});
