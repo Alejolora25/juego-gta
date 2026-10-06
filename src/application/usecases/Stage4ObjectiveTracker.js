@@ -5,7 +5,7 @@ export class Stage4ObjectiveTracker {
   const a=player.getPosition(),b=target.entity.getPosition(),dx=b.x-a.x,dz=b.z-a.z,distance=Math.hypot(dx,dz);
   if(!distance)return {distance:0,angle:0,name:target.name};
   const fx=-Math.sin(cameraYaw),fz=-Math.cos(cameraYaw),tx=dx/distance,tz=dz/distance;
-  const dot=Math.max(-1,Math.min(1,fx*tx+fz*tz)),cross=fz*tx-fx*tz;
+  const dot=Math.max(-1,Math.min(1,fx*tx+fz*tz)),cross=fx*tz-fz*tx;
   return {distance,angle:Math.atan2(cross,dot),name:target.name};
  }
  direction(angle){
