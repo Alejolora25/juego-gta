@@ -92,3 +92,6 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
   assert.match(boot, /Math\.abs\(x\)>185/);
   assert.doesNotMatch(world, /Rapier|RAPIER/);
 });
+
+test('objective GPS uses camera-relative forward bearing',()=>{const boot=read('src/presentation/GameBootstrap.js');assert.match(boot,/Math\.atan2\(dx,-dz\)-cameraYaw/);assert.match(boot,/hud\.objective/);});
+test('mission NPCs remain outside their landmark building footprints',()=>{const world=read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
