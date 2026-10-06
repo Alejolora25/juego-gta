@@ -75,3 +75,6 @@ test('Stage 4 preserves approved Stage 3 movement speeds and boss camera lock he
 
 
 test('Stage 4 city uses shared PBR materials windows vegetation and road markings',async()=>{const [world,materials]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4MaterialLibrary.js','utf8')]);assert.match(world,/Stage4MaterialLibrary/);assert.match(world,/RoadLineV/);assert.match(world,/RoadLineH/);assert.match(world,/_Windows_/);for(const token of ['asphalt','concrete','grass','bark','foliage','window','roadLine'])assert.match(materials,new RegExp('this\\.'+token));assert.match(materials,/useMetalness=true/);assert.match(materials,/emissiveIntensity/);});
+
+
+test('Stage 4 asset pipeline deduplicates concurrent GLB loads and cleans failures',async()=>{const source=await fs.readFile('src/infrastructure/rendering/Stage4AssetPipeline.js','utf8');assert.match(source,/this\.pending=new Map\(\)/);assert.match(source,/if\(this\.pending\.has\(name\)\)return this\.pending\.get\(name\)/);assert.match(source,/this\.pending\.delete\(name\)/);assert.match(source,/this\.app\.assets\.remove\(asset\)/);assert.match(source,/isLoading\(name\)/);});
