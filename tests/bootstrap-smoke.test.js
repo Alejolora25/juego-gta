@@ -105,3 +105,6 @@ test('GPS signed angle is zero whenever camera and objective face the same direc
 
 
 test('public entrypoint cache-busts the signed-angle GPS build',async()=>{const html=await read('index.html');assert.match(html,/GameBootstrap\.js\?v=20261006-3/g);});
+
+
+test('touch combat lock keeps FIJAR/LIBRE UI synchronized',async()=>{const [touch,stage4]=await Promise.all([fs.readFile('src/infrastructure/input/TouchControls.js','utf8'),fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8')]);assert.match(touch,/setLocked\(locked\)/);assert.match(touch,/this\.lockButton\.classList\.toggle\('active',this\.locked\)/);assert.match(touch,/this\.setLocked\(false\)/);assert.match(stage4,/manualCamera\(cameraDelta\).*setLocked\(false\)/);assert.match(stage4,/setLocked\(true\);this\.controls\.setCombat\(true\)/);});
