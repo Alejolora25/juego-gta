@@ -1,5 +1,5 @@
 export class Stage4PlayerController {
- constructor(entity,characters,{characterId='stage4-player',walkSpeed=5.2,runSpeed=8.6,resolveMovement=null}={}){this.entity=entity;this.characters=characters;this.characterId=characterId;this.walkSpeed=walkSpeed;this.runSpeed=runSpeed;this.resolveMovement=resolveMovement;}
+ constructor(entity,characters,{characterId='stage4-player',walkSpeed=7,runSpeed=13,resolveMovement=null}={}){this.entity=entity;this.characters=characters;this.characterId=characterId;this.walkSpeed=walkSpeed;this.runSpeed=runSpeed;this.resolveMovement=resolveMovement;}
  movement(joy,cameraYaw){
   const x=joy?.x??0,y=joy?.y??0,s=Math.sin(cameraYaw),c=Math.cos(cameraYaw);
   const mx=c*x+s*y,mz=-s*x+c*y,length=Math.hypot(mx,mz);
