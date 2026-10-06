@@ -12,7 +12,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,5 +20,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install browser test dependency
+        run: npm install
       - name: Run regression suite
         run: npm test
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run real browser smoke test
+        run: npm run test:browser
