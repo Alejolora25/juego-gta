@@ -11,7 +11,7 @@ export class Stage4CharacterSystem {
   catch(error){entity=createStage4Character({name,villain:role==='boss'});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
   entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});
   const animation=new Stage4AnimationController(entity);
-  const skeletal=new Stage4SkeletalAnimation(entity);skeletal.discover();
+  const skeletal=new Stage4SkeletalAnimation(entity);if(source==='glb')skeletal.configure(this.pipeline.animations(assetId));
   const character={id,name,role,entity,animation,skeletal,source};this.characters.set(id,character);return character;
  }
  get(id){return this.characters.get(id);}
