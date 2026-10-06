@@ -42,3 +42,6 @@ test('Stage 4 bridges gameplay semantics to skeletal GLB clips',async()=>{const 
 
 
 test('Stage 4 world does not duplicate procedural NPCs beside GLB cast',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.doesNotMatch(src,/createStage4Character/);assert.match(src,/const npcs=\[\]/);});
+
+
+test('Stage 4 registers PlayCanvas animation system before spawning GLB actors',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/pc\.AnimComponentSystem/);});
