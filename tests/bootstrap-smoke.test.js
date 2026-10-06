@@ -96,9 +96,12 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
 test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/GameBootstrap.js');assert.match(boot,/camera\.getWorldDirection\(cameraDirection\)/);assert.match(boot,/cameraDirection\.y=0/);assert.match(boot,/dot=THREE\.MathUtils\.clamp/);assert.match(boot,/cross=cameraDirection\.z\*targetX-cameraDirection\.x\*targetZ/);assert.match(boot,/objectiveAngle=Math\.atan2\(cross,dot\)/);assert.match(boot,/hud\.objective/);});
 test('mission NPCs remain outside their landmark building footprints',async()=>{const world=await read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
 
-test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-2/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
+test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-3/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
 
 test('GPS arrow maps camera-forward bearing to visual up and compass clutter is removed',async()=>{const html=await read('index.html');const hud=await read('src/presentation/HudController.js');assert.doesNotMatch(html,/id=["']compass["']/);assert.doesNotMatch(html,/id=["']heading["']/);assert.match(hud,/Math\.abs\(angle\)<\.12\?0:angle/);assert.match(hud,/aligned-Math\.PI\/2/);});
 
 
 test('GPS signed angle is zero whenever camera and objective face the same direction',()=>{const angle=(fx,fz,tx,tz)=>Math.atan2(fz*tx-fx*tz,fx*tx+fz*tz);for(const [x,z] of [[0,-1],[0,1],[1,0],[-1,0],[Math.SQRT1_2,-Math.SQRT1_2]])assert.ok(Math.abs(angle(x,z,x,z))<1e-12);});
+
+
+test('public entrypoint cache-busts the signed-angle GPS build',async()=>{const html=await read('index.html');assert.match(html,/GameBootstrap\.js\?v=20261006-3/g);});
