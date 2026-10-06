@@ -10,7 +10,7 @@ test('Stage 4 PlayCanvas probe is isolated and WebGPU-first with WebGL2 fallback
 });
 test('stable Three.js entrypoint is untouched during engine spike',async()=>{
  const html=await fs.readFile('index.html','utf8');
- assert.match(html,/three@0\.180\.0/);
+ assert.match(html,/three@0\.180\.0/);assert.match(html,/playcanvas@2\.23\.0\/build\/playcanvas\.mjs/);
  assert.match(html,/GameBootstrap\.js\?v=20261006-3/);
 });
 
