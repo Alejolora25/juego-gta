@@ -14,5 +14,7 @@ export class Stage4AssetPipeline {
   const entity=asset.resource.instantiateRenderEntity();entity.name=name;entity.setPosition(...position);entity.setLocalScale(...scale);parent.addChild(entity);return entity;
  }
  async loadAndInstantiate(name,url,options={}){await this.loadGlb(name,url);return this.instantiate(name,options);}
+ animations(name){const asset=this.assets.get(name);return asset?.resource?.animations??[];}
  has(name){return this.assets.has(name);}
+
 }
