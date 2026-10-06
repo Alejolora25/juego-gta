@@ -63,3 +63,6 @@ test('Stage 4 controls bridge reuses approved TouchControls contract',async()=>{
 
 
 test('Stage 4 player controller supports an external Rapier movement resolver',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8');assert.match(src,/resolveMovement=null/);assert.match(src,/this\.resolveMovement\?\./);assert.match(src,/if\(resolved\)this\.entity\.setPosition/);});
+
+
+test('Stage 4 runtime keeps Rapier player and boss bodies synchronized',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/physics\.syncPlayer\(actorRecord\.entity\.getPosition\(\)\)/);assert.match(src,/physics\.syncBoss\(wardenRecord\.entity\.getPosition\(\)\)/);assert.match(src,/physics\.step\(dt\)/);});
