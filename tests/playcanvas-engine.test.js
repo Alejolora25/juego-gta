@@ -51,3 +51,6 @@ test('Stage 4 preserves approved Stage 2 city geometry and sectors',async()=>{co
 
 
 test('Stage 4 cast preserves approved Stage 2 gameplay coordinates',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');for(const position of ['[0,0,108]','[-28,0,74]','[98,0,6]','[-108,0,54]','[0,0,-150]'])assert.ok(src.includes(position),'missing '+position);});
+
+
+test('Stage 4 third-person camera preserves approved camera contract',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4ThirdPersonCamera.js','utf8');assert.match(src,/height=5\.4/);assert.match(src,/distance=8\.5/);assert.match(src,/targetHeight=2\.2/);assert.match(src,/deltaX\*\.008/);assert.match(src,/Math\.pow\(this\.smoothing/);});
