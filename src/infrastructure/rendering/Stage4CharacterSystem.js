@@ -2,6 +2,7 @@ import {createStage4Character} from './Stage4CharacterFactory.js';
 import {Stage4AnimationController} from './Stage4AnimationController.js';
 import {applyCharacterProfile} from './Stage4CharacterProfiles.js';
 import {Stage4SkeletalAnimation} from './Stage4SkeletalAnimation.js';
+import {applyStage4Identity} from './Stage4CharacterIdentity.js';
 
 export class Stage4CharacterSystem {
  constructor({pipeline,root}){this.pipeline=pipeline;this.root=root;this.characters=new Map();}
@@ -9,7 +10,7 @@ export class Stage4CharacterSystem {
   let entity,source='procedural';
   try{entity=await this.pipeline.loadAndInstantiate(assetId,url,{parent:this.root,position,scale});source='glb';}
   catch(error){entity=createStage4Character({name,villain:role==='boss'});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
-  entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});
+  entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});if(role==='player'||role==='boss')applyStage4Identity(entity,role);
   const animation=new Stage4AnimationController(entity);
   const skeletal=new Stage4SkeletalAnimation(entity);if(source==='glb')skeletal.configure(this.pipeline.animations(assetId));
   const character={id,name,role,entity,animation,skeletal,source};this.characters.set(id,character);return character;
