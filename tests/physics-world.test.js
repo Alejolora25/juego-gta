@@ -14,8 +14,13 @@ test('Rapier infrastructure is isolated and explicitly initialized',async()=>{
  assert.match(physics,/addObstacle/);
 });
 
-test('stage 3 does not make Rapier a bootstrap dependency yet',async()=>{
+test('stage 3 attaches Rapier after gameplay startup without blocking play',async()=>{
  const boot=await read('src/presentation/GameBootstrap.js');
- assert.doesNotMatch(boot,/PhysicsWorld|rapier3d|RAPIER/);
+ assert.match(boot,/new PhysicsWorld\(\)/);
+ assert.match(boot,/async function ensurePhysics/);
+ assert.match(boot,/physics\.addFloor\(420\)/);
+ assert.match(boot,/physics\.addPlayer\(world\.player\.position\)/);
+ assert.match(boot,/running=true;last=performance\.now\(\);raf=requestAnimationFrame\(loop\);void ensurePhysics\(\)/);
  assert.match(boot,/\$\('play'\)\.onclick=start/);
+ assert.match(boot,/catch\(error\).*Rapier no disponible/s);
 });
