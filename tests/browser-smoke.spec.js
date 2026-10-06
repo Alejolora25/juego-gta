@@ -34,3 +34,6 @@ test('stage 4 PlayCanvas engine initializes in a real browser',async({page})=>{
  });
  expect(result.ok,result.error).toBe(true);expect(['webgpu','webgl2']).toContain(result.backend);expect(result.actor).toBe('Stage4ActorProbe');expect(errors).toEqual([]);
 });
+
+
+test('stage 4 loads a licensed rigged humanoid GLB in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const [{PlayCanvasProbe},{Stage4AssetPipeline},{STAGE4_ASSETS}]=await Promise.all([import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-glb'),import('./src/infrastructure/rendering/Stage4AssetPipeline.js'),import('./src/infrastructure/rendering/Stage4AssetCatalog.js')]);const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const pipeline=new Stage4AssetPipeline(probe.app);const cfg=STAGE4_ASSETS.humanoid;const entity=await pipeline.loadAndInstantiate(cfg.id,cfg.url,{position:[0,0,0]});return {ok:!!entity,loaded:pipeline.has(cfg.id),name:entity.name};}catch(e){return {ok:false,error:e?.message||String(e)};}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.loaded).toBe(true);expect(result.name).toBe('cesium-man');});
