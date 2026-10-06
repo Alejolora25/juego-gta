@@ -33,3 +33,6 @@ test('Stage 4 protects mobile performance with LOD and adaptive budgets',async()
 
 
 test('Stage 4 character system upgrades GLB actors without losing safe fallbacks',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8');assert.match(src,/loadAndInstantiate/);assert.match(src,/createStage4Character/);assert.match(src,/role==='boss'/);assert.match(src,/Stage4AnimationController/);assert.match(src,/source='glb'/);assert.match(src,/source='procedural'/);});
+
+
+test('Stage 4 GLB cast is governed by mobile-aware LOD and frame budget',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/new Stage4LodManager/);assert.match(src,/new Stage4PerformanceBudget/);assert.match(src,/performance\.frame\(dt\)/);assert.match(src,/lod\.update\(camera\.getPosition\(\),dynamicEntities\)/);});
