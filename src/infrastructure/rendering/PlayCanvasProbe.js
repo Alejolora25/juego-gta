@@ -9,6 +9,7 @@ import {STAGE4_ASSETS} from './Stage4AssetCatalog.js';
 import {Stage4LodManager} from './Stage4LodManager.js';
 import {Stage4PerformanceBudget} from './Stage4PerformanceBudget.js';
 import {Stage4ThirdPersonCamera} from './Stage4ThirdPersonCamera.js';
+import {Stage4PlayerController} from './Stage4PlayerController.js';
 import {STAGE4_CHARACTER_PROFILES as profiles} from './Stage4CharacterProfiles.js';
 
 export class PlayCanvasProbe {
@@ -44,8 +45,9 @@ export class PlayCanvasProbe {
   const performance=new Stage4PerformanceBudget({mobile});
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
 const thirdPersonCamera=new Stage4ThirdPersonCamera(camera);
+const playerController=new Stage4PlayerController(actorRecord.entity,characters);
   let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);thirdPersonCamera.update(actorRecord.entity,dt);});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,world,environment,lighting,sky};
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
 }
