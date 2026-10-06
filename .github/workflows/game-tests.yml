@@ -2,7 +2,7 @@ name: Game regression tests
 
 on:
   push:
-    branches: [main, engine-upgrade, stage2-map, stage3-rapier, stage3-physics-controller]
+    branches: [main, engine-upgrade, stage2-map, stage3-rapier, stage3-physics-controller, fix-gps-camera-alignment]
   pull_request:
     branches: [main]
 
