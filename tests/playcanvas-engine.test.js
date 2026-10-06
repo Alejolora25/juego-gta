@@ -60,3 +60,6 @@ test('Stage 4 locomotion preserves approved camera-relative joystick mapping',as
 
 
 test('Stage 4 controls bridge reuses approved TouchControls contract',async()=>{const [bridge,touch]=await Promise.all([fs.readFile('src/infrastructure/input/Stage4ControlsBridge.js','utf8'),fs.readFile('src/infrastructure/input/TouchControls.js','utf8')]);for(const token of ['controls.move.x','controls.move.y','controls.running','controls.consumeCamera()'])assert.ok(bridge.includes(token));assert.match(bridge,/camera\.drag\(cameraDelta\)/);assert.match(touch,/this\.move\.x=dx\/max/);assert.match(touch,/this\.move\.y=dy\/max/);});
+
+
+test('Stage 4 player controller supports an external Rapier movement resolver',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8');assert.match(src,/resolveMovement=null/);assert.match(src,/this\.resolveMovement\?\./);assert.match(src,/if\(resolved\)this\.entity\.setPosition/);});
