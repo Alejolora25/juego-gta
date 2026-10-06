@@ -54,3 +54,6 @@ test('Stage 4 cast preserves approved Stage 2 gameplay coordinates',async()=>{co
 
 
 test('Stage 4 third-person camera preserves approved camera contract',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4ThirdPersonCamera.js','utf8');assert.match(src,/height=5\.4/);assert.match(src,/distance=8\.5/);assert.match(src,/targetHeight=2\.2/);assert.match(src,/deltaX\*\.008/);assert.match(src,/Math\.pow\(this\.smoothing/);});
+
+
+test('Stage 4 locomotion preserves approved camera-relative joystick mapping',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8');assert.match(src,/Math\.sin\(cameraYaw\)/);assert.match(src,/Math\.cos\(cameraYaw\)/);assert.match(src,/mx=c\*x\+s\*y/);assert.match(src,/mz=-s\*x\+c\*y/);assert.match(src,/setLocomotion/);for(const state of ["'run'","'walk'","'idle'"])assert.ok(src.includes(state));});
