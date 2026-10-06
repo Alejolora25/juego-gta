@@ -1,7 +1,7 @@
 const RAPIER_URL='https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.19.3/+esm';
 
 export class PhysicsWorld{
- constructor(){this.ready=false;this.rapier=null;this.world=null;this.playerBody=null;this.playerCollider=null;this.staticColliders=[]}
+ constructor(){this.ready=false;this.rapier=null;this.world=null;this.playerBody=null;this.playerCollider=null;this.staticColliders=[];this.bossBody=null;this.bossCollider=null}
  async init(){
   if(this.ready)return this;
   const RAPIER=await import(RAPIER_URL);
@@ -24,6 +24,8 @@ export class PhysicsWorld{
   this.playerCollider=this.world.createCollider(R.ColliderDesc.capsule(.85,.55),this.playerBody);
   return this.playerBody;
  }
+ addBoss(position={x:0,y:0,z:-150}){if(!this.ready)throw new Error('PhysicsWorld no inicializado');const R=this.rapier;this.bossBody=this.world.createRigidBody(R.RigidBodyDesc.kinematicPositionBased().setTranslation(position.x,position.y+1.4,position.z));this.bossCollider=this.world.createCollider(R.ColliderDesc.capsule(1.05,.8),this.bossBody);return this.bossBody}
+ syncBoss(position){if(this.bossBody)this.bossBody.setNextKinematicTranslation({x:position.x,y:position.y+1.4,z:position.z})}
  addObstacle({x,z,hw,hd},height=30){
   if(!this.ready)throw new Error('PhysicsWorld no inicializado');
   const R=this.rapier,body=this.world.createRigidBody(R.RigidBodyDesc.fixed().setTranslation(x,height/2,z));
