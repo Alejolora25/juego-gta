@@ -72,3 +72,6 @@ test('Stage 4 objective tracker preserves approved camera-relative GPS semantics
 
 
 test('Stage 4 preserves approved Stage 3 movement speeds and boss camera lock height',async()=>{const [player,camera]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4ThirdPersonCamera.js','utf8')]);assert.match(player,/walkSpeed=7,runSpeed=13/);assert.match(camera,/lookAt\(a\.x\+\(b\.x-a\.x\)\*w,2\.15,a\.z\+\(b\.z-a\.z\)\*w\)/);});
+
+
+test('Stage 4 city uses shared PBR materials windows vegetation and road markings',async()=>{const [world,materials]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4MaterialLibrary.js','utf8')]);assert.match(world,/Stage4MaterialLibrary/);assert.match(world,/RoadLineV/);assert.match(world,/RoadLineH/);assert.match(world,/_Windows_/);for(const token of ['asphalt','concrete','grass','bark','foliage','window','roadLine'])assert.match(materials,new RegExp('this\\.'+token));assert.match(materials,/useMetalness=true/);assert.match(materials,/emissiveIntensity/);});
