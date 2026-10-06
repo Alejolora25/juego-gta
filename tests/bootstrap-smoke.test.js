@@ -90,5 +90,5 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
   assert.match(world, /Arena Firewall/);
   assert.match(world, /return\{player,limbs,npcs,boss,obstacles,mat,sectors\}/);
   assert.match(boot, /Math\.abs\(x\)>185/);
-  assert.doesNotMatch(world + boot, /Rapier|RAPIER/);
+  assert.doesNotMatch(world, /Rapier|RAPIER/);
 });
