@@ -22,3 +22,8 @@ test('Stage 4 environment covers PBR buildings glass and vegetation',async()=>{c
 
 
 test('Stage 4 lighting uses ACES, shadows, sky and mobile quality profile',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4Lighting.js','utf8');assert.match(src,/TONEMAP_ACES/);assert.match(src,/castShadows:true/);assert.match(src,/shadowResolution:mobile\?1024:2048/);assert.match(src,/Stage4SkyDome/);assert.match(src,/profile:mobile\?'mobile':'high'/);});
+
+
+test('Stage 4 asset pipeline loads and instantiates GLB containers',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4AssetPipeline.js','utf8');assert.match(src,/new pc\.Asset\(name,'container'/);assert.match(src,/instantiateRenderEntity/);assert.match(src,/loadAndInstantiate/);});
+
+test('Stage 4 humanoid animation contract covers locomotion and combat',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4AnimationController.js','utf8');for(const state of ['idle','walk','run','combat','hit','defeated'])assert.match(src,new RegExp(state));assert.match(src,/addComponent\('anim'/);});
