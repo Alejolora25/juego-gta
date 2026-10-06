@@ -17,7 +17,7 @@ import {GameState} from '../../domain/entities/GameState.js';
 import {Stage4MissionCoordinator} from '../../application/usecases/Stage4MissionCoordinator.js';
 
 export class PlayCanvasProbe {
- constructor(canvas,{controls=null}={}){this.canvas=canvas;this.controls=controls;this.app=null;this.backend='uninitialized';}
+ constructor(canvas,{controls=null,onMissionInteraction=null}={}){this.canvas=canvas;this.controls=controls;this.onMissionInteraction=onMissionInteraction;this.previousAction=null;this.app=null;this.backend='uninitialized';}
  async init(){
   const device=await pc.createGraphicsDevice(this.canvas,{deviceTypes:['webgpu','webgl2'],antialias:true,alpha:false,powerPreference:'high-performance'});
   this.backend=device.isWebGPU?'webgpu':'webgl2';
@@ -56,8 +56,9 @@ const playerController=new Stage4PlayerController(actorRecord.entity,characters,
 const ensurePhysics=async()=>{try{await physics.init();physics.addFloor(420);physics.addPlayer(actorRecord.entity.getPosition());physics.addBoss(wardenRecord.entity.getPosition());physics.addObstacles(world.obstacles);return true;}catch(error){console.warn('Stage 4 Rapier unavailable; using renderer movement fallback.',error);return false;}};
 void ensurePhysics();
 const controlsBridge=this.controls?new Stage4ControlsBridge(this.controls,thirdPersonCamera):null;
+if(this.controls){this.previousAction=this.controls.onAction;this.controls.onAction=()=>{const result=missions.interact(actorRecord.entity);this.onMissionInteraction?.(result,state);return result;};}
   let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);if(controlsBridge)controlsBridge.update(playerController,dt);thirdPersonCamera.update(actorRecord.entity,dt);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
   this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,state,missions,physics,ensurePhysics,world,environment,lighting,sky};
  }
- destroy(){this.app?.destroy();this.app=null;}
+ destroy(){if(this.controls&&this.previousAction)this.controls.onAction=this.previousAction;this.app?.destroy();this.app=null;}
 }
