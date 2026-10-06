@@ -20,6 +20,7 @@ test('stage 3 attaches Rapier after gameplay startup without blocking play',asyn
  assert.match(boot,/async function ensurePhysics/);
  assert.match(boot,/physics\.addFloor\(420\)/);
  assert.match(boot,/physics\.addPlayer\(world\.player\.position\)/);
+ assert.match(boot,/physics\.addObstacles\(world\.obstacles\)/);
  assert.match(boot,/running=true;last=performance\.now\(\);raf=requestAnimationFrame\(loop\);void ensurePhysics\(\)/);
  assert.match(boot,/\$\('play'\)\.onclick=start/);
  assert.match(boot,/catch\(error\).*Rapier no disponible/s);
