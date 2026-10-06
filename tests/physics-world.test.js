@@ -12,7 +12,7 @@ test('Rapier infrastructure is isolated and explicitly initialized',async()=>{
  assert.match(physics,/addFloor/);
  assert.match(physics,/addPlayer/);
  assert.match(physics,/addObstacle/);
- assert.match(physics,/canMoveTo/);
+ assert.match(physics,/canMoveTo/);assert.match(physics,/resolveMovement/);assert.match(physics,/blocked\(x,current\.z\)/);assert.match(physics,/blocked\(current\.x,z\)/);
 });
 
 test('stage 3 attaches Rapier after gameplay startup without blocking play',async()=>{
@@ -22,8 +22,8 @@ test('stage 3 attaches Rapier after gameplay startup without blocking play',asyn
  assert.match(boot,/physics\.addFloor\(420\)/);
  assert.match(boot,/physics\.addPlayer\(world\.player\.position\)/);
  assert.match(boot,/physics\.addObstacles\(world\.obstacles\)/);
- assert.match(boot,/physics\.canMoveTo/);
- assert.match(boot,/rapierMove===null\?collide/);
+ assert.match(boot,/physics\.resolveMovement/);
+ assert.match(boot,/resolved===null/);assert.match(boot,/collide\(nx,nz\)/);
  assert.match(boot,/running=true;last=performance\.now\(\);raf=requestAnimationFrame\(loop\);void ensurePhysics\(\)/);
  assert.match(boot,/\$\('play'\)\.onclick=start/);
  assert.match(boot,/catch\(error\).*Rapier no disponible/s);
