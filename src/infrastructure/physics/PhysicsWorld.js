@@ -31,6 +31,7 @@ export class PhysicsWorld{
   this.staticColliders.push(collider);return collider;
  }
  addObstacles(obstacles=[]){obstacles.forEach(o=>this.addObstacle(o));return this.staticColliders}
- canMoveTo(position,bounds=185){if(!this.ready)return null;if(Math.abs(position.x)>bounds||Math.abs(position.z)>bounds)return false;const radius=.55;for(const c of this.staticColliders){const p=c.parent()?.translation?.();if(!p)continue;const h=c.halfExtents?.();if(!h)continue;if(Math.abs(position.x-p.x)<h.x+radius&&Math.abs(position.z-p.z)<h.z+radius)return false}return true}\n syncPlayer(position){if(this.playerBody)this.playerBody.setNextKinematicTranslation({x:position.x,y:position.y+1,z:position.z})}
+ canMoveTo(position,bounds=185){if(!this.ready)return null;if(Math.abs(position.x)>bounds||Math.abs(position.z)>bounds)return false;const radius=.55;for(const c of this.staticColliders){const p=c.parent()?.translation?.();if(!p)continue;const h=c.halfExtents?.();if(!h)continue;if(Math.abs(position.x-p.x)<h.x+radius&&Math.abs(position.z-p.z)<h.z+radius)return false}return true}
+ syncPlayer(position){if(this.playerBody)this.playerBody.setNextKinematicTranslation({x:position.x,y:position.y+1,z:position.z})}
  step(dt){if(!this.ready)return;this.world.timestep=Math.min(Math.max(dt,1/120),1/30);this.world.step()}
 }
