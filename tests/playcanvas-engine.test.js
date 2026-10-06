@@ -30,3 +30,6 @@ test('Stage 4 humanoid animation contract covers locomotion and combat',async()=
 
 
 test('Stage 4 protects mobile performance with LOD and adaptive budgets',async()=>{const [lod,budget]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4LodManager.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4PerformanceBudget.js','utf8')]);assert.match(lod,/high.*medium.*low.*culled/s);assert.match(lod,/castShadows/);assert.match(budget,/targetFps=mobile\?45:60/);assert.match(budget,/maxDynamicNpcs=mobile\?10:24/);assert.match(budget,/pressure/);});
+
+
+test('Stage 4 character system upgrades GLB actors without losing safe fallbacks',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8');assert.match(src,/loadAndInstantiate/);assert.match(src,/createStage4Character/);assert.match(src,/role==='boss'/);assert.match(src,/Stage4AnimationController/);assert.match(src,/source='glb'/);assert.match(src,/source='procedural'/);});
