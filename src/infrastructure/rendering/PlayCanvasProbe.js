@@ -10,6 +10,7 @@ import {Stage4LodManager} from './Stage4LodManager.js';
 import {Stage4PerformanceBudget} from './Stage4PerformanceBudget.js';
 import {Stage4ThirdPersonCamera} from './Stage4ThirdPersonCamera.js';
 import {Stage4PlayerController} from './Stage4PlayerController.js';
+import {PhysicsWorld} from '../physics/PhysicsWorld.js?v=20261006-1';
 import {STAGE4_CHARACTER_PROFILES as profiles} from './Stage4CharacterProfiles.js';
 
 export class PlayCanvasProbe {
@@ -45,9 +46,12 @@ export class PlayCanvasProbe {
   const performance=new Stage4PerformanceBudget({mobile});
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
 const thirdPersonCamera=new Stage4ThirdPersonCamera(camera);
-const playerController=new Stage4PlayerController(actorRecord.entity,characters);
+const physics=new PhysicsWorld();
+const playerController=new Stage4PlayerController(actorRecord.entity,characters,{resolveMovement:(from,to)=>physics.ready?physics.resolveMovement(from,to):to});
+const ensurePhysics=async()=>{try{await physics.init();physics.addFloor(420);physics.addPlayer(actorRecord.entity.getPosition());physics.addBoss(wardenRecord.entity.getPosition());physics.addObstacles(world.obstacles);return true;}catch(error){console.warn('Stage 4 Rapier unavailable; using renderer movement fallback.',error);return false;}};
+void ensurePhysics();
   let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);thirdPersonCamera.update(actorRecord.entity,dt);});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,world,environment,lighting,sky};
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,physics,ensurePhysics,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
 }
