@@ -36,3 +36,6 @@ test('Stage 4 character system upgrades GLB actors without losing safe fallbacks
 
 
 test('Stage 4 GLB cast is governed by mobile-aware LOD and frame budget',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/new Stage4LodManager/);assert.match(src,/new Stage4PerformanceBudget/);assert.match(src,/performance\.frame\(dt\)/);assert.match(src,/lod\.update\(camera\.getPosition\(\),dynamicEntities\)/);});
+
+
+test('Stage 4 bridges gameplay semantics to skeletal GLB clips',async()=>{const [skeletal,characters]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4SkeletalAnimation.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8')]);assert.match(skeletal,/idle.*walk.*run.*combat.*hit.*defeated/s);assert.match(skeletal,/baseLayer\.transition/);assert.match(characters,/skeletal\.playSemantic\(state\)/);});
