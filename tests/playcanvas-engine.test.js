@@ -57,3 +57,6 @@ test('Stage 4 third-person camera preserves approved camera contract',async()=>{
 
 
 test('Stage 4 locomotion preserves approved camera-relative joystick mapping',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8');assert.match(src,/Math\.sin\(cameraYaw\)/);assert.match(src,/Math\.cos\(cameraYaw\)/);assert.match(src,/mx=c\*x\+s\*y/);assert.match(src,/mz=-s\*x\+c\*y/);assert.match(src,/setLocomotion/);for(const state of ["'run'","'walk'","'idle'"])assert.ok(src.includes(state));});
+
+
+test('Stage 4 controls bridge reuses approved TouchControls contract',async()=>{const [bridge,touch]=await Promise.all([fs.readFile('src/infrastructure/input/Stage4ControlsBridge.js','utf8'),fs.readFile('src/infrastructure/input/TouchControls.js','utf8')]);for(const token of ['controls.move.x','controls.move.y','controls.running','controls.consumeCamera()'])assert.ok(bridge.includes(token));assert.match(bridge,/camera\.drag\(cameraDelta\)/);assert.match(touch,/this\.move\.x=dx\/max/);assert.match(touch,/this\.move\.y=dy\/max/);});
