@@ -66,3 +66,6 @@ test('Stage 4 player controller supports an external Rapier movement resolver',a
 
 
 test('Stage 4 runtime keeps Rapier player and boss bodies synchronized',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/physics\.syncPlayer\(actorRecord\.entity\.getPosition\(\)\)/);assert.match(src,/physics\.syncBoss\(wardenRecord\.entity\.getPosition\(\)\)/);assert.match(src,/physics\.step\(dt\)/);});
+
+
+test('Stage 4 objective tracker preserves approved camera-relative GPS semantics',async()=>{const {Stage4ObjectiveTracker}=await import('../src/application/usecases/Stage4ObjectiveTracker.js');const pos=(x,z)=>({getPosition:()=>({x,z})});const target={name:'Target',entity:pos(0,-10)};const tracker=new Stage4ObjectiveTracker({target:()=>target});const player=pos(0,0);const dirs=[0,Math.PI/2,Math.PI,Math.PI*1.5].map(yaw=>tracker.direction(tracker.measure(player,yaw).angle));assert.deepEqual(dirs,['↑','→','↓','←']);});
