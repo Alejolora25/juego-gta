@@ -7,7 +7,7 @@ const read = path => readFile(new URL(path, root), 'utf8');
 
 test('index exposes every DOM dependency required by the game', async () => {
   const html = await read('index.html');
-  const required = ['game','xp','hp','mt','guide','arrow','distance','bossHud','bossFill','camPad','joy','stick','action','lock','shoot','run','intro','loading','dialog','who','speech','cont','end','endTitle','endText','again','play'];
+  const required = ['game','xp','hp','mt','guide','arrow','distance','bossHud','bossFill','camPad','joy','stick','action','lock','shoot','run','intro','loading','dialog','who','speech','cont','end','endTitle','endText','again','play','compass','heading','targetName'];
   for (const id of required) assert.match(html, new RegExp(`id=["']${id}["']`), `missing #${id}`);
 });
 
@@ -95,3 +95,5 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
 
 test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/GameBootstrap.js');assert.match(boot,/Math\.atan2\(dx,-dz\)-cameraYaw/);assert.match(boot,/hud\.objective/);});
 test('mission NPCs remain outside their landmark building footprints',async()=>{const world=await read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
+
+test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-1/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
