@@ -26,6 +26,7 @@ export class PhysicsWorld{
  }
  addBoss(position={x:0,y:0,z:-150}){if(!this.ready)throw new Error('PhysicsWorld no inicializado');const R=this.rapier;this.bossBody=this.world.createRigidBody(R.RigidBodyDesc.kinematicPositionBased().setTranslation(position.x,position.y+1.4,position.z));this.bossCollider=this.world.createCollider(R.ColliderDesc.capsule(1.05,.8),this.bossBody);return this.bossBody}
  syncBoss(position){if(this.bossBody)this.bossBody.setNextKinematicTranslation({x:position.x,y:position.y+1.4,z:position.z})}
+ playerBossOverlap(playerPosition,bossPosition,minDistance=1.55){if(!this.ready)return null;const dx=playerPosition.x-bossPosition.x,dz=playerPosition.z-bossPosition.z;return dx*dx+dz*dz<minDistance*minDistance}
  bossCanMoveTo(position,bounds=185){if(!this.ready)return null;if(Math.abs(position.x)>bounds||Math.abs(position.z)>bounds)return false;const radius=.8;for(const c of this.staticColliders){const p=c.parent()?.translation?.();if(!p)continue;const h=c.halfExtents?.();if(!h)continue;if(Math.abs(position.x-p.x)<h.x+radius&&Math.abs(position.z-p.z)<h.z+radius)return false}return true}
  addObstacle({x,z,hw,hd},height=30){
   if(!this.ready)throw new Error('PhysicsWorld no inicializado');
