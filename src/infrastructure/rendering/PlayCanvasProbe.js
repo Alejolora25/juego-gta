@@ -18,6 +18,7 @@ import {Stage4MissionCoordinator} from '../../application/usecases/Stage4Mission
 import {Stage4ObjectiveTracker} from '../../application/usecases/Stage4ObjectiveTracker.js';
 import {CombatService} from '../../application/usecases/CombatService.js';
 import {Stage4BossEncounter} from '../../application/usecases/Stage4BossEncounter.js';
+import {Stage4BossController} from '../../application/usecases/Stage4BossController.js';
 
 export class PlayCanvasProbe {
  constructor(canvas,{controls=null,hud=null,onMissionInteraction=null}={}){this.canvas=canvas;this.controls=controls;this.hud=hud;this.onMissionInteraction=onMissionInteraction;this.previousAction=null;this.app=null;this.backend='uninitialized';}
@@ -58,14 +59,15 @@ const missions=new Stage4MissionCoordinator(state,characters);
 const objectives=new Stage4ObjectiveTracker(missions);
 const combat=new CombatService(state);
 const bossEncounter=new Stage4BossEncounter(state,combat);
+const bossController=new Stage4BossController(wardenRecord.entity,physics);
 const playerController=new Stage4PlayerController(actorRecord.entity,characters,{resolveMovement:(from,to)=>physics.ready?physics.resolveMovement(from,to):to});
 const ensurePhysics=async()=>{try{await physics.init();physics.addFloor(420);physics.addPlayer(actorRecord.entity.getPosition());physics.addBoss(wardenRecord.entity.getPosition());physics.addObstacles(world.obstacles);return true;}catch(error){console.warn('Stage 4 Rapier unavailable; using renderer movement fallback.',error);return false;}};
 void ensurePhysics();
 const controlsBridge=this.controls?new Stage4ControlsBridge(this.controls,thirdPersonCamera):null;
 if(this.controls){this.controls.onLock=locked=>bossEncounter.setLock(locked);}
 if(this.controls){this.previousAction=this.controls.onAction;this.controls.onAction=()=>{const result=missions.interact(actorRecord.entity);this.onMissionInteraction?.(result,state);return result;};}
-  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);if(controlsBridge){const cameraDelta=this.controls?.cameraDelta??0;if(bossEncounter.manualCamera(cameraDelta)&&this.controls)this.controls.locked=false;controlsBridge.update(playerController,dt);}const encounter=bossEncounter.update(actorRecord.entity,wardenRecord.entity,dt);if(encounter.started){if(this.controls){this.controls.locked=true;this.controls.setCombat(true);}this.hud?.combat(true);this.hud?.sync(state);}thirdPersonCamera.update(actorRecord.entity,dt);if(bossEncounter.locked&&state.bossActive)thirdPersonCamera.lockTarget(actorRecord.entity,wardenRecord.entity,.34);const objective=objectives.measure(actorRecord.entity,thirdPersonCamera.yaw);if(objective)this.hud?.objective(objective.distance,objective.angle,objective.name);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,state,missions,objectives,combat,bossEncounter,physics,ensurePhysics,world,environment,lighting,sky};
+  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);if(controlsBridge){const cameraDelta=this.controls?.cameraDelta??0;if(bossEncounter.manualCamera(cameraDelta)&&this.controls)this.controls.locked=false;controlsBridge.update(playerController,dt);}const encounter=bossEncounter.update(actorRecord.entity,wardenRecord.entity,dt);if(encounter.started){if(this.controls){this.controls.locked=true;this.controls.setCombat(true);}this.hud?.combat(true);this.hud?.sync(state);}bossController.update(actorRecord.entity,dt,state);thirdPersonCamera.update(actorRecord.entity,dt);if(bossEncounter.locked&&state.bossActive)thirdPersonCamera.lockTarget(actorRecord.entity,wardenRecord.entity,.34);const objective=objectives.measure(actorRecord.entity,thirdPersonCamera.yaw);if(objective)this.hud?.objective(objective.distance,objective.angle,objective.name);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,state,missions,objectives,combat,bossEncounter,bossController,physics,ensurePhysics,world,environment,lighting,sky};
  }
  destroy(){if(this.controls&&this.previousAction)this.controls.onAction=this.previousAction;this.app?.destroy();this.app=null;}
 }
