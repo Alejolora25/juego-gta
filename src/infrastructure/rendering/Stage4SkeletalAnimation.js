@@ -7,7 +7,7 @@ export class Stage4SkeletalAnimation {
   if(!anim)return false;
   const states=[{name:'START'},...clips.map((_,i)=>({name:'clip'+i,speed:1,loop:true}))];
   anim.loadStateGraph({layers:[{name:'base',states,transitions:[{from:'START',to:'clip0'}]}],parameters:{}});
-  clips.forEach((clip,i)=>anim.assignAnimation('base.clip'+i,clip.resource??clip));
+  clips.forEach((clip,i)=>anim.assignAnimation('clip'+i,clip.resource??clip,'base'));
   this.clips=clips.map((clip,i)=>clip.name||('clip'+i));this.ready=true;return true;
  }
  available(){return this.clips;}
