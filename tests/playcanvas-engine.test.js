@@ -39,3 +39,6 @@ test('Stage 4 GLB cast is governed by mobile-aware LOD and frame budget',async()
 
 
 test('Stage 4 bridges gameplay semantics to skeletal GLB clips',async()=>{const [skeletal,characters]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4SkeletalAnimation.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8')]);assert.match(skeletal,/idle.*walk.*run.*combat.*hit.*defeated/s);assert.match(skeletal,/baseLayer\.transition/);assert.match(characters,/skeletal\.playSemantic\(state\)/);});
+
+
+test('Stage 4 world does not duplicate procedural NPCs beside GLB cast',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.doesNotMatch(src,/createStage4Character/);assert.match(src,/const npcs=\[\]/);});
