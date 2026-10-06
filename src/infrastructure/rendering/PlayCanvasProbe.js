@@ -16,7 +16,7 @@ export class PlayCanvasProbe {
   const device=await pc.createGraphicsDevice(this.canvas,{deviceTypes:['webgpu','webgl2'],antialias:true,alpha:false,powerPreference:'high-performance'});
   this.backend=device.isWebGPU?'webgpu':'webgl2';
   this.app=new pc.AppBase(this.canvas);
-  this.app.init({graphicsDevice:device,componentSystems:[pc.RenderComponentSystem,pc.CameraComponentSystem,pc.LightComponentSystem],resourceHandlers:[pc.TextureHandler,pc.ContainerHandler]});
+  this.app.init({graphicsDevice:device,componentSystems:[pc.RenderComponentSystem,pc.CameraComponentSystem,pc.LightComponentSystem,pc.AnimComponentSystem],resourceHandlers:[pc.TextureHandler,pc.ContainerHandler]});
   this.app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
   this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
   return this;
