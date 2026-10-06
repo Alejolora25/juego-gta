@@ -48,3 +48,6 @@ test('Stage 4 registers PlayCanvas animation system before spawning GLB actors',
 
 
 test('Stage 4 preserves approved Stage 2 city geometry and sectors',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.match(src,/\[420,.5,420\]/);assert.match(src,/\[-86,0,86\]/);assert.match(src,/\[-138,-70,0,70,138\]/);for(const name of ['Pasto Centro','Canales','Distrito Industrial','Mirador Blanco','Arena Firewall'])assert.match(src,new RegExp(name));assert.match(src,/i<24/);assert.match(src,/Math\.cos\(a\)\*31/);});
+
+
+test('Stage 4 cast preserves approved Stage 2 gameplay coordinates',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');for(const position of ['[0,0,108]','[-28,0,74]','[98,0,6]','[-108,0,54]','[0,0,-150]'])assert.ok(src.includes(position),'missing '+position);});
