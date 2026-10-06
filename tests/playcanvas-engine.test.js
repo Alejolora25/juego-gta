@@ -69,3 +69,6 @@ test('Stage 4 runtime keeps Rapier player and boss bodies synchronized',async()=
 
 
 test('Stage 4 objective tracker preserves approved camera-relative GPS semantics',async()=>{const {Stage4ObjectiveTracker}=await import('../src/application/usecases/Stage4ObjectiveTracker.js');const pos=(x,z)=>({getPosition:()=>({x,z})});const target={name:'Target',entity:pos(0,-10)};const tracker=new Stage4ObjectiveTracker({target:()=>target});const player=pos(0,0);const dirs=[0,Math.PI/2,Math.PI,Math.PI*1.5].map(yaw=>tracker.direction(tracker.measure(player,yaw).angle));assert.deepEqual(dirs,['↑','→','↓','←']);});
+
+
+test('Stage 4 preserves approved Stage 3 movement speeds and boss camera lock height',async()=>{const [player,camera]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4PlayerController.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4ThirdPersonCamera.js','utf8')]);assert.match(player,/walkSpeed=7,runSpeed=13/);assert.match(camera,/lookAt\(a\.x\+\(b\.x-a\.x\)\*w,2\.15,a\.z\+\(b\.z-a\.z\)\*w\)/);});
