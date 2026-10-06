@@ -42,7 +42,7 @@ export class PlayCanvasProbe {
   const lod=new Stage4LodManager(mobile?{near:20,mid:48,far:90}:{near:32,mid:75,far:140});
   const performance=new Stage4PerformanceBudget({mobile});
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
-  this.app.on('update',dt=>{performance.frame(dt);lod.update(camera.getPosition(),dynamicEntities);});
+  let budgetTimer=0;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);});
   this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,world,environment,lighting,sky};
  }
  destroy(){this.app?.destroy();this.app=null;}
