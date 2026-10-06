@@ -4,6 +4,10 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "test:smoke": "node --test tests/bootstrap-smoke.test.js"
+    "test:smoke": "node --test tests/bootstrap-smoke.test.js",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
   }
 }
