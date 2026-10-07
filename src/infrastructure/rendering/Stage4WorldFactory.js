@@ -27,6 +27,10 @@ export function createStage4World(app,{spawnLegacyCharacters=false}={}){
  }
  for(const x of [-86,0,86])for(let z=-196;z<=196;z+=14)root.addChild(box('RoadLineV',[x,.055,z],[.14,.02,5.5],roadLine));
  for(const z of [-138,-70,0,70,138])for(let x=-196;x<=196;x+=14)root.addChild(box('RoadLineH',[x,.06,z],[5.5,.02,.14],roadLine));
+ // Painted pedestrian crossings are purely visual: no extra physics obstacles.
+ for(const [cx,cz] of [[0,70],[-86,0],[86,0],[0,-70]]){
+  for(let stripe=-3;stripe<=3;stripe++)root.addChild(box('CrosswalkStripe',[cx+stripe*1.45,.095,cz+10],[.85,.018,3.2],materials.sidewalk));
+ }
  root.addChild(box('FirewallArenaFloor',[0,.08,-150],[58,.12,58],firewall));
  for(let i=0;i<24;i++){const a=i/24*Math.PI*2,x=Math.cos(a)*31,z=-150+Math.sin(a)*31;root.addChild(box('FirewallPillar_'+i,[x,4,z],[2.2,8,2.2],concrete));root.addChild(box('FirewallCap_'+i,[x,8.25,z],[2.65,.5,2.65],firewall));root.addChild(box('FirewallGlow_'+i,[x,6.15,z],[2.32,.18,2.32],firewallGlow));obstacles.push({x,z,hw:1.1,hd:1.1});}
  for(let i=0;i<16;i++){const a=i/16*Math.PI*2,x=Math.cos(a)*24,z=-150+Math.sin(a)*24;const segment=box('FirewallRing_'+i,[x,.22,z],[6,.18,.42],firewallGlow);segment.setEulerAngles(0,-a*180/Math.PI,0);root.addChild(segment);}
