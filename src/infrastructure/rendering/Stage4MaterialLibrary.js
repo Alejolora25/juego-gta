@@ -17,5 +17,7 @@ export class Stage4MaterialLibrary {
   this.blue=material(new pc.Color(.055,.3,.62),{metalness:.05,gloss:.5});
   this.window=material(new pc.Color(.04,.14,.22),{metalness:.42,gloss:.86,emissive:new pc.Color(.018,.07,.12),emissiveIntensity:.35});
   this.roadLine=material(new pc.Color(.92,.72,.2),{gloss:.42,emissive:new pc.Color(.12,.07,.005),emissiveIntensity:.18});
+  this.firewall=material(new pc.Color(.12,.14,.18),{metalness:.62,gloss:.68});
+  this.firewallGlow=material(new pc.Color(.34,.025,.018),{metalness:.18,gloss:.72,emissive:new pc.Color(1,.055,.025),emissiveIntensity:2.2});
  }
 }
