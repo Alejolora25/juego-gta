@@ -9,10 +9,11 @@ const runtime=new PlayCanvasProbe($('game'),{controls,hud});
 let session=null;
 async function boot(){
  try{
-  await runtime.init();session=await runtime.start();hud.sync(session.state);$('loading').style.display='none';
+  await runtime.init();session=await runtime.start();hud.sync(session.state);
   $('play').onclick=()=>{$('intro').style.display='none';session.resetSession();hud.sync(session.state);};
   $('again').onclick=()=>{$('end').style.display='none';session.resetSession();hud.sync(session.state);};
   $('cont').onclick=()=>{$('dialog').style.display='none';};
+  $('loading').style.display='none';
   addEventListener('pagehide',()=>runtime.destroy(),{once:true});
  }catch(error){console.error('Stage 4 bootstrap failed',error);const loading=$('loading');loading.style.display='flex';loading.querySelector('h1').textContent='Error cargando Stage 4';loading.querySelector('p').textContent=error?.message||'No se pudo iniciar PlayCanvas.';}
 }
