@@ -17,6 +17,6 @@ export class Stage4CharacterSystem {
   const character={id,name,role,entity,animation,skeletal,source};this.characters.set(id,character);return character;
  }
  get(id){return this.characters.get(id);}
- setLocomotion(id,speed,running=false){const c=this.get(id);if(!c)return;const state=c.animation.setLocomotion(speed,running);c.skeletal.playSemantic(state);return state;}
+ setLocomotion(id,speed,running=false){const c=this.get(id);if(!c)return;const state=c.animation.setLocomotion(speed,running);c.skeletal.playSemantic(state);const rig=c.entity.__alejandroRig;if(rig){const moving=speed>.05,t=performance.now()*.009*(running?1.65:1),swing=moving?Math.sin(t)*(running?34:22):0;rig.leftArm?.setLocalEulerAngles(swing,0,0);rig.rightArm?.setLocalEulerAngles(-swing,0,0);rig.leftLeg?.setLocalEulerAngles(-swing,0,0);rig.rightLeg?.setLocalEulerAngles(swing,0,0);rig.torso?.setLocalEulerAngles(0,0,moving?Math.sin(t*.5)*1.5:0);}return state;}
  setCombat(id,active){const c=this.get(id);if(!c)return;const state=c.animation.setCombat(active);c.skeletal.playSemantic(state);return state;}
 }
