@@ -105,3 +105,6 @@ test('Stage 4 district wayfinding is visual-only and preserves navigation obstac
 
 
 test('Stage 4 crosswalks remain decorative and use shared sidewalk material',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');const start=world.indexOf('// Painted pedestrian crossings');const end=world.indexOf("root.addChild(box('FirewallArenaFloor'",start);assert.ok(start>=0&&end>start);const crossing=world.slice(start,end);assert.match(crossing,/CrosswalkStripe/);assert.match(crossing,/materials\.sidewalk/);assert.match(crossing,/stripe<=3/);assert.doesNotMatch(crossing,/obstacles\.push/);});
+
+
+test('Stage 4 applies adaptive mobile shadow budget without hiding mission NPCs',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/const baseShadow=mobile\?1024:2048/);assert.match(src,/Math\.max\(512,Math\.round\(baseShadow\*rec\.shadowScale\)\)/);assert.match(src,/lighting\.sun\.light\.shadowResolution=shadowResolution/);assert.match(src,/npcShadowLimit=Math\.floor\(npcRecords\.length\*rec\.npcScale\)/);assert.match(src,/if\(index>=npcShadowLimit\).*render\.castShadows=false/);assert.doesNotMatch(src,/npcRecords\.forEach\([^\n]*entity\.enabled=false/);});
