@@ -102,3 +102,6 @@ test('Stage 4 vegetation uses deterministic lightweight clusters without gamepla
 
 
 test('Stage 4 district wayfinding is visual-only and preserves navigation obstacles',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.match(world,/Pasto',-18,82,pastoAccent/);assert.match(world,/Canales',-136,48,canalGlow/);assert.match(world,/Industrial',100,48,industrialSteel/);assert.match(world,/Mirador',-18,-42,miradorAccent/);assert.match(world,/_SignPost_/);assert.match(world,/_SignHeader/);assert.match(world,/_SignMarker/);const signs=world.slice(world.indexOf('// Non-colliding district wayfinding'),world.indexOf('for(const x of [-86,0,86])for(let z=-196'));assert.doesNotMatch(signs,/obstacles\.push/);});
+
+
+test('Stage 4 crosswalks remain decorative and use shared sidewalk material',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');const start=world.indexOf('// Painted pedestrian crossings');const end=world.indexOf("root.addChild(box('FirewallArenaFloor'",start);assert.ok(start>=0&&end>start);const crossing=world.slice(start,end);assert.match(crossing,/CrosswalkStripe/);assert.match(crossing,/materials\.sidewalk/);assert.match(crossing,/stripe<=3/);assert.doesNotMatch(crossing,/obstacles\.push/);});
