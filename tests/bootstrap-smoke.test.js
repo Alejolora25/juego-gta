@@ -11,7 +11,7 @@ test('index exposes every DOM dependency required by the game', async () => {
   for (const id of required) assert.match(html, new RegExp(`id=["']${id}["']`), `missing #${id}`);
 });
 
-test('index loads the modular bootstrap and Three.js import map', async () => {
+test('index loads the Stage 4 bootstrap and engine import map', async () => {
   const html = await read('index.html');
   assert.match(html, /type=["']module["'][^>]+GameBootstrap\.js/);
   assert.match(html, /type=["']importmap["']/);
