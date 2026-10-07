@@ -39,9 +39,9 @@ export class PlayCanvasProbe {
   const lighting=configureStage4Lighting(this.app,{mobile:matchMedia('(max-width: 800px)').matches});
   const sky=createStage4Sky(this.app);
   const world=createStage4World(this.app);
-  const environment=new Stage4Environment(this.app).build();
-  environment.addBuilding({name:'PastoHQ',x:-14,z:-22,w:11,d:9,h:18});
-  environment.addBuilding({name:'TechTower',x:14,z:-22,w:9,d:9,h:24,material:'glass'});
+  const environment=new Stage4Environment(this.app,{materials:world.materials}).build();
+  environment.addBuilding({name:'PastoHQ',x:-14,z:-22,w:11,d:9,h:18,material:'pasto'});
+  environment.addBuilding({name:'TechTower',x:14,z:-22,w:9,d:9,h:24,material:'industrial'});
   for(const [x,z,s] of [[-18,18,1],[18,18,1.15],[-28,-5,.9],[28,-5,.9]])environment.addTree(x,z,s);
   const pipeline=new Stage4AssetPipeline(this.app);
   const characters=new Stage4CharacterSystem({pipeline,root:this.app.root});
