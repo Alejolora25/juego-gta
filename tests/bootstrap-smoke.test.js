@@ -13,7 +13,7 @@ test('index exposes every DOM dependency required by the game', async () => {
 
 test('index loads the Stage 4 bootstrap and engine import map', async () => {
   const html = await read('index.html');
-  assert.match(html, /type=["']module["'][^>]+GameBootstrap\.js/);
+  assert.match(html, /type=["']module["'][^>]+Stage4Bootstrap\.js/);
   assert.match(html, /type=["']importmap["']/);
   assert.match(html, /three@0\.180\.0/);
 });
@@ -96,7 +96,7 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
 test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/GameBootstrap.js');assert.match(boot,/camera\.getWorldDirection\(cameraDirection\)/);assert.match(boot,/cameraDirection\.y=0/);assert.match(boot,/dot=THREE\.MathUtils\.clamp/);assert.match(boot,/cross=cameraDirection\.z\*targetX-cameraDirection\.x\*targetZ/);assert.match(boot,/objectiveAngle=Math\.atan2\(cross,dot\)/);assert.match(boot,/hud\.objective/);});
 test('mission NPCs remain outside their landmark building footprints',async()=>{const world=await read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
 
-test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-1/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
+test('mobile deployment cache-busts Stage 4 and preserves Stage 3 physics rollback',async()=>{const html=await read('index.html');const legacy=await read('src/presentation/GameBootstrap.js');assert.match(html,/Stage4Bootstrap\.js\?v=20261006-1/);assert.match(legacy,/PhysicsWorld\.js\?v=20261006-1/);});
 
 test('GPS arrow maps camera-forward bearing to visual up and compass clutter is removed',async()=>{const html=await read('index.html');const hud=await read('src/presentation/HudController.js');assert.doesNotMatch(html,/id=["']compass["']/);assert.doesNotMatch(html,/id=["']heading["']/);assert.match(hud,/Math\.abs\(angle\)<\.12\?0:angle/);assert.match(hud,/aligned-Math\.PI\/2/);});
 
@@ -104,7 +104,7 @@ test('GPS arrow maps camera-forward bearing to visual up and compass clutter is 
 test('GPS signed angle is zero whenever camera and objective face the same direction',()=>{const angle=(fx,fz,tx,tz)=>Math.atan2(fz*tx-fx*tz,fx*tx+fz*tz);for(const [x,z] of [[0,-1],[0,1],[1,0],[-1,0],[Math.SQRT1_2,-Math.SQRT1_2]])assert.ok(Math.abs(angle(x,z,x,z))<1e-12);});
 
 
-test('public entrypoint cache-busts the signed-angle GPS build',async()=>{const html=await read('index.html');assert.match(html,/GameBootstrap\.js\?v=20261006-1/g);});
+test('public experimental entrypoint cache-busts Stage 4',async()=>{const html=await read('index.html');assert.match(html,/Stage4Bootstrap\.js\?v=20261006-1/g);});
 
 
 test('touch combat lock keeps FIJAR/LIBRE UI synchronized',async()=>{const [touch,stage4]=await Promise.all([read('src/infrastructure/input/TouchControls.js'),read('src/infrastructure/rendering/PlayCanvasProbe.js')]);assert.match(touch,/setLocked\(locked\)/);assert.match(touch,/this\.lockButton\.classList\.toggle\('active',this\.locked\)/);assert.match(touch,/this\.setLocked\(false\)/);assert.match(stage4,/manualCamera\(cameraDelta\).*setLocked\).*setLocked\(false\).*controls\.locked=false/);assert.match(stage4,/setLocked\).*setLocked\(true\).*controls\.locked=true.*setCombat\(true\)/);});
