@@ -2,7 +2,7 @@
 
 ## Auditoría comparativa
 
-Corte de auditoría: 6 de octubre de 2026. Baseline estable: Stage 3 en `main`. Desarrollo Stage 4: `stage4-playcanvas-spike`.
+Corte de auditoría inicial: 6 de octubre de 2026. Actualización de validación: 7 de octubre de 2026. Baseline estable: Stage 3 en `main`. Desarrollo Stage 4: `stage4-playcanvas-spike`.
 
 | Área | Auditoría anterior | Actual | Estado |
 |---|---:|---:|---|
@@ -33,12 +33,12 @@ Corte de auditoría: 6 de octubre de 2026. Baseline estable: Stage 3 en `main`. 
 
 El ≈91% corresponde a **migración técnica**, no a calidad gráfica final. El acabado visual global está aproximadamente en **60–65% del objetivo Stage 4**. El cuello de botella dejó de ser gameplay: Rapier, GPS/misiones, combate y HUD pasaron de estados parciales a estar cerca del cierre técnico.
 
-El trabajo pendiente se concentra en modelos/personajes definitivos, materiales y texturas PBR de mayor calidad, edificios, vegetación, ambiente/efectos, optimización móvil y el bootstrap final de Stage 4.
+El trabajo pendiente se concentra en modelos/personajes definitivos, materiales y texturas PBR de mayor calidad, edificios, vegetación, ambiente/efectos, optimización móvil y pruebas físicas. El bootstrap final ya está conectado al `index.html` experimental; los porcentajes de la tabla son estimaciones históricas, no métricas automáticas actualizadas.
 
 ## Regla de promoción
 
-`main` permanece en Stage 3 aprobado. Stage 4 no se promueve hasta completar CI de navegador, preparar el entrypoint único `index.html` en la rama y superar validación física en Samsung. No se crearán HTML de preview versionados; el historial de Git y las ramas son el mecanismo de aislamiento y rollback.
+`main` permanece en Stage 3 aprobado. Stage 4 no se promueve hasta superar validación física en Samsung y recibir aprobación explícita. CI de navegador y entrypoint único `index.html` ya se completaron en la rama experimental. No se crearán HTML de preview versionados; el historial de Git y las ramas son el mecanismo de aislamiento y rollback.
 
 ## Última validación
 
-CI #212: éxito. Chromium verificó identidades distintas de Alejandro y Warden sobre rigs GLB animados. La capa de identidad actual es una transición visual original; CesiumMan continúa temporalmente como rig humano base y no se considera el modelo humano definitivo.
+CI #254: éxito, commit `f623677b3`. La suite de regresión y Chromium pasaron con el entrypoint experimental `index.html` apuntando a `Stage4Bootstrap.js`. CI #212 también había verificado identidades distintas de Alejandro y Warden sobre rigs GLB animados. La capa de identidad actual es una transición visual original; CesiumMan continúa temporalmente como rig humano base y no se considera el modelo humano definitivo.
