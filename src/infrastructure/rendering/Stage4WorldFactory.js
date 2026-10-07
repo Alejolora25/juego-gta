@@ -19,6 +19,12 @@ export function createStage4World(app,{spawnLegacyCharacters=false}={}){
  for(const x of [-86,0,86])root.addChild(box('RoadV',[x,0,0],[14,.08,420],asphalt));
  for(const z of [-138,-70,0,70,138])root.addChild(box('RoadH',[0,.01,z],[420,.08,14],asphalt));
  district(root,obstacles,'Pasto',0,108,pasto,window,pastoAccent);district(root,obstacles,'Canales',-118,20,canal,window,canalGlow);district(root,obstacles,'Industrial',118,18,industrial,window,industrialSteel);district(root,obstacles,'Mirador',0,-62,mirador,window,miradorAccent);
+ // Non-colliding district wayfinding: paired posts, horizontal header and colored marker.
+ for(const [id,x,z,accent] of [['Pasto',-18,82,pastoAccent],['Canales',-136,48,canalGlow],['Industrial',100,48,industrialSteel],['Mirador',-18,-42,miradorAccent]]){
+  for(const side of [-1,1])root.addChild(box(id+'_SignPost_'+side,[x+side*2.2,1.65,z],[.16,3.3,.16],concrete));
+  root.addChild(box(id+'_SignHeader',[x,3.15,z],[4.6,.58,.22],accent));
+  root.addChild(box(id+'_SignMarker',[x,2.65,z],[1.35,.24,.24],window));
+ }
  for(const x of [-86,0,86])for(let z=-196;z<=196;z+=14)root.addChild(box('RoadLineV',[x,.055,z],[.14,.02,5.5],roadLine));
  for(const z of [-138,-70,0,70,138])for(let x=-196;x<=196;x+=14)root.addChild(box('RoadLineH',[x,.06,z],[5.5,.02,.14],roadLine));
  root.addChild(box('FirewallArenaFloor',[0,.08,-150],[58,.12,58],firewall));
