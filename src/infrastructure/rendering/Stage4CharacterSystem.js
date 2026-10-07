@@ -8,9 +8,10 @@ export class Stage4CharacterSystem {
  constructor({pipeline,root}){this.pipeline=pipeline;this.root=root;this.characters=new Map();}
  async spawn({id,name,url,assetId=id,role='npc',position=[0,0,0],scale=[1,1,1],profile=null}){
   let entity,source='procedural';
-  try{entity=await this.pipeline.loadAndInstantiate(assetId,url,{parent:this.root,position,scale});source='glb';}
+  if(role==='player'){entity=createStage4Character({name,villain:false});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
+  else try{entity=await this.pipeline.loadAndInstantiate(assetId,url,{parent:this.root,position,scale});source='glb';}
   catch(error){entity=createStage4Character({name,villain:role==='boss'});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
-  entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});if(role==='player'||role==='boss')applyStage4Identity(entity,role);
+  entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});if(role==='boss')applyStage4Identity(entity,role);
   const animation=new Stage4AnimationController(entity);
   const skeletal=new Stage4SkeletalAnimation(entity);if(source==='glb')skeletal.configure(this.pipeline.animations(assetId));
   const character={id,name,role,entity,animation,skeletal,source};this.characters.set(id,character);return character;
