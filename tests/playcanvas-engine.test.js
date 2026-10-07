@@ -8,10 +8,10 @@ test('Stage 4 PlayCanvas probe is isolated and WebGPU-first with WebGL2 fallback
  assert.match(src,/new pc\.AppBase/);
  assert.match(src,/Stage4ActorProbe/);assert.match(src,/createStage4Character/);assert.match(src,/Stage4WardenProbe/);
 });
-test('stable Three.js entrypoint is untouched during engine spike',async()=>{
+test('experimental entrypoint now boots Stage 4 while retaining rollback imports',async()=>{
  const html=await fs.readFile('index.html','utf8');
  assert.match(html,/three@0\.180\.0/);assert.match(html,/playcanvas@2\.23\.0\/build\/playcanvas\.mjs/);
- assert.match(html,/GameBootstrap\.js\?v=20261006-3/);
+ assert.match(html,/Stage4Bootstrap\.js\?v=20261006-1/);assert.doesNotMatch(html,/src=["'][^"']*GameBootstrap\.js/);
 });
 
 
