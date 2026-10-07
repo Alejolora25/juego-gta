@@ -11,5 +11,5 @@ export function configureStage4Lighting(app,{mobile=false}={}){
 }
 
 export function createStage4Sky(app){
- const dome=new pc.Entity('Stage4SkyDome');const m=new pc.StandardMaterial();m.diffuse=new pc.Color(.18,.42,.7);m.emissive=new pc.Color(.08,.2,.42);m.emissiveIntensity=.45;m.cull=pc.CULLFACE_FRONT;m.update();dome.addComponent('render',{type:'sphere',material:m});dome.setLocalScale(260,180,260);app.root.addChild(dome);return dome;
+ const dome=new pc.Entity('Stage4SkyDome');const m=new pc.StandardMaterial();m.diffuse=new pc.Color(.18,.42,.7);m.emissive=new pc.Color(.08,.2,.42);m.emissiveIntensity=.45;m.cull=pc.CULLFACE_FRONT;m.update();dome.addComponent('render',{type:'sphere',material:m});dome.setLocalScale(1200,800,1200);app.root.addChild(dome);return dome;
 }
