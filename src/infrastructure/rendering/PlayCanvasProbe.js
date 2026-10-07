@@ -48,7 +48,7 @@ export class PlayCanvasProbe {
   const playerAsset=stage4AssetFor('player'),npcAsset=stage4AssetFor('npc'),wardenAsset=stage4AssetFor('boss');
   const actorRecord=await characters.spawn({id:'stage4-player',name:'Stage4ActorProbe',url:playerAsset.url,assetId:playerAsset.id,role:'player',position:[0,0,108],scale:[1,1,1],profile:profiles.player});
   const npcRecords=[];
-  for(const [id,name,position,profile] of [['stage4-juan','Juan',[-28,0,74],profiles.juan],['stage4-sara','Sara',[98,0,6],profiles.sara],['stage4-david','David',[-108,0,54],profiles.david]])npcRecords.push(await characters.spawn({id,name,url:npcAsset.url,assetId:npcAsset.id,role:'npc',position,profile}));
+  for(const [id,name,position,profile] of [['stage4-juan','Juan',[-28,0,74],profiles.juan],['stage4-sara','Sara',[98,0,-12],profiles.sara],['stage4-david','David',[-108,0,54],profiles.david]])npcRecords.push(await characters.spawn({id,name,url:npcAsset.url,assetId:npcAsset.id,role:'npc',position,profile}));
   const wardenRecord=await characters.spawn({id:'stage4-warden',name:'Stage4WardenProbe',url:wardenAsset.url,assetId:wardenAsset.id,role:'boss',position:[0,0,-150],scale:[1.15,1.15,1.15],profile:profiles.warden});
   const mobile=matchMedia('(max-width: 800px)').matches;
   const lod=new Stage4LodManager(mobile?{near:20,mid:48,far:90}:{near:32,mid:75,far:140});
