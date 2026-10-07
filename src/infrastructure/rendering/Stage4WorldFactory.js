@@ -10,15 +10,15 @@ export const STAGE4_SECTORS={
 };
 export const STAGE4_LANDMARKS={devops:{x:-28,z:88},backend:{x:112,z:18},lab:{x:-118,z:66}};
 const box=(name,pos,scale,material)=>{const e=new pc.Entity(name);e.addComponent('render',{type:'box',material});e.setPosition(...pos);e.setLocalScale(...scale);return e;};
-const district=(root,obstacles,id,cx,cz,material,windowMaterial)=>{for(let i=0;i<6;i++){const h=7+(i%3)*5,x=cx+(i-2.5)*7,z=cz+(i%2?9:-9);root.addChild(box(id+'_Building_'+i,[x,h/2,z],[5.5,h,7],material));const windows=box(id+'_Windows_'+i,[x,h*.56,z-3.53],[3.8,h*.5,.08],windowMaterial);root.addChild(windows);obstacles.push({x,z,hw:2.75,hd:3.5});}};
+const district=(root,obstacles,id,cx,cz,material,windowMaterial,accent)=>{for(let i=0;i<6;i++){const h=7+(i%3)*5,x=cx+(i-2.5)*7,z=cz+(i%2?9:-9);root.addChild(box(id+'_Building_'+i,[x,h/2,z],[5.5,h,7],material));root.addChild(box(id+'_Base_'+i,[x,.32,z],[5.9,.64,7.4],accent));root.addChild(box(id+'_Roof_'+i,[x,h+.18,z],[5.85,.36,7.35],accent));const windows=box(id+'_Windows_'+i,[x,h*.56,z-3.53],[3.8,h*.5,.08],windowMaterial);root.addChild(windows);obstacles.push({x,z,hw:2.75,hd:3.5});}};
 
 export function createStage4World(app,{spawnLegacyCharacters=false}={}){
  const root=new pc.Entity('Stage4World');app.root.addChild(root);
- const materials=new Stage4MaterialLibrary();const {asphalt,concrete,grass,pasto,canal,industrial,mirador,window,roadLine,bark,foliage,firewall,firewallGlow}=materials;
+ const materials=new Stage4MaterialLibrary();const {asphalt,concrete,grass,pasto,canal,industrial,mirador,window,roadLine,bark,foliage,firewall,firewallGlow,pastoAccent,canalGlow,industrialSteel,miradorAccent}=materials;
  root.addChild(box('Ground',[0,-.3,0],[420,.5,420],grass));const obstacles=[];
  for(const x of [-86,0,86])root.addChild(box('RoadV',[x,0,0],[14,.08,420],asphalt));
  for(const z of [-138,-70,0,70,138])root.addChild(box('RoadH',[0,.01,z],[420,.08,14],asphalt));
- district(root,obstacles,'Pasto',0,108,pasto,window);district(root,obstacles,'Canales',-118,20,canal,window);district(root,obstacles,'Industrial',118,18,industrial,window);district(root,obstacles,'Mirador',0,-62,mirador,window);
+ district(root,obstacles,'Pasto',0,108,pasto,window,pastoAccent);district(root,obstacles,'Canales',-118,20,canal,window,canalGlow);district(root,obstacles,'Industrial',118,18,industrial,window,industrialSteel);district(root,obstacles,'Mirador',0,-62,mirador,window,miradorAccent);
  for(const x of [-86,0,86])for(let z=-196;z<=196;z+=14)root.addChild(box('RoadLineV',[x,.055,z],[.14,.02,5.5],roadLine));
  for(const z of [-138,-70,0,70,138])for(let x=-196;x<=196;x+=14)root.addChild(box('RoadLineH',[x,.06,z],[5.5,.02,.14],roadLine));
  root.addChild(box('FirewallArenaFloor',[0,.08,-150],[58,.12,58],firewall));
