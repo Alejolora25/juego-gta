@@ -108,3 +108,6 @@ test('Stage 4 crosswalks remain decorative and use shared sidewalk material',asy
 
 
 test('Stage 4 applies adaptive mobile shadow budget without hiding mission NPCs',async()=>{const src=await fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8');assert.match(src,/const baseShadow=mobile\?1024:2048/);assert.match(src,/Math\.max\(512,Math\.round\(baseShadow\*rec\.shadowScale\)\)/);assert.match(src,/lighting\.sun\.light\.shadowResolution=shadowResolution/);assert.match(src,/npcShadowLimit=Math\.floor\(npcRecords\.length\*rec\.npcScale\)/);assert.match(src,/if\(index>=npcShadowLimit\).*render\.castShadows=false/);assert.doesNotMatch(src,/npcRecords\.forEach\([^\n]*entity\.enabled=false/);});
+
+
+test('Stage 4 has a production bootstrap ready for the single index entrypoint',async()=>{const src=await fs.readFile('src/presentation/Stage4Bootstrap.js','utf8');assert.match(src,/new TouchControls/);assert.match(src,/new HudController/);assert.match(src,/new PlayCanvasProbe/);assert.match(src,/await runtime\.init\(\)/);assert.match(src,/await runtime\.start\(\)/);assert.match(src,/session\.resetSession\(\)/);assert.match(src,/runtime\.destroy\(\)/);});
