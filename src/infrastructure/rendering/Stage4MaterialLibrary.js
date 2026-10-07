@@ -19,5 +19,9 @@ export class Stage4MaterialLibrary {
   this.roadLine=material(new pc.Color(.92,.72,.2),{gloss:.42,emissive:new pc.Color(.12,.07,.005),emissiveIntensity:.18});
   this.firewall=material(new pc.Color(.12,.14,.18),{metalness:.62,gloss:.68});
   this.firewallGlow=material(new pc.Color(.34,.025,.018),{metalness:.18,gloss:.72,emissive:new pc.Color(1,.055,.025),emissiveIntensity:2.2});
+  this.pastoAccent=material(new pc.Color(.52,.16,.075),{metalness:.04,gloss:.4});
+  this.canalGlow=material(new pc.Color(.025,.28,.48),{metalness:.28,gloss:.78,emissive:new pc.Color(.015,.18,.42),emissiveIntensity:.8});
+  this.industrialSteel=material(new pc.Color(.16,.18,.21),{metalness:.72,gloss:.58});
+  this.miradorAccent=material(new pc.Color(.93,.91,.82),{metalness:.02,gloss:.48});
  }
 }
