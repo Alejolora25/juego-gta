@@ -96,3 +96,6 @@ test('Stage 4 Firewall arena gains emissive identity without changing approved c
 
 
 test('Stage 4 districts gain distinct accents without changing approved building footprints',async()=>{const [world,materials]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4MaterialLibrary.js','utf8')]);for(const token of ['pastoAccent','canalGlow','industrialSteel','miradorAccent']){assert.ok(world.includes(token));assert.ok(materials.includes('this.'+token+'='));}assert.match(world,/_Base_/);assert.match(world,/_Roof_/);assert.match(world,/obstacles\.push\(\{x,z,hw:2\.75,hd:3\.5\}\)/);for(const call of ["'Pasto',0,108","'Canales',-118,20","'Industrial',118,18","'Mirador',0,-62"])assert.ok(world.includes(call));});
+
+
+test('Stage 4 vegetation uses deterministic lightweight clusters without gameplay colliders',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.match(world,/const trees=\[\[-34,94,1\].*\[38,-48,\.78\]\]/s);assert.match(world,/for\(const \[x,z,s\] of trees\)/);assert.match(world,/TreeTrunk/);assert.match(world,/TreeCrown/);const treeBlock=world.slice(world.indexOf('const trees='),world.indexOf('const npcs=[]'));assert.doesNotMatch(treeBlock,/obstacles\.push/);});
