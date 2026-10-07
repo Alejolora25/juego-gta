@@ -19,7 +19,7 @@ test('index loads the Stage 4 bootstrap and engine import map', async () => {
 });
 
 test('bootstrap keeps the critical play-button startup path', async () => {
-  const js = await read('src/presentation/Stage4Bootstrap.js');
+  const js = await read('src/presentation/GameBootstrap.js');
   assert.match(js, /function start\(\)/);
   assert.match(js, /\$\(['"]play['"]\)\.onclick=start/);
   assert.match(js, /\$\(['"]intro['"]\)\.style\.display=['"]none['"]/);
@@ -29,7 +29,7 @@ test('bootstrap keeps the critical play-button startup path', async () => {
 
 test('approved joystick and camera mapping are protected', async () => {
   const controls = await read('src/infrastructure/input/TouchControls.js');
-  const bootstrap = await read('src/presentation/Stage4Bootstrap.js');
+  const bootstrap = await read('src/presentation/GameBootstrap.js');
   assert.match(controls, /this\.move\.x=dx\/max;this\.move\.y=dy\/max/);
   assert.match(bootstrap, /addScaledVector\(right,controls\.move\.x\)\.addScaledVector\(forward,-controls\.move\.y\)/);
   assert.match(bootstrap, /cameraYaw-=manualCam\*\.008/);
@@ -39,7 +39,7 @@ test('boss lock-on remains wired through HTML, controls, HUD and bootstrap', asy
   const html = await read('index.html');
   const controls = await read('src/infrastructure/input/TouchControls.js');
   const hud = await read('src/presentation/HudController.js');
-  const bootstrap = await read('src/presentation/Stage4Bootstrap.js');
+  const bootstrap = await read('src/presentation/GameBootstrap.js');
   assert.match(html, /id=["']lock["']/);
   assert.match(controls, /this\.onLock/);
   assert.match(hud, /this\.\$\(['"]lock['"]\)/);
@@ -47,7 +47,7 @@ test('boss lock-on remains wired through HTML, controls, HUD and bootstrap', asy
 });
 
 test('adaptive renderer uses the visual profile without changing gameplay', async () => {
-  const bootstrap = await read('src/presentation/Stage4Bootstrap.js');
+  const bootstrap = await read('src/presentation/GameBootstrap.js');
   assert.match(bootstrap, /selectVisualProfile/);
   assert.match(bootstrap, /visualProfile\.pixelRatio/);
   assert.match(bootstrap, /visualProfile\.shadowMapSize/);
@@ -82,7 +82,7 @@ test('startup failures are visible instead of leaving a dead play button', async
 
 test('stage 2 map exposes Pasto and Europe districts without Rapier', async () => {
   const world = await read('src/infrastructure/rendering/WorldFactory.js');
-  const boot = await read('src/presentation/Stage4Bootstrap.js');
+  const boot = await read('src/presentation/GameBootstrap.js');
   assert.match(world, /Pasto Centro/);
   assert.match(world, /Canales/);
   assert.match(world, /Distrito Industrial/);
@@ -93,10 +93,10 @@ test('stage 2 map exposes Pasto and Europe districts without Rapier', async () =
   assert.doesNotMatch(world, /Rapier|RAPIER/);
 });
 
-test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/Stage4Bootstrap.js');assert.match(boot,/camera\.getWorldDirection\(cameraDirection\)/);assert.match(boot,/cameraDirection\.y=0/);assert.match(boot,/dot=THREE\.MathUtils\.clamp/);assert.match(boot,/cross=cameraDirection\.z\*targetX-cameraDirection\.x\*targetZ/);assert.match(boot,/objectiveAngle=Math\.atan2\(cross,dot\)/);assert.match(boot,/hud\.objective/);});
+test('objective GPS uses camera-relative forward bearing',async()=>{const boot=await read('src/presentation/GameBootstrap.js');assert.match(boot,/camera\.getWorldDirection\(cameraDirection\)/);assert.match(boot,/cameraDirection\.y=0/);assert.match(boot,/dot=THREE\.MathUtils\.clamp/);assert.match(boot,/cross=cameraDirection\.z\*targetX-cameraDirection\.x\*targetZ/);assert.match(boot,/objectiveAngle=Math\.atan2\(cross,dot\)/);assert.match(boot,/hud\.objective/);});
 test('mission NPCs remain outside their landmark building footprints',async()=>{const world=await read('src/infrastructure/rendering/WorldFactory.js');assert.match(world,/npc\(-28,74,'Juan · DevOps'/);assert.match(world,/npc\(98,6,'Sara · Backend'/);assert.match(world,/npc\(-108,54,'David · Lab'/);});
 
-test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/Stage4Bootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-1/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
+test('mobile deployment cache-busts the bootstrap and physics module',async()=>{const html=await read('index.html');const boot=await read('src/presentation/GameBootstrap.js');assert.match(html,/GameBootstrap\.js\?v=20261006-1/);assert.match(boot,/PhysicsWorld\.js\?v=20261006-1/);});
 
 test('GPS arrow maps camera-forward bearing to visual up and compass clutter is removed',async()=>{const html=await read('index.html');const hud=await read('src/presentation/HudController.js');assert.doesNotMatch(html,/id=["']compass["']/);assert.doesNotMatch(html,/id=["']heading["']/);assert.match(hud,/Math\.abs\(angle\)<\.12\?0:angle/);assert.match(hud,/aligned-Math\.PI\/2/);});
 
