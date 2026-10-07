@@ -87,3 +87,6 @@ test('Stage 4 character PBR gloss values stay normalized',async()=>{const source
 
 
 test('Stage 4 gives Alejandro and Warden distinct original visual identities',async()=>{const [identity,system]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4CharacterIdentity.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4CharacterSystem.js','utf8')]);for(const token of ['AlejandroJacket','AlejandroTechPanel','AlejandroBackpack','WardenChestArmor','WardenShoulderL','WardenShoulderR','WardenVisor','WardenCore','AlejandroShoulderL','AlejandroShoulderR','AlejandroWristTech','WardenHelmet','WardenCrownL','WardenCrownR','WardenForearmL','WardenForearmR','WardenPowerL','WardenPowerR'])assert.match(identity,new RegExp(token));assert.match(system,/applyStage4Identity\(entity,role\)/);});
+
+
+test('Stage 4 environment reuses shared PBR materials and adds lightweight facade detail',async()=>{const [env,probe]=await Promise.all([read('src/infrastructure/rendering/Stage4Environment.js'),read('src/infrastructure/rendering/PlayCanvasProbe.js')]);assert.match(env,/Stage4MaterialLibrary/);assert.match(env,/materials\?\?new Stage4MaterialLibrary/);assert.match(env,/name\+'Base'/);assert.match(env,/name\+'Crown'/);assert.match(env,/this\.materials\.window/);assert.match(probe,/Stage4Environment\(this\.app,\{materials:world\.materials\}\)/);});
