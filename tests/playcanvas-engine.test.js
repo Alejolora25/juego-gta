@@ -99,3 +99,6 @@ test('Stage 4 districts gain distinct accents without changing approved building
 
 
 test('Stage 4 vegetation uses deterministic lightweight clusters without gameplay colliders',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.match(world,/const trees=\[\[-34,94,1\].*\[38,-48,\.78\]\]/s);assert.match(world,/for\(const \[x,z,s\] of trees\)/);assert.match(world,/TreeTrunk/);assert.match(world,/TreeCrown/);const treeBlock=world.slice(world.indexOf('const trees='),world.indexOf('const npcs=[]'));assert.doesNotMatch(treeBlock,/obstacles\.push/);});
+
+
+test('Stage 4 district wayfinding is visual-only and preserves navigation obstacles',async()=>{const world=await fs.readFile('src/infrastructure/rendering/Stage4WorldFactory.js','utf8');assert.match(world,/Pasto',-18,82,pastoAccent/);assert.match(world,/Canales',-136,48,canalGlow/);assert.match(world,/Industrial',100,48,industrialSteel/);assert.match(world,/Mirador',-18,-42,miradorAccent/);assert.match(world,/_SignPost_/);assert.match(world,/_SignHeader/);assert.match(world,/_SignMarker/);const signs=world.slice(world.indexOf('// Non-colliding district wayfinding'),world.indexOf('for(const x of [-86,0,86])for(let z=-196'));assert.doesNotMatch(signs,/obstacles\.push/);});
