@@ -16,6 +16,8 @@ test('game loads and starts in a real browser without engine errors',async({page
  await expect(page.locator('#loading')).toBeHidden();
  expect(errors).toEqual([]);
  await expect(page.locator('#targetName')).toContainText('Juan');
+ const runtime=await page.evaluate(()=>({canvas:!!document.querySelector('#game'),stage4Script:[...document.scripts].some(s=>s.src.includes('Stage4Bootstrap.js')),threeScript:[...document.scripts].some(s=>s.src.includes('GameBootstrap.js'))}));
+ expect(runtime.canvas).toBe(true);expect(runtime.stage4Script).toBe(true);expect(runtime.threeScript).toBe(false);
 });
 
 
