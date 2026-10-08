@@ -1,103 +1,119 @@
 import {test,expect} from '@playwright/test';
 import {spawn} from 'node:child_process';
 
+const base='http://127.0.0.1:4173/';
 let server;
-test.beforeAll(async()=>{server=spawn('python3',['-m','http.server','4173','--bind','127.0.0.1'],{stdio:'ignore'});await new Promise(r=>setTimeout(r,800));});
+
+test.beforeAll(async()=>{
+ server=spawn('python3',['-m','http.server','4173','--bind','127.0.0.1'],{stdio:'ignore'});
+ await new Promise(r=>setTimeout(r,800));
+});
 test.afterAll(()=>server?.kill());
 
-test('game loads and starts in a real browser without engine errors',async({page})=>{
- const errors=[];
- page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+async function open(page){
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base,{waitUntil:'networkidle'});
+ return errors;
+}
+
+async function startProbe(page,{controls=null,hud=null,suffix='smoke'}={}){
+ return page.evaluate(async({controls,hud,suffix})=>{
+  const {PlayCanvasProbe}=await import(`./src/infrastructure/rendering/PlayCanvasProbe.js?v=${suffix}`);
+  const canvas=document.createElement('canvas');canvas.width=360;canvas.height=240;document.body.appendChild(canvas);
+  const probe=new PlayCanvasProbe(canvas,{controls,hud});
+  try{
+   await probe.init();
+   const s=await probe.start();
+   await new Promise(r=>setTimeout(r,180));
+   const names=e=>{const out=[];const walk=n=>{out.push(n.name);for(const child of n.children??[])walk(child)};walk(e);return out};
+   const juan=s.characters.get('stage4-juan'),sara=s.characters.get('stage4-sara'),david=s.characters.get('stage4-david');
+   const player=s.characters.get('stage4-player'),warden=s.characters.get('stage4-warden');
+   return {ok:true,backend:s.backend,player:s.actor.name,npcs:s.npcs.map(n=>n.name),boss:s.warden.name,count:s.characters.characters.size,assetCount:s.characters.pipeline.assets.size,stage5:s.stage5Slice.root.children.length,playerSource:player.source,wardenSource:warden.source,playerParts:names(player.entity),wardenParts:names(warden.entity),wardenAnimated:warden.skeletal.ready,juan:juan.entity.getPosition(),sara:sara.entity.getPosition(),david:david.entity.getPosition()};
+  }catch(e){return {ok:false,error:e?.message||String(e),stack:e?.stack};}
+  finally{probe.destroy();canvas.remove();}
+ },{controls,hud,suffix});
+}
+
+test('public game boots Stage 5 entrypoint without browser errors',async({page})=>{
+ const errors=await open(page);
  await expect(page.locator('#loading')).toBeHidden({timeout:20000});
  await expect(page.locator('#play')).toBeVisible();
  await page.locator('#play').click();
  await expect(page.locator('#intro')).toBeHidden();
- await page.waitForTimeout(700);
  await expect(page.locator('#loading')).toBeHidden();
- expect(errors).toEqual([]);
  await expect(page.locator('#targetName')).toContainText('Juan');
- const runtime=await page.evaluate(()=>({canvas:!!document.querySelector('#game'),stage4Script:[...document.scripts].some(s=>s.src.includes('Stage4Bootstrap.js')),threeScript:[...document.scripts].some(s=>s.src.includes('GameBootstrap.js'))}));
- expect(runtime.canvas).toBe(true);expect(runtime.stage4Script).toBe(true);expect(runtime.threeScript).toBe(false);
+ const runtime=await page.evaluate(()=>({canvas:!!document.querySelector('#game'),stage4Script:[...document.scripts].some(s=>s.src.includes('Stage4Bootstrap.js')),legacyScript:[...document.scripts].some(s=>s.src.includes('GameBootstrap.js'))}));
+ expect(runtime).toEqual({canvas:true,stage4Script:true,legacyScript:false});
+ expect(errors).toEqual([]);
 });
 
+test('PlayCanvas runtime spawns cast, Stage 5 street, identities and GLB animation once',async({page})=>{
+ const errors=await open(page);
+ const result=await startProbe(page,{suffix:'stage5-runtime'});
+ expect(result.ok,result.error).toBe(true);
+ expect(['webgpu','webgl2']).toContain(result.backend);
+ expect(result.player).toBe('Stage4ActorProbe');
+ expect(result.npcs).toEqual(['Juan','Sara','David']);
+ expect(result.boss).toBe('Stage4WardenProbe');
+ expect(result.count).toBe(5);
+ expect(result.assetCount).toBe(2);
+ expect(result.stage5).toBeGreaterThan(120);
+ expect(result.playerSource).toBe('procedural');
+ expect(result.wardenSource).toBe('glb');
+ expect(result.wardenAnimated).toBe(true);
+ expect(result.playerParts).toEqual(expect.arrayContaining(['AlejandroTorso','FaceNose','JacketCollarL','Belt','KneePanelL','SmartWatch']));
+ expect(result.wardenParts).toEqual(expect.arrayContaining(['WardenIdentity','WardenChestArmor','WardenVisor','WardenCore','WardenBackReactor']));
+ expect(result.playerParts).not.toContain('WardenVisor');
+ expect(result.wardenParts).not.toContain('JacketBody');
+ expect(result.sara.x).toBe(98);
+ expect(errors).toEqual([]);
+});
 
-test('legacy Rapier physics contract remains available for rollback',async({page})=>{
- await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
- const physicsLoaded=await page.evaluate(async()=>{const m=await import('./src/infrastructure/physics/PhysicsWorld.js?v=stage3-final');const p=new m.PhysicsWorld();try{await p.init();p.addFloor(20);p.addPlayer({x:0,y:0,z:0});p.addBoss({x:4,y:0,z:0});p.addObstacle({x:2,z:0,hw:.5,hd:2},3);return p.ready&&p.projectileBlocked({x:2,z:0})===true&&p.playerBossOverlap({x:0,z:0},{x:0,z:0})===true}catch(e){return false}});
+test('gameplay loop covers movement, missions, boss combat, projectiles and reset in one runtime',async({page})=>{
+ await open(page);
+ const result=await page.evaluate(async()=>{
+  const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage5-gameplay');
+  const controls={move:{x:0,y:-1},running:false,locked:false,cameraDelta:40,onAction(){},onShoot(){},onLock(){},consumeCamera(){const d=this.cameraDelta;this.cameraDelta=0;return d;},setCombat(active){this.combat=active;if(!active)this.locked=false;}};
+  const hudEvents={objectives:[],combat:[],finish:[],dialogs:[],syncs:0};
+  const hud={objective:(distance,angle,name)=>hudEvents.objectives.push({distance,angle,name}),combat:v=>hudEvents.combat.push(v),finish:v=>hudEvents.finish.push(v),dialog:(name,text)=>hudEvents.dialogs.push({name,text}),sync:()=>hudEvents.syncs++};
+  const canvas=document.createElement('canvas');canvas.width=360;canvas.height=240;document.body.appendChild(canvas);
+  const probe=new PlayCanvasProbe(canvas,{controls,hud});
+  try{
+   await probe.init();const s=await probe.start();await s.ensurePhysics();
+   const start=s.actor.getPosition().clone();controls.cameraDelta=0;
+   for(let i=0;i<30;i++){s.controlsBridge.update(s.playerController,1/60);s.physics.syncPlayer(s.actor.getPosition());s.physics.step(1/60);}
+   const moved=s.actor.getPosition().z-start.z;
+   controls.cameraDelta=40;const yawBefore=s.thirdPersonCamera.yaw;s.controlsBridge.update(s.playerController,1/60);const yawAfter=s.thirdPersonCamera.yaw;
+   const completed=[];
+   for(const id of ['stage4-juan','stage4-sara','stage4-david']){const c=s.characters.get(id);s.actor.setPosition(c.entity.getPosition());completed.push(s.missions.interact(s.actor).character);}
+   s.actor.setPosition(0,0,-130);s.warden.setPosition(0,0,-150);s.state.startBoss();s.bossEncounter.setLock(true);s.physics.syncPlayer(s.actor.getPosition());s.physics.syncBoss(s.warden.getPosition());
+   const bossBefore=s.state.bossHP,playerBefore=s.state.playerHP;
+   const playerShot=s.projectiles.shootPlayer(s.actor,s.warden,true);
+   for(let i=0;i<100&&s.state.bossHP===bossBefore;i++){s.projectiles.update(1/60,s.warden,s.actor);s.physics.step(1/60);}
+   const enemyShot=s.projectiles.shootEnemy(s.warden,s.actor);
+   for(let i=0;i<120&&s.state.playerHP===playerBefore;i++){s.projectiles.update(1/60,s.warden,s.actor);s.physics.step(1/60);}
+   s.state.bossHP=12;s.combat.bossHit();await new Promise(r=>setTimeout(r,80));const victory=s.state.finished&&hudEvents.finish.at(-1)===true;
+   s.resetSession();
+   return {ok:true,moved,yawBefore,yawAfter,cameraDelta:controls.cameraDelta,completed,stage:s.state.stage,xp:s.state.xp,hp:s.state.playerHP,bossHP:s.state.bossHP,bossActive:s.state.bossActive,playerShot,enemyShot,bossBefore,bossAfter:s.state.bossHP,playerBefore,playerAfter:s.state.playerHP,victory,resetPos:s.actor.getPosition(),hudEvents,callbacksRestored:false};
+  }catch(e){return {ok:false,error:e?.message||String(e),stack:e?.stack};}
+  finally{probe.destroy();canvas.remove();}
+ });
+ expect(result.ok,result.error).toBe(true);
+ expect(result.moved).toBeLessThan(-1);
+ expect(result.yawAfter).toBeLessThan(result.yawBefore);
+ expect(result.cameraDelta).toBe(0);
+ expect(result.completed).toEqual(['Juan','Sara','David']);
+ expect(result.playerShot).toBe(true);
+ expect(result.enemyShot).toBe(true);
+ expect(result.victory).toBe(true);
+ expect([result.stage,result.xp,result.hp,result.bossHP,result.bossActive]).toEqual([0,0,3,100,false]);
+ expect([result.resetPos.x,result.resetPos.z]).toEqual([0,108]);
+ expect(result.hudEvents.finish).toContain(true);
+ expect(result.hudEvents.objectives.length).toBeGreaterThan(0);
+});
+
+test('legacy Rapier rollback contract still loads in Chromium',async({page})=>{
+ await open(page);
+ const physicsLoaded=await page.evaluate(async()=>{const m=await import('./src/infrastructure/physics/PhysicsWorld.js?v=stage3-final');const p=new m.PhysicsWorld();try{await p.init();p.addFloor(20);p.addPlayer({x:0,y:0,z:0});p.addBoss({x:4,y:0,z:0});p.addObstacle({x:2,z:0,hw:.5,hd:2},3);return p.ready&&p.projectileBlocked({x:2,z:0})===true&&p.playerBossOverlap({x:0,z:0},{x:0,z:0})===true}catch{return false}});
  expect(physicsLoaded).toBe(true);
 });
-
-
-test('stage 4 PlayCanvas engine initializes in a real browser',async({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
- const result=await page.evaluate(async()=>{
-  const m=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4');
-  const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);
-  const probe=new m.PlayCanvasProbe(canvas);
-  try{await probe.init();const started=await probe.start();await new Promise(r=>setTimeout(r,120));return {ok:true,backend:started.backend,actor:started.actor.name};}
-  catch(e){return {ok:false,error:e?.message||String(e)};}finally{probe.destroy();canvas.remove();}
- });
- expect(result.ok,result.error).toBe(true);expect(['webgpu','webgl2']).toContain(result.backend);expect(result.actor).toBe('Stage4ActorProbe');expect(errors).toEqual([]);
-});
-
-
-test('stage 4 loads a licensed rigged humanoid GLB in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const [{PlayCanvasProbe},{Stage4AssetPipeline},{STAGE4_ASSETS}]=await Promise.all([import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-glb'),import('./src/infrastructure/rendering/Stage4AssetPipeline.js'),import('./src/infrastructure/rendering/Stage4AssetCatalog.js')]);const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const pipeline=new Stage4AssetPipeline(probe.app);const cfg=STAGE4_ASSETS.humanoid;const entity=await pipeline.loadAndInstantiate(cfg.id,cfg.url,{position:[0,0,0]});return {ok:!!entity,loaded:pipeline.has(cfg.id),name:entity.name};}catch(e){return {ok:false,error:e?.message||String(e)};}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.loaded).toBe(true);expect(result.name).toBe('cesium-man');});
-
-
-test('stage 4 scene spawns player NPCs and Warden through character system',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-cast');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();return {player:s.actor.name,npcs:s.npcs.map(n=>n.name),boss:s.warden.name,count:s.characters.characters.size,assetCount:s.characters.pipeline.assets.size};}catch(e){return {error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.error).toBeUndefined();expect(result.player).toBe('Stage4ActorProbe');expect(result.npcs).toEqual(['Juan','Sara','David']);expect(result.boss).toBe('Stage4WardenProbe');expect(result.count).toBe(5);expect(result.assetCount).toBe(2);});
-
-
-test('stage 4 rigged GLB exposes skinning and animation resources in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const [{PlayCanvasProbe},{Stage4AssetPipeline},{STAGE4_ASSETS}]=await Promise.all([import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-rig'),import('./src/infrastructure/rendering/Stage4AssetPipeline.js'),import('./src/infrastructure/rendering/Stage4AssetCatalog.js')]);const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const pipeline=new Stage4AssetPipeline(probe.app),cfg=STAGE4_ASSETS.humanoid;await pipeline.loadGlb(cfg.id,cfg.url);const asset=pipeline.assets.get(cfg.id),resource=asset.resource,entity=pipeline.instantiate(cfg.id);const renders=entity.findComponents('render');const meshes=renders.flatMap(r=>r.meshInstances??[]);const skins=meshes.filter(mi=>!!mi.skinInstance).length;const animationCount=(resource.animations?.length??0)+(resource.assets?.filter?.(a=>a.type==='animation').length??0);return {ok:true,animations:animationCount,skins,renderCount:renders.length,meshCount:meshes.length,hasSkinMeshes:meshes.some(mi=>!!mi.skinInstance)};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.renderCount).toBeGreaterThan(0);expect(result.skins).toBeGreaterThan(0);expect(result.animations).toBeGreaterThan(0);});
-
-
-test('stage 4 rigged humanoid animation advances its skeleton across frames',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const [{PlayCanvasProbe},{Stage4AssetPipeline},{STAGE4_ASSETS}]=await Promise.all([import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-motion'),import('./src/infrastructure/rendering/Stage4AssetPipeline.js'),import('./src/infrastructure/rendering/Stage4AssetCatalog.js')]);const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const pipeline=new Stage4AssetPipeline(probe.app),cfg=STAGE4_ASSETS.humanoid;await pipeline.loadGlb(cfg.id,cfg.url);const asset=pipeline.assets.get(cfg.id),entity=pipeline.instantiate(cfg.id),clips=asset.resource.animations??[];if(!clips.length)return {ok:false,error:'GLB has no animations'};entity.addComponent('anim',{activate:true});const anim=entity.anim??entity.c?.anim??entity.findComponent?.('anim');if(!anim)return {ok:false,error:'AnimComponent not registered',animProp:!!entity.anim,componentKeys:Object.keys(entity.c??{})};const stateGraph={layers:[{name:'base',states:[{name:'START'},{name:'motion',speed:1,loop:true}],transitions:[{from:'START',to:'motion'}]}],parameters:{}};anim.loadStateGraph(stateGraph);anim.assignAnimation('motion',clips[0].resource??clips[0],'base');probe.app.start();const joints=entity.findComponents('render').flatMap(r=>r.meshInstances??[]).map(mi=>mi.skinInstance?.bones??[]).flat().filter(Boolean);const bone=joints.find(b=>b.name&&b.name!=='Scene')??joints[0];if(!bone)return {ok:false,error:'No skinned bone found'};const before=bone.getWorldTransform().data.slice();await new Promise(r=>setTimeout(r,450));const after=bone.getWorldTransform().data.slice();const delta=after.reduce((sum,v,i)=>sum+Math.abs(v-before[i]),0);return {ok:true,clipCount:clips.length,bone:bone.name,delta};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.clipCount).toBeGreaterThan(0);expect(result.delta).toBeGreaterThan(0.0001);});
-
-
-test('stage 4 CharacterSystem binds skeletal animation and accepts locomotion semantics',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-character-motion');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start(),character=s.characters.get('stage4-player');const state=s.characters.setLocomotion('stage4-player',1,true);await new Promise(r=>setTimeout(r,120));return {ok:true,source:character.source,ready:character.skeletal.ready,state,current:character.skeletal.current,playing:character.entity.anim?.playing??false};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.source).toBe('procedural');expect(result.ready).toBe(false);expect(result.state).toBe('run');expect(result.current).toBeNull();expect(result.playing).toBe(false);});
-
-
-test('stage 4 player controller moves camera-relative and drives idle walk run in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-player-motion');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start(),ctl=s.playerController,p=s.actor;const samples=[];for(const yaw of [0,Math.PI/2,Math.PI,Math.PI*1.5]){p.setPosition(0,0,0);const out=ctl.update({joy:{x:0,y:-1},cameraYaw:yaw,running:false,dt:1});const pos=p.getPosition();samples.push({yaw,x:pos.x,z:pos.z,state:out.state});}p.setPosition(0,0,0);const idle=ctl.update({joy:{x:0,y:0},cameraYaw:0,running:false,dt:1}).state;const run=ctl.update({joy:{x:0,y:-1},cameraYaw:0,running:true,dt:1}).state;return {ok:true,samples,idle,run};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.idle).toBe('idle');expect(result.run).toBe('run');expect(result.samples.map(s=>s.state)).toEqual(['walk','walk','walk','walk']);const [[a],[b],[c],[d]]=result.samples.map(s=>[s]);expect(a.z).toBeLessThan(-5);expect(Math.abs(a.x)).toBeLessThan(.01);expect(b.x).toBeLessThan(-5);expect(Math.abs(b.z)).toBeLessThan(.01);expect(c.z).toBeGreaterThan(5);expect(Math.abs(c.x)).toBeLessThan(.01);expect(d.x).toBeGreaterThan(5);expect(Math.abs(d.z)).toBeLessThan(.01);});
-
-
-test('stage 4 Rapier blocks player movement through a world building in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-rapier-block');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();const ready=await s.ensurePhysics();if(!ready)return {ok:false,error:'Rapier not ready'};const obstacle=s.world.obstacles[0],p=s.actor;p.setPosition(obstacle.x,0,obstacle.z+5);s.physics.syncPlayer(p.getPosition());for(let i=0;i<90;i++){s.playerController.update({joy:{x:0,y:-1},cameraYaw:0,running:false,dt:1/60});s.physics.syncPlayer(p.getPosition());s.physics.step(1/60);}const pos=p.getPosition();return {ok:true,ready:s.physics.ready,obstacle,position:{x:pos.x,z:pos.z},penetrated:Math.abs(pos.x-obstacle.x)<obstacle.hw&&Math.abs(pos.z-obstacle.z)<obstacle.hd};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.ready).toBe(true);expect(result.penetrated).toBe(false);expect(result.position.z).toBeGreaterThanOrEqual(result.obstacle.z+result.obstacle.hd);});
-
-
-test('stage 4 runtime consumes approved touch-control state for movement and camera',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-controls-runtime');const controls={move:{x:0,y:-1},running:false,cameraDelta:0,consumeCamera(){const d=this.cameraDelta;this.cameraDelta=0;return d;}};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls});try{await probe.init();const s=await probe.start();await s.ensurePhysics();const before=s.actor.getPosition().clone();for(let i=0;i<30;i++){s.controlsBridge.update(s.playerController,1/60);s.physics.syncPlayer(s.actor.getPosition());s.physics.step(1/60);}const after=s.actor.getPosition().clone();controls.move.y=0;controls.cameraDelta=40;const yawBefore=s.thirdPersonCamera.yaw;s.controlsBridge.update(s.playerController,1/60);return {ok:true,dz:after.z-before.z,yawBefore,yawAfter:s.thirdPersonCamera.yaw,cameraDelta:controls.cameraDelta,bridge:!!s.controlsBridge};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.bridge).toBe(true);expect(result.dz).toBeLessThan(-1);expect(result.yawAfter).toBeLessThan(result.yawBefore);expect(result.cameraDelta).toBe(0);});
-
-
-test('stage 4 missions progress Juan Sara David using shared GameState in Chromium',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-missions');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();const names=[];for(const id of ['stage4-juan','stage4-sara','stage4-david']){const c=s.characters.get(id);s.actor.setPosition(c.entity.getPosition());const out=s.missions.interact(s.actor);names.push(out.character);if(!out.completed)return {ok:false,error:'mission did not complete',out};}return {ok:true,names,stage:s.state.stage,xp:s.state.xp,bossReady:s.missions.bossReady(s.actor)};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.names).toEqual(['Juan','Sara','David']);expect(result.stage).toBe(3);expect(result.xp).toBe(300);expect(result.bossReady).toBe(false);});
-
-
-test('stage 4 ACTION callback completes the nearby mission and is restored on destroy',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-action');let previousCalls=0,interaction=null;const previous=()=>previousCalls++;const controls={move:{x:0,y:0},running:false,cameraDelta:0,onAction:previous,consumeCamera(){return 0;}};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls,onMissionInteraction:r=>interaction=r});try{await probe.init();const s=await probe.start();const juan=s.characters.get('stage4-juan');s.actor.setPosition(juan.entity.getPosition());controls.onAction();const during={stage:s.state.stage,xp:s.state.xp,completed:interaction?.completed,character:interaction?.character,overridden:controls.onAction!==previous};probe.destroy();const restored=controls.onAction===previous;controls.onAction();return {ok:true,during,restored,previousCalls};}catch(e){probe.destroy();return {ok:false,error:e?.message||String(e)}}finally{canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.during).toEqual({stage:1,xp:100,completed:true,character:'Juan',overridden:true});expect(result.restored).toBe(true);expect(result.previousCalls).toBe(1);});
-
-
-test('stage 4 runtime feeds mission objectives to the existing HUD contract',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-hud-objectives');const calls=[];const hud={objective:(distance,angle,name)=>calls.push({distance,angle,name})};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{hud});try{await probe.init();const s=await probe.start();await new Promise(r=>setTimeout(r,80));const first=calls.at(-1);for(const id of ['stage4-juan','stage4-sara','stage4-david']){const c=s.characters.get(id);s.actor.setPosition(c.entity.getPosition());s.missions.interact(s.actor);}await new Promise(r=>setTimeout(r,80));const boss=calls.at(-1);return {ok:true,first:first?.name,boss:boss?.name,stage:s.state.stage,finite:Number.isFinite(boss?.distance)&&Number.isFinite(boss?.angle)};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.first).toBe('Juan');expect(result.boss).toBe('Stage4WardenProbe');expect(result.stage).toBe(3);expect(result.finite).toBe(true);});
-
-
-test('stage 4 Warden activates only after missions and enters approved combat lock',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-boss-encounter');const hudCalls=[];const hud={objective(){},combat:v=>hudCalls.push(v),sync(){}};const controls={move:{x:0,y:0},running:false,locked:false,cameraDelta:0,onAction(){},onLock(){},consumeCamera(){const d=this.cameraDelta;this.cameraDelta=0;return d;},setCombat(active){if(!active)this.locked=false;}};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls,hud});try{await probe.init();const s=await probe.start();s.actor.setPosition(s.warden.getPosition());await new Promise(r=>setTimeout(r,60));const before=s.state.bossActive;for(const id of ['stage4-juan','stage4-sara','stage4-david']){const c=s.characters.get(id);s.actor.setPosition(c.entity.getPosition());s.missions.interact(s.actor);}s.actor.setPosition(s.warden.getPosition().x,s.warden.getPosition().y,s.warden.getPosition().z+10);await new Promise(r=>setTimeout(r,80));return {ok:true,before,after:s.state.bossActive,locked:s.bossEncounter.locked,controlLocked:controls.locked,combatHud:hudCalls.includes(true)};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.before).toBe(false);expect(result.after).toBe(true);expect(result.locked).toBe(true);expect(result.controlLocked).toBe(true);expect(result.combatHud).toBe(true);});
-
-
-test('stage 4 Warden pursues the player with Rapier after encounter activation',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-warden-movement');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();await s.ensurePhysics();s.state.stage=3;s.actor.setPosition(0,0,-130);s.warden.setPosition(0,0,-150);s.state.startBoss();s.physics.syncBoss(s.warden.getPosition());const before=s.warden.getPosition().clone();for(let i=0;i<60;i++){s.bossController.update(s.actor,1/60,s.state);s.physics.syncBoss(s.warden.getPosition());s.physics.step(1/60);}const after=s.warden.getPosition().clone();return {ok:true,beforeZ:before.z,afterZ:after.z,distance:Math.hypot(s.actor.getPosition().x-after.x,s.actor.getPosition().z-after.z)};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.afterZ).toBeGreaterThan(result.beforeZ+1);expect(result.distance).toBeGreaterThanOrEqual(9);});
-
-
-test('stage 4 locked player shot uses CombatService and swept Rapier hit detection',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-player-projectile');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();await s.ensurePhysics();s.state.stage=3;s.state.startBoss();s.bossEncounter.setLock(true);s.actor.setPosition(0,0,-130);s.warden.setPosition(0,0,-150);s.physics.syncPlayer(s.actor.getPosition());s.physics.syncBoss(s.warden.getPosition());const hp=s.state.bossHP;const fired=s.projectiles.shootPlayer(s.actor,s.warden,true);const blockedByCooldown=s.projectiles.shootPlayer(s.actor,s.warden,true);for(let i=0;i<90&&s.state.bossHP===hp;i++){s.projectiles.update(1/60,s.warden);s.physics.step(1/60);}return {ok:true,fired,blockedByCooldown,hpBefore:hp,hpAfter:s.state.bossHP,shots:s.projectiles.playerShots.length};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.fired).toBe(true);expect(result.blockedByCooldown).toBe(false);expect(result.hpAfter).toBe(result.hpBefore-12);expect(result.shots).toBe(0);});
-
-
-test('stage 4 Warden shot respects range cooldown and removes one player heart',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-enemy-projectile');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();await s.ensurePhysics();s.state.stage=3;s.state.startBoss();s.actor.setPosition(0,0,-130);s.warden.setPosition(0,0,-150);s.physics.syncPlayer(s.actor.getPosition());s.physics.syncBoss(s.warden.getPosition());const hp=s.state.playerHP;const fired=s.projectiles.shootEnemy(s.warden,s.actor),blocked=s.projectiles.shootEnemy(s.warden,s.actor);for(let i=0;i<120&&s.state.playerHP===hp;i++){s.projectiles.update(1/60,s.warden,s.actor);s.physics.step(1/60);}return {ok:true,fired,blocked,hpBefore:hp,hpAfter:s.state.playerHP,shots:s.projectiles.enemyShots.length};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.fired).toBe(true);expect(result.blocked).toBe(false);expect(result.hpAfter).toBe(result.hpBefore-1);expect(result.shots).toBe(0);});
-
-
-test('stage 4 closes combat on victory and restores every control callback on destroy',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-finish-lifecycle');const controls={move:{x:0,y:0},running:false,locked:false,cameraDelta:0,onAction:undefined,onShoot:undefined,onLock:undefined,consumeCamera(){return 0},setCombat(active){this.combat=active;}};const finishes=[],combats=[];const hud={objective(){},sync(){},combat:v=>combats.push(v),finish:v=>finishes.push(v)};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls,hud});try{await probe.init();const s=await probe.start();s.state.stage=3;s.state.startBoss();s.state.bossHP=12;s.combat.bossHit();await new Promise(r=>setTimeout(r,60));const during={finished:s.state.finished,finish:finishes.at(-1),combat:controls.combat,shots:s.projectiles.playerShots.length+s.projectiles.enemyShots.length};probe.destroy();return {ok:true,...during,restored:[controls.onAction,controls.onShoot,controls.onLock].every(v=>v===undefined)};}catch(e){probe.destroy();return {ok:false,error:e?.message||String(e)}}finally{canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.finished).toBe(true);expect(result.finish).toBe(true);expect(result.combat).toBe(false);expect(result.shots).toBe(0);expect(result.restored).toBe(true);});
-
-
-test('stage 4 session preserves dialogs boss visibility and full reset state',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-session');const dialogs=[];const hud={objective(){},sync(){},combat(){},finish(){},dialog:(name,text)=>dialogs.push({name,text})};const controls={move:{x:0,y:0},running:false,locked:false,cameraDelta:0,onAction(){},onShoot(){},onLock(){},consumeCamera(){return 0},setCombat(){}};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls,hud});try{await probe.init();const s=await probe.start();const hiddenInitially=!s.warden.enabled;const juan=s.characters.get('stage4-juan');s.actor.setPosition(juan.entity.getPosition());controls.onAction();s.state.playerHP=1;s.state.bossHP=40;s.state.bossActive=true;s.projectiles.spawn({x:0,y:2,z:0},{x:0,y:0,z:-1});s.session.reset();return {ok:true,hiddenInitially,dialog:dialogs[0],stage:s.state.stage,xp:s.state.xp,hp:s.state.playerHP,bossHP:s.state.bossHP,bossActive:s.state.bossActive,finished:s.state.finished,wardenHidden:!s.warden.enabled,shots:s.projectiles.playerShots.length,pos:s.actor.getPosition()};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.hiddenInitially).toBe(true);expect(result.dialog?.name).toBe('Juan · DevOps');expect(result.dialog?.text).toContain('pipeline');expect([result.stage,result.xp,result.hp,result.bossHP,result.bossActive,result.finished]).toEqual([0,0,3,100,false,false]);expect(result.wardenHidden).toBe(true);expect(result.shots).toBe(0);expect([result.pos.x,result.pos.z]).toEqual([0,108]);});
-
-
-test('stage 4 supports defeat reset and a second finished encounter in one runtime',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-restart-cycle');const finishes=[];const hud={objective(){},sync(){},combat(){},dialog(){},finish:v=>finishes.push(v)};const controls={move:{x:0,y:0},running:false,locked:false,cameraDelta:17,onAction(){},onShoot(){},onLock(){},consumeCamera(){const d=this.cameraDelta;this.cameraDelta=0;return d;},setCombat(active){if(!active)this.locked=false;}};const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas,{controls,hud});try{await probe.init();const s=await probe.start();s.state.stage=3;s.state.startBoss();s.state.playerHP=1;s.combat.playerHit();await new Promise(r=>setTimeout(r,60));const lost=finishes.at(-1)===false;s.thirdPersonCamera.yaw=1.5;s.resetSession();const reset={stage:s.state.stage,hp:s.state.playerHP,bossHP:s.state.bossHP,yaw:s.thirdPersonCamera.yaw,locked:controls.locked,cameraDelta:controls.cameraDelta};s.state.stage=3;s.state.startBoss();s.state.bossHP=12;s.combat.bossHit();await new Promise(r=>setTimeout(r,60));return {ok:true,lost,reset,finishes};}catch(e){return {ok:false,error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.ok,result.error).toBe(true);expect(result.lost).toBe(true);expect(result.reset).toEqual({stage:0,hp:3,bossHP:100,yaw:0,locked:false,cameraDelta:0});expect(result.finishes).toEqual([false,true]);});
-
-
-test('stage 4 LOD cannot reveal Warden before boss encounter',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-warden-visibility');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();s.actor.setPosition(0,0,-126);await new Promise(resolve=>setTimeout(resolve,120));return {stage:s.state.stage,bossActive:s.state.bossActive,wardenEnabled:s.warden.enabled};}catch(e){return {error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.error).toBeUndefined();expect(result.stage).toBe(0);expect(result.bossActive).toBe(false);expect(result.wardenEnabled).toBe(false);});
-
-
-test('stage 4 renders approved procedural Alejandro and distinct animated Warden identity',async({page})=>{await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});const result=await page.evaluate(async()=>{const {PlayCanvasProbe}=await import('./src/infrastructure/rendering/PlayCanvasProbe.js?v=stage4-character-identity-v2');const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;document.body.appendChild(canvas);const probe=new PlayCanvasProbe(canvas);try{await probe.init();const s=await probe.start();const player=s.characters.get('stage4-player'),warden=s.characters.get('stage4-warden');const names=e=>{const out=[];const walk=n=>{out.push(n.name);for(const child of n.children??[])walk(child)};walk(e);return out};return {playerSource:player.source,wardenSource:warden.source,playerAnimated:player.skeletal.ready,wardenAnimated:warden.skeletal.ready,playerParts:names(player.entity),wardenParts:names(warden.entity)};}catch(e){return {error:e?.message||String(e)}}finally{probe.destroy();canvas.remove();}});expect(result.error).toBeUndefined();expect(result.playerSource).toBe('procedural');expect(result.wardenSource).toBe('glb');expect(result.playerAnimated).toBe(false);expect(result.wardenAnimated).toBe(true);expect(result.playerParts).toEqual(expect.arrayContaining(['AlejandroTorso','JacketBody','Shirt','Backpack','CargoLegL','CargoLegR','SneakerL','SneakerR','SmartWatch']));expect(result.wardenParts).toEqual(expect.arrayContaining(['WardenIdentity','WardenChestArmor','WardenVisor','WardenCore','WardenHelmet','WardenCrownL','WardenCrownR','WardenForearmL','WardenForearmR','WardenPowerL','WardenPowerR','WardenSpine','WardenKneeL','WardenKneeR','WardenBootL','WardenBootR','WardenBackReactor']));expect(result.playerParts).not.toContain('WardenVisor');expect(result.wardenParts).not.toContain('JacketBody');});
