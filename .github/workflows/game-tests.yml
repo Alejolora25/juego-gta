@@ -29,12 +29,3 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run real browser smoke test
         run: npm run test:browser
-      - name: Upload Playwright report
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: |
-            playwright-report/
-            test-results/
-          if-no-files-found: ignore
