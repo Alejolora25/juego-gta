@@ -15,10 +15,13 @@ test('urban pilot preserves human scale, idle NPCs, locomotion and clear road co
    if(!s.physics.ready)throw new Error('Rapier unavailable');
    const pilot=s.urbanPilot;
    const baked=pilot.chunks.every(chunk=>chunk.high.findComponents('render').every(render=>render.meshInstances.every(mesh=>mesh.material.lightMap===pilot.lightmap&&mesh.material.lightMapUv===1)));
-   pilot.updateLOD({x:0,z:105});const near=pilot.chunks.map(c=>c.tier);
-   pilot.updateLOD({x:70,z:105});const far=pilot.chunks.map(c=>c.tier);
-   pilot.updateLOD({x:300,z:105});const culled=pilot.chunks.map(c=>c.tier);
+   pilot.updateLOD({x:0,z:105});const near=pilot.chunks.slice(0,6).map(c=>c.tier);
+   pilot.updateLOD({x:70,z:105});const far=pilot.chunks.slice(0,6).map(c=>c.tier);
+   pilot.updateLOD({x:500,z:105});const culled=pilot.chunks.map(c=>c.tier);
    if(!baked||!near.every(t=>t==='high')||!far.every(t=>t==='low')||!culled.every(t=>t==='culled'))throw new Error('Baked lighting or building LOD contract failed');
+   if(pilot.buildings.length<60||new Set(pilot.buildings.map(b=>b.district)).size!==4)throw new Error('District rollout missing');
+   const leftovers=s.world.root.children.filter(e=>/^(Pasto|Canales|Industrial|Mirador)/.test(e.name)&&e.enabled);
+   if(leftovers.length)throw new Error('Legacy floating facade fragments remain');
    const c=s.characters.get('stage4-player');
    // Imported human front (-Z) must match the gameplay heading (+Z).
    const facing=c.entity.findByName('ModelFacing');

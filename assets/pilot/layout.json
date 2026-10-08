@@ -2,9 +2,9 @@
  "buildings": [
   {"x":-13,"z":94,"width":6,"depth":8,"model":"brick-shop"},
   {"x":-13,"z":116,"width":6,"depth":8,"model":"plaster-apartments"},
-  {"x":-23,"z":105,"width":6,"depth":8,"model":"brick-shop"},
+  {"x":-23,"z":105,"width":6,"depth":8,"model":"kenney-house-a"},
   {"x":13,"z":94,"width":6,"depth":8,"model":"plaster-apartments"},
   {"x":13,"z":116,"width":6,"depth":8,"model":"brick-shop"},
-  {"x":23,"z":105,"width":6,"depth":8,"model":"plaster-apartments"}
+  {"x":23,"z":105,"width":6,"depth":8,"model":"kenney-house-c"}
  ]
 }

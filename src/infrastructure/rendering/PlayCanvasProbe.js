@@ -63,7 +63,7 @@ export class PlayCanvasProbe {
   const performance=new Stage4PerformanceBudget({mobile});
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
 const thirdPersonCamera=new Stage4ThirdPersonCamera(camera);
-if(pilotEnabled){thirdPersonCamera.height=3.3;thirdPersonCamera.distance=6;thirdPersonCamera.targetHeight=1.4;lighting.sun.light.color=new pc.Color(1,.95,.87);lighting.sun.light.intensity=1.5;lighting.rim.light.intensity=.1;this.app.root.findByName('Stage4HorizonGlow').enabled=false;}
+if(pilotEnabled){thirdPersonCamera.height=3.3;thirdPersonCamera.distance=6;thirdPersonCamera.targetHeight=1.4;lighting.sun.light.color=new pc.Color(1,.95,.87);lighting.sun.light.intensity=1.5;lighting.fill.light.color=new pc.Color(.78,.85,.92);lighting.fill.light.intensity=.65;lighting.rim.light.intensity=.1;this.app.scene.ambientLight.set(.40,.42,.44);this.app.scene.fogColor.set(.52,.61,.65);this.app.scene.fogDensity=.0025;this.app.root.findByName('Stage4HorizonGlow').enabled=false;const skyMaterial=sky.render.material;skyMaterial.diffuse.set(.52,.66,.74);skyMaterial.emissive.set(.32,.45,.55);skyMaterial.update();}
 if(urbanPilot)this.app.on('update',()=>urbanPilot.updateLOD(camera.getPosition()));
 const physics=new PhysicsWorld();
 const state=new GameState();

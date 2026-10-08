@@ -8,16 +8,23 @@
    final character appearance still requires visual approval.
 4. NPCs/Warden: three human outfit variants and animated robot integrated.
    Not four bespoke finished characters; mobile visual approval pending.
-5. District rollout: deferred until the pilot passes Samsung review.
-6. Separation: pilot visuals and building collision footprints separated;
-   central movement corridor checked in Chromium. Full-map navigation review
-   remains pending; no new navigation system is claimed.
+5. District rollout: initial Samsung review approved character movement/rig.
+   Four districts (83 buildings), two adapted CC0 external house models plus
+   original facade modules, real surface textures, trees and lamps implemented.
+   This version needs its own visual/mobile acceptance; art is still stylized.
+6. Separation: all four visual districts use the same validated placement list
+   for solid building footprints. Road corridors, mission approach clearances
+   and arena exclusions are validated before spawning meshes/physics objects.
+   Complete road sweeps checked in Chromium/Rapier; no new navigation AI claimed.
 7. Lighting/optimization: shared baked UV1 lightmap, character contact shadows,
-   building high/low LOD and Draco implemented. KTX2 texture compression pending.
+   building high/low LOD and Draco implemented city-wide. Atlas UV target,
+   geometry triangulation and diffuse sky floor corrected; surfaces use shared
+   scanned materials. KTX2 texture compression pending.
 8. Validation: local Chromium checks and screenshots done. Initial Samsung
    review confirmed improvement but reported reversed human facing and Warden
    appearance issues. Human visual heading corrected without changing controls;
-   Warden export animation tracks isolated. Further visual review is required.
+   Warden original rig retained. Samsung approved these fixes; the subsequent
+   district rollout requires another device review.
 
 The pilot is opt-in with `?pilot=1`; initial pilot commit `89193c4` was promoted
 to main after CI #294 passed. Later fixes must pass CI before promotion.

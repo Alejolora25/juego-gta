@@ -1,7 +1,8 @@
 # Urban pilot — review before map rollout
 
 Use `?pilot=1` on the game URL. The normal entrypoint continues to use Stage 6.
-This is a deliberately limited street prototype, not the completed city.
+The approved street prototype now extends to four modular districts. This is
+still stylized prototype art, not a photorealistic or final city.
 
 ## Assets and licenses
 
@@ -12,8 +13,9 @@ This is a deliberately limited street prototype, not the completed city.
 - `source/robot.glb`: RobotExpressive by Tomás Laulhé / Quaternius, CC0 1.0;
   modifications by Don McCurdy. Source and licensing statement:
   https://github.com/mrdoob/three.js/tree/dev/examples/models/gltf/RobotExpressive.
-- Buildings, embedded facade/ground textures and street layout: original assets
-  created in this repository using `tools/build-urban-pilot.py`.
+- Two original facade meshes, two adapted Kenney CC0 house models, Kenney trees
+  and street lamps. Material textures are ambientCG CC0 scans. Exact sources
+  and original licenses: `source/references/README.md`.
 
 Alejandro, Juan, Sara and David are clothed/color-separated variants of one
 base human. Sara has adjusted torso proportions. These are prototype variants,
@@ -31,6 +33,9 @@ bind transforms are preserved. Gameplay roots stay at ground level.
 The 78 × 52 metre pilot contains six 6 × 8 metre buildings, a 14 metre road,
 separate sidewalks and lamp posts. Collision footprints come from the same
 placement list and do not overlap the central road or mission characters.
+`UrbanDistrictLayout.js` extends those six prototypes to 83 buildings, with
+four districts, protected road corridors and mission approaches. Only the
+approved arena colliders are retained from the old visual city.
 
 ## Validation and remaining work
 
@@ -40,11 +45,15 @@ and produces screenshots under `/tmp`.
 
 Static lighting is baked in Blender into a shared 1024px UV1 atlas. Character
 contact shadows remain dynamic. Each building has high/low geometry, switching
-at 35 metres and culling at 120 metres without changing collision footprints.
+at 35 metres and culling at 180 metres without changing collision footprints.
+Trees and lamp meshes cull at 110 metres; roads and collision data never cull.
 Runtime GLBs use Draco geometry compression with a locally hosted decoder
 (Google Draco, Apache 2.0; see assets/vendor/draco/LICENSE).
-District rollout and KTX2 GPU texture compression remain pending. Embedded
+KTX2 GPU texture compression remains pending. Embedded
 512px JPEG textures are not GPU-compressed textures.
 
-Samsung acceptance must happen on the actual device before replacing the rest
-of the city. Automated Chromium screenshots cannot certify mobile GPU performance.
+Initial Samsung review approved the humanoid facing and Warden rig fixes.
+The four-district rollout needs a new Samsung review. Automated Chromium
+screenshots cannot certify mobile GPU performance.
+`node tools/check-urban-districts.mjs` produces four district screenshots and
+checks complete protected road sweeps in Rapier.

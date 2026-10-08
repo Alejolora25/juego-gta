@@ -13,13 +13,18 @@ bpy.context.preferences.filepaths.save_version=0
 mesh=next(o for o in bpy.context.scene.objects if o.type=='MESH')
 bpy.context.view_layer.objects.active=mesh
 mesh.select_set(True)
+mesh.data.validate(clean_customdata=True)
+bm=bmesh.new();bm.from_mesh(mesh.data)
+bmesh.ops.triangulate(bm,faces=list(bm.faces))
+bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces))
+bm.to_mesh(mesh.data);bm.free();mesh.data.update()
 uv0=mesh.data.uv_layers[0]
 uv1=mesh.data.uv_layers.new(name='Lightmap')
 mesh.data.uv_layers.active=uv1
 bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT')
 bpy.ops.uv.smart_project(angle_limit=math.radians(70),island_margin=.006,area_weight=1)
 bpy.ops.object.mode_set(mode='OBJECT')
-uv0.active_render=True
+uv1.active_render=True
 
 scene=bpy.context.scene
 scene.render.engine='CYCLES';scene.cycles.device='CPU';scene.cycles.samples=16
@@ -34,11 +39,25 @@ sun=bpy.context.object;sun.data.energy=2.0;sun.data.angle=.08
 image=bpy.data.images.new('PilotLightmap',width=1024,height=1024,float_buffer=True)
 image.colorspace_settings.name='Non-Color'
 materials=list(set(mesh.data.materials))
-for mat in materials:
- node=mat.node_tree.nodes.new('ShaderNodeTexImage');node.image=image;node.name='BakeTarget'
- mat.node_tree.nodes.active=node
+# Bake neutral irradiance, not albedo. A temporary material keeps importer
+# texture/normal-map conversions out of Cycles while retaining all UV islands.
+source_slots=list(mesh.data.materials)
+bake_material=bpy.data.materials.new('NeutralIrradiance');bake_material.use_nodes=True
+bake_material.node_tree.nodes.get('Principled BSDF').inputs['Base Color'].default_value=(.8,.8,.8,1)
+node=bake_material.node_tree.nodes.new('ShaderNodeTexImage');node.image=image
+bake_material.node_tree.nodes.active=node
+for i in range(len(source_slots)):mesh.data.materials[i]=bake_material
 bpy.ops.object.select_all(action='DESELECT');mesh.select_set(True);bpy.context.view_layer.objects.active=mesh
-bpy.ops.object.bake(type='DIFFUSE')
+bpy.ops.object.bake(type='DIFFUSE',uv_layer='Lightmap')
+for i,mat in enumerate(source_slots):mesh.data.materials[i]=mat
+# Small diffuse sky-floor keeps shadow-facing walls readable in the mobile
+# renderer without realtime lights on baked meshes. Preserve directional
+# shading above the floor; extend it into atlas padding to avoid black seams.
+pixels=list(image.pixels)
+for i in range(0,len(pixels),4):
+ for channel,floor in enumerate((.24,.26,.28)):
+  pixels[i+channel]=max(floor,pixels[i+channel])
+image.pixels.foreach_set(pixels);image.update()
 image.filepath_raw=os.path.join(OUT,'lightmap.png');image.file_format='PNG';image.save()
 image.pack()
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT,'street-lighting.blend'),compress=True)

@@ -22,7 +22,7 @@ def material(name,color,rough=.8,metal=0):
  return m
 
 def export(name):
- if name in ('brick-shop','plaster-apartments'):
+ if name in ('brick-shop','plaster-apartments','kenney-house-a','kenney-house-c','district-tree','district-lamp'):
   meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
   bpy.ops.object.select_all(action='DESELECT')
   for o in meshes:o.select_set(True)
@@ -130,9 +130,78 @@ def texture_material(name,base,brick=False):
  m.node_tree.links.new(tex.outputs['Color'],nodes.get('Principled BSDF').inputs['Base Color'])
  return m
 
+def scanned_material(name,filename,rough=.85,normal=None):
+ m=material(name,(1,1,1),rough)
+ image=bpy.data.images.load(os.path.join(OUT,'source','references',filename),check_existing=True)
+ image.scale(512,512);image.pack()
+ tex=m.node_tree.nodes.new('ShaderNodeTexImage');tex.image=image
+ bs=m.node_tree.nodes.get('Principled BSDF')
+ m.node_tree.links.new(tex.outputs['Color'],bs.inputs['Base Color'])
+ if normal:
+  image=bpy.data.images.load(os.path.join(OUT,'source','references',normal),check_existing=True)
+  image.colorspace_settings.name='Non-Color'
+  image.scale(512,512)
+  # Generated copy avoids the exporter reusing the original 2K PNG bytes for
+  # a normal map, despite the resized in-memory image.
+  small=bpy.data.images.new(name+'Normal512',width=512,height=512)
+  small.colorspace_settings.name='Non-Color'
+  small.pixels.foreach_set(image.pixels[:]);image=small
+  image.update();image.pack()
+  tex=m.node_tree.nodes.new('ShaderNodeTexImage');tex.image=image
+  n=m.node_tree.nodes.new('ShaderNodeNormalMap');n.inputs['Strength'].default_value=.4
+  m.node_tree.links.new(tex.outputs['Color'],n.inputs['Color']);m.node_tree.links.new(n.outputs['Normal'],bs.inputs['Normal'])
+ return m
+
+def imported_buildings():
+ # Adapt CC0 Kenney geometry with scanned wall materials; runtime output is
+ # self-contained and centered at ground level, never its source scale.
+ for name in ['kenney-house-a','kenney-house-c']:
+  clear();bpy.ops.import_scene.gltf(filepath=os.path.join(OUT,'source','references',name+'.glb'))
+  meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
+  bpy.ops.object.select_all(action='DESELECT')
+  for o in meshes:o.select_set(True)
+  bpy.context.view_layer.objects.active=meshes[0];bpy.ops.object.join()
+  o=bpy.context.object;bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+  points=[Vector(v) for v in o.bound_box];lo=[min(p[i] for p in points) for i in range(3)];hi=[max(p[i] for p in points) for i in range(3)]
+  factor=min(6/(hi[0]-lo[0]),8/(hi[1]-lo[1]))
+  for v in o.data.vertices:v.co=Vector(((v.co.x-(lo[0]+hi[0])/2)*factor,(v.co.y-(lo[1]+hi[1])/2)*factor,(v.co.z-lo[2])*factor))
+  old=list(o.data.materials)
+  atlas=next((n.image for m in old if m.use_nodes for n in m.node_tree.nodes if n.type=='TEX_IMAGE' and n.image),None)
+  wall=scanned_material(name+'Wall','concrete.jpg');frame=material('ImportedFrames',(.25,.26,.24));glass=material('ImportedGlass',(.28,.40,.45),.3,.15);roof=material('ImportedRoof',(.28,.22,.18))
+  # Read source atlas colors before replacing UVs, separating wall and glass.
+  pixels=list(atlas.pixels) if atlas else [];iw,ih=atlas.size[:] if atlas else (0,0)
+  uv=o.data.uv_layers.active
+  indices=[]
+  for p in o.data.polygons:
+   t=uv.data[p.loop_start].uv
+   k=4*(min(ih-1,max(0,int(t.y*ih)))*iw+min(iw-1,max(0,int(t.x*iw)))) if atlas else 0
+   color=pixels[k:k+3] if atlas else [1,1,1]
+   blue=color[2]>color[0]*1.15
+   dark=sum(color)<.8
+   indices.append(2 if blue else 1 if dark else 0)
+  o.data.materials.clear()
+  for m in [wall,frame,glass,roof]:o.data.materials.append(m)
+  for p,idx in zip(o.data.polygons,indices):
+   p.material_index=idx
+   axis=max(range(3),key=lambda i:abs(p.normal[i]));axes=(1,2) if axis==0 else (0,2) if axis==1 else (0,1)
+   for loop in p.loop_indices:
+    co=o.data.vertices[o.data.loops[loop].vertex_index].co;uv.data[loop].uv=(co[axes[0]]*.5,co[axes[1]]*.5)
+  export(name)
+
+def imported_fixture(name,source,height):
+ clear();bpy.ops.import_scene.gltf(filepath=os.path.join(OUT,'source','references',source))
+ meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
+ bpy.ops.object.select_all(action='DESELECT')
+ for o in meshes:o.select_set(True)
+ bpy.context.view_layer.objects.active=meshes[0];bpy.ops.object.join()
+ o=bpy.context.object;bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+ lo=min(v.co.z for v in o.data.vertices);hi=max(v.co.z for v in o.data.vertices);factor=height/(hi-lo)
+ for v in o.data.vertices:v.co=Vector((v.co.x*factor,v.co.y*factor,(v.co.z-lo)*factor))
+ export(name)
+
 def buildings():
  for name,base,brick in [('brick-shop',(.43,.27,.19),True),('plaster-apartments',(.65,.62,.53),False)]:
-  clear();wall=texture_material(name+'Facade',base,brick);stone=material('Limestone',(.45,.44,.4));trim=material('Frames',(.12,.14,.15),.55,.25);glass=material('Glass',(.085,.14,.18),.18,.5);door=material('Timber',(.20,.13,.08));roof=material('Roof',(.17,.18,.18));canvas=material('Canvas',(.21,.28,.23))
+  clear();wall=scanned_material(name+'Facade','brick.jpg' if brick else 'concrete.jpg',normal='brick-normal.jpg' if brick else None);stone=material('Limestone',(.58,.56,.50));trim=material('Frames',(.31,.32,.30),.55,.1);glass=material('Glass',(.30,.43,.49),.3,.15);door=material('Timber',(.30,.20,.12));roof=material('Roof',(.25,.26,.25));canvas=material('Canvas',(.35,.40,.32))
   cube('BuildingShell',(0,0,5),(6,8,10),wall,.07)
   cube('Foundation',(0,0,.18),(6,.0+8,.36),stone)
   cube('RoofCornice',(0,0,10),(6.15,8.15,.25),stone,.04)
@@ -160,7 +229,7 @@ def buildings():
 
 def pilot_scene():
  clear()
- asphalt=texture_material('Asphalt',(.15,.16,.17));paving=texture_material('Paving',(.52,.50,.45));paint=material('LanePaint',(.77,.72,.52));soil=texture_material('Soil',(.22,.25,.18));steel=material('LampSteel',(.13,.14,.14),.5,.6)
+ asphalt=scanned_material('Asphalt','asphalt.jpg');paving=scanned_material('Paving','concrete.jpg');paint=material('LanePaint',(.77,.72,.52));soil=scanned_material('Soil','grass.jpg');steel=material('LampSteel',(.23,.24,.24),.5,.6)
  cube('PilotGround',(0,108,-.12),(78,52,.16),soil)
  cube('PilotRoad',(0,108,.01),(14,52,.08),asphalt)
  for side in [-1,1]:
@@ -199,4 +268,11 @@ def pilot_scene():
  bpy.context.object.name='UrbanPilotStatic'
  export('street-pilot')
 
-characters();buildings();pilot_scene()
+def fixtures():
+ imported_fixture('district-tree','vegetation/tree.glb',4.5)
+ imported_fixture('district-lamp','street/lamp.glb',5.5)
+
+if '--fixtures-only' in __import__('sys').argv:fixtures()
+else:
+ if '--environment-only' not in __import__('sys').argv:characters()
+ buildings();imported_buildings();fixtures();pilot_scene()
