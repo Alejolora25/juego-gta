@@ -22,7 +22,8 @@ The mirror README attributes each pack; original publishers were checked:
 Kenney meshes remain stylized, not photogrammetric buildings. Two original
 facade modules are combined with two adapted external house models. Wall,
 ground and pavement color maps use the actual ambientCG source images.
-Runtime textures are resized/embedded, and geometry is compressed with Draco.
+Runtime textures are resized/embedded and GPU-compressed with KTX2/Basis;
+geometry is compressed with Draco. Original reference images remain editable.
 Source files are not runtime downloads. No runtime asset depends on this mirror.
 
 Poly Haven urban facade models were researched (CC0:

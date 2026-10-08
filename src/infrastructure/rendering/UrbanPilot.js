@@ -4,7 +4,7 @@ import {buildUrbanDistrictSurfaces} from './UrbanDistrictSurfaces.js';
 import {addUrbanBuildingContactShadows} from './UrbanBuildingContactShadows.js';
 
 async function lightmap(app){
- const asset=new pc.Asset('PilotLightmap','texture',{url:'./assets/pilot/lightmap.png'},{srgb:false});
+ const asset=new pc.Asset('PilotLightmap','texture',{url:'./assets/pilot/lightmap.ktx2'},{srgb:false});
  app.assets.add(asset);
  return new Promise((resolve,reject)=>{asset.once('load',()=>resolve(asset.resource));asset.once('error',reject);app.assets.load(asset);});
 }
@@ -39,6 +39,7 @@ export async function buildUrbanPilot({world,stage5Slice,stage6City,environment,
   if(child.name==='RoadLineV'&&Math.abs(p.x)<1&&p.z>82&&p.z<134)child.enabled=false;
  }
  pc.dracoInitialize({jsUrl:'./assets/vendor/draco/decoder.js',wasmUrl:'./assets/vendor/draco/decoder.wasm',numWorkers:1,lazyInit:true});
+ pc.basisInitialize({glueUrl:'./assets/vendor/basis/transcoder.js',wasmUrl:'./assets/vendor/basis/transcoder.wasm',numWorkers:1,lazyInit:true});
  const texture=await lightmap(app);
  const root=await pipeline.loadAndInstantiate('street-pilot','./assets/pilot/street-baked.glb',{position:[0,0,0]});
  const streetRenders=root.findComponents('render');

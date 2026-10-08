@@ -24,7 +24,11 @@ prototype, not a final bespoke villain.
 
 ## Rebuild
 
-`npm run assets:pilot` (requires Blender and installed npm dependencies).
+`npm run assets:pilot` requires Blender, installed npm dependencies and
+Khronos KTX-Software 4.4.2 (`toktx` on PATH, or `TOKTX_BIN` pointing to the
+executable). Official releases: https://github.com/KhronosGroup/KTX-Software/releases.
+This is an offline art build; normal game startup and CI consume committed
+assets and do not need Blender or KTX-Software.
 
 The `.blend` files preserve editable source scenes. GLB files are self-contained;
 the game does not contact an external model host. Animation clip names and source
@@ -49,11 +53,25 @@ at 35 metres and culling at 180 metres without changing collision footprints.
 Trees and lamp meshes cull at 110 metres; roads and collision data never cull.
 Runtime GLBs use Draco geometry compression with a locally hosted decoder
 (Google Draco, Apache 2.0; see assets/vendor/draco/LICENSE).
-KTX2 GPU texture compression remains pending. Embedded
-512px JPEG textures are not GPU-compressed textures.
+Large runtime color maps and the linear irradiance atlas use ETC1S KTX2;
+RGB normal maps use UASTC/Zstd KTX2. All contain offline mip chains. Tiny
+character/prop atlases and the UV1 carrier keep their original format.
+The local Basis transcoder chooses a supported GPU format and falls back to
+uncompressed pixels when the device lacks compression support. This makes
+texture VRAM savings device-dependent. Decoder sources/license:
+`assets/vendor/basis/README.md`.
+
+Matched four-district Chromium tours measured 35,102,828 texture VRAM bytes
+before and 7,665,436 after compression, approximately 78% less estimated
+allocated texture memory. This does not measure Samsung VRAM or frame rate.
+The 13 textured runtime GLBs grow from 1.19 MB to 2.06 MB to preserve normals
+and supply complete mipmaps; the decoder adds 0.58 MB, and the irradiance atlas
+is 44 KB. GPU memory and network download size are separate budgets. Each
+building chunk still stays below 350 KB.
 
 Initial Samsung review approved the humanoid facing and Warden rig fixes.
-The four-district rollout needs a new Samsung review. Automated Chromium
+Samsung also approved the four-district layout and new facade textures.
+The compressed-texture update needs another Samsung review. Automated Chromium
 screenshots cannot certify mobile GPU performance.
 `node tools/check-urban-districts.mjs` produces four district screenshots and
 checks complete protected road sweeps in Rapier.

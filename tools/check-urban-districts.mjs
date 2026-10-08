@@ -21,6 +21,10 @@ try{
   await page.evaluate(({x,z,yaw})=>{const {s}=window.city;s.actor.setPosition(x,0,z);s.thirdPersonCamera.yaw=yaw;s.actor.setEulerAngles(0,yaw*180/Math.PI+180,0);},{x,z,yaw});
   await page.waitForTimeout(900);await page.screenshot({path:`/tmp/urban-district-${name}.png`});
  }
+ Object.assign(report,await page.evaluate(async()=>{
+  const pc=await import('playcanvas');const {probe,s}=window.city;
+  return {textureBytes:probe.app.stats.vram.tex,lightmapFormat:s.urbanPilot.lightmap.format,lightmapCompressed:pc.isCompressedPixelFormat(s.urbanPilot.lightmap.format)};
+ }));
  console.log(JSON.stringify({report,errors},null,2));assert.equal(errors.length,0);assert.ok(report.buildings>60);
  for(const r of report.protectedRoads.slice(0,3))assert.equal(r.z,-105);
  for(const r of report.protectedRoads.slice(3))assert.equal(r.x,180);

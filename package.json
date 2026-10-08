@@ -7,7 +7,7 @@
     "test:smoke": "node --test tests/bootstrap-smoke.test.js",
     "test:browser": "playwright test",
     "test:playcanvas": "node --test tests/playcanvas-engine.test.js",
-    "assets:pilot": "blender --background --factory-startup --python tools/build-urban-pilot.py && blender --background --factory-startup --python tools/bake-pilot-lightmap.py && node tools/compress-pilot.mjs"
+    "assets:pilot": "blender --background --factory-startup --python tools/build-urban-pilot.py && blender --background --factory-startup --python tools/bake-pilot-lightmap.py && node tools/compress-pilot.mjs && node tools/compress-pilot-textures.mjs"
   },
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",

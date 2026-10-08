@@ -1,5 +1,5 @@
 import {NodeIO} from '@gltf-transform/core';
-import {KHRDracoMeshCompression} from '@gltf-transform/extensions';
+import {KHRDracoMeshCompression,KHRTextureBasisu} from '@gltf-transform/extensions';
 import {draco,dedup} from '@gltf-transform/functions';
 import draco3d from 'draco3dgltf';
 import {readdir,stat,copyFile,mkdir} from 'node:fs/promises';
@@ -9,7 +9,7 @@ const vendor=new URL('../assets/vendor/draco/',import.meta.url);
 await mkdir(vendor,{recursive:true});
 await copyFile(new URL('../node_modules/draco3dgltf/draco_decoder_gltf_nodejs.js',import.meta.url),new URL('decoder.js',vendor));
 await copyFile(new URL('../node_modules/draco3dgltf/draco_decoder_gltf.wasm',import.meta.url),new URL('decoder.wasm',vendor));
-const io=new NodeIO().registerExtensions([KHRDracoMeshCompression]).registerDependencies({
+const io=new NodeIO().registerExtensions([KHRDracoMeshCompression,KHRTextureBasisu]).registerDependencies({
  'draco3d.encoder':await draco3d.createEncoderModule(),
  'draco3d.decoder':await draco3d.createDecoderModule()
 });

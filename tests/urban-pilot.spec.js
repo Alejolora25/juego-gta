@@ -14,6 +14,14 @@ test('urban pilot preserves human scale, idle NPCs, locomotion and clear road co
    while(!s.physics.ready&&Date.now()<deadline)await new Promise(r=>setTimeout(r,50));
    if(!s.physics.ready)throw new Error('Rapier unavailable');
    const pilot=s.urbanPilot;
+   const pc=await import('playcanvas');
+   const gpu=probe.app.graphicsDevice;
+   const compressionSupported=!!(gpu.extCompressedTextureASTC||gpu.extCompressedTextureS3TC||gpu.extCompressedTextureETC||gpu.extCompressedTextureETC1||gpu.extCompressedTexturePVRTC||gpu.extCompressedTextureATC);
+   if(compressionSupported&&!pc.isCompressedPixelFormat(pilot.lightmap.format))throw new Error('Lightmap not GPU-compressed');
+   if(pilot.lightmap.srgb||!pilot.lightmap.mipmaps||pilot.lightmap.width!==1024)throw new Error('Lightmap encoding or mip chain changed');
+   const facade=pilot.chunks[0].high.findComponents('render').flatMap(r=>r.meshInstances).map(m=>m.material).find(m=>/Facade/.test(m.name));
+   if(!facade?.diffuseMap?.srgb||facade.normalMap?.srgb)throw new Error('Facade color/normal transfer functions changed');
+   if(compressionSupported&&(!pc.isCompressedPixelFormat(facade.diffuseMap.format)||!pc.isCompressedPixelFormat(facade.normalMap.format)))throw new Error('Facade textures not GPU-compressed');
    const baked=pilot.chunks.every(chunk=>chunk.high.findComponents('render').every(render=>render.meshInstances.every(mesh=>mesh.material.lightMap===pilot.lightmap&&mesh.material.lightMapUv===1)));
    pilot.updateLOD({x:0,z:105});const near=pilot.chunks.slice(0,6).map(c=>c.tier);
    pilot.updateLOD({x:70,z:105});const far=pilot.chunks.slice(0,6).map(c=>c.tier);
