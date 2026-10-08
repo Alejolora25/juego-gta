@@ -14,8 +14,10 @@
    remains pending; no new navigation system is claimed.
 7. Lighting/optimization: shared baked UV1 lightmap, character contact shadows,
    building high/low LOD and Draco implemented. KTX2 texture compression pending.
-8. Validation: local Chromium checks and screenshots done. CI must pass before
-   publication; actual Samsung review is required before district rollout.
+8. Validation: local Chromium checks and screenshots done. Initial Samsung
+   review confirmed improvement but reported reversed human facing and Warden
+   appearance issues. Human visual heading corrected without changing controls;
+   Warden export animation tracks isolated. Further visual review is required.
 
-The pilot is opt-in with `?pilot=1`; the public main branch does not yet contain
-these changes. Do not present its URL as deployed until publication is verified.
+The pilot is opt-in with `?pilot=1`; initial pilot commit `89193c4` was promoted
+to main after CI #294 passed. Later fixes must pass CI before promotion.

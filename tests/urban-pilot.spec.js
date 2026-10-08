@@ -20,8 +20,16 @@ test('urban pilot preserves human scale, idle NPCs, locomotion and clear road co
    pilot.updateLOD({x:300,z:105});const culled=pilot.chunks.map(c=>c.tier);
    if(!baked||!near.every(t=>t==='high')||!far.every(t=>t==='low')||!culled.every(t=>t==='culled'))throw new Error('Baked lighting or building LOD contract failed');
    const c=s.characters.get('stage4-player');
+   // Imported human front (-Z) must match the gameplay heading (+Z).
+   const facing=c.entity.findByName('ModelFacing');
+   const front=facing.getWorldTransform().transformVector({x:0,y:0,z:-1});
+   if(front.z<.99)throw new Error('Human visual faces backwards');
    const bounds=()=>{let lo=Infinity,hi=-Infinity;for(const r of c.visual.findComponents('render'))for(const m of r.meshInstances){lo=Math.min(lo,m.aabb.center.y-m.aabb.halfExtents.y);hi=Math.max(hi,m.aabb.center.y+m.aabb.halfExtents.y);}return {lo,hi};};
    await new Promise(r=>setTimeout(r,180));const idle=bounds();
+   const boss=s.characters.get('stage4-warden');boss.entity.enabled=true;
+   let bossLo=Infinity,bossHi=-Infinity;
+   for(const render of boss.visual.findComponents('render'))for(const m of render.meshInstances){bossLo=Math.min(bossLo,m.aabb.center.y-m.aabb.halfExtents.y);bossHi=Math.max(bossHi,m.aabb.center.y+m.aabb.halfExtents.y);}
+   if(bossLo<-.15||bossHi<2.3||bossHi>3.1)throw new Error('Warden animated silhouette collapsed');
    s.playerController.update({joy:{x:0,y:-1},dt:1/60});await new Promise(r=>setTimeout(r,200));const walk=c.skeletal.current,walkBounds=bounds();
    s.playerController.update({joy:{x:0,y:-1},running:true,dt:1/60});await new Promise(r=>setTimeout(r,200));
    return {idle,walkBounds,runBounds:bounds(),walk,run:c.skeletal.current,rootY:c.entity.getPosition().y,npcs:['stage4-juan','stage4-sara','stage4-david'].map(id=>s.characters.get(id).skeletal.current),blocked:s.physics.resolveMovement({x:9,z:94},{x:13,z:94}),road:s.physics.resolveMovement({x:0,z:108},{x:0,z:98}),cast:[...s.characters.characters.values()].map(r=>r.source)};

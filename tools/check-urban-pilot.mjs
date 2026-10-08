@@ -33,6 +33,17 @@ const motion=await page.evaluate(async()=>{
  return {idle,walk,run,walkClip,runClip:c.skeletal.current,blocked,road};
 });
 await page.screenshot({path:'/tmp/urban-pilot-run.png'});
+const bossBounds=await page.evaluate(async()=>{
+ const {s,probe}=window.pilot;s.state.bossActive=true;
+ s.warden.setPosition(0,0,103);s.actor.setPosition(0,0,108);s.thirdPersonCamera.yaw=0;
+ await new Promise(r=>setTimeout(r,200));
+ const c=s.characters.get('stage4-warden');let min=Infinity,max=-Infinity;
+ for(const render of c.visual.findComponents('render'))for(const m of render.meshInstances){min=Math.min(min,m.aabb.center.y-m.aabb.halfExtents.y);max=Math.max(max,m.aabb.center.y+m.aabb.halfExtents.y);}
+ return {min,max};
+});
+await page.screenshot({path:'/tmp/urban-pilot-warden.png'});
+console.log('Warden rendered bounds',bossBounds);
+assert.ok(bossBounds.min>-.15&&bossBounds.max>2.3&&bossBounds.max<3.1,'Warden must retain its full upright silhouette');
 console.log(JSON.stringify({result,motion,errors},null,2));
 assert.equal(errors.length,0);
 assert.equal(result.records.length,5);

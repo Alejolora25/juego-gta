@@ -74,6 +74,13 @@ def characters():
     if 2.7<z<4.5:v.co.y*=.89
   export(name)
  clear();bpy.ops.import_scene.gltf(filepath=os.path.join(OUT,'source','robot.glb'))
+ # Never combine imported NLA clips into the exported rest pose. They remain
+ # separate playable clips, just as on the human rig.
+ for o in bpy.context.scene.objects:
+  if o.animation_data:
+   o.animation_data.action=None
+   for track in o.animation_data.nla_tracks:track.mute=True
+ bpy.context.view_layer.update()
  meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
  points=[o.matrix_world @ Vector(v) for o in meshes for v in o.bound_box]
  lo=min(p.z for p in points);hi=max(p.z for p in points)
