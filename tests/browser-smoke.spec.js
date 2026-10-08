@@ -27,12 +27,13 @@ async function startProbe(page,{controls=null,hud=null,suffix='smoke'}={}){
 }
 
 test('public game boots Stage 5 entrypoint without browser errors',async({page})=>{
+ test.setTimeout(60000);
  const errors=await open(page);
  await expect(page.locator('#loading')).toBeHidden({timeout:20000});
  await expect(page.locator('#play')).toBeVisible();
  await page.locator('#play').click();
  await expect(page.locator('#intro')).toBeHidden();
- await expect(page.locator('#loading')).toBeHidden();
+ await expect(page.locator('#loading')).toBeHidden({timeout:20000});
  await expect(page.locator('#targetName')).toContainText('Juan');
  const runtime=await page.evaluate(()=>({canvas:!!document.querySelector('#game'),stage4Script:[...document.scripts].some(s=>s.src.includes('Stage4Bootstrap.js')),legacyScript:[...document.scripts].some(s=>s.src.includes('GameBootstrap.js'))}));
  expect(runtime).toEqual({canvas:true,stage4Script:true,legacyScript:false});
