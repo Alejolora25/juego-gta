@@ -10,7 +10,8 @@ export const STAGE4_SECTORS={
 };
 export const STAGE4_LANDMARKS={devops:{x:-28,z:88},backend:{x:112,z:18},lab:{x:-118,z:66}};
 const box=(name,pos,scale,material)=>{const e=new pc.Entity(name);e.addComponent('render',{type:'box',material});e.setPosition(...pos);e.setLocalScale(...scale);return e;};
-const district=(root,obstacles,id,cx,cz,material,windowMaterial,accent)=>{for(let i=0;i<6;i++){const h=7+(i%3)*5,x=cx+(i-2.5)*7,z=cz+(i%2?9:-9);root.addChild(box(id+'_Building_'+i,[x,h/2,z],[5.5,h,7],material));root.addChild(box(id+'_Base_'+i,[x,.32,z],[5.9,.64,7.4],accent));root.addChild(box(id+'_Roof_'+i,[x,h+.18,z],[5.85,.36,7.35],accent));const windows=box(id+'_Windows_'+i,[x,h*.56,z-3.53],[3.8,h*.5,.08],windowMaterial);root.addChild(windows);obstacles.push({x,z,hw:2.75,hd:3.5});}};
+const facadeDetails=(root,id,i,x,z,h,windowMaterial,accent)=>{const front=z-3.57;for(let row=0;row<Math.max(2,Math.floor(h/4));row++){const y=2.2+row*2.25;if(y>h-.9)continue;for(const side of [-1,1])root.addChild(box(id+'_Window_'+i+'_'+row+'_'+side,[x+side*1.25,y,front],[.82,.72,.09],windowMaterial));}for(const side of [-1,1])root.addChild(box(id+'_FacadeRib_'+i+'_'+side,[x+side*2.62,h*.52,front+.01],[.12,h*.82,.12],accent));root.addChild(box(id+'_Awning_'+i,[x,1.35,front-.05],[3.7,.24,.42],accent));};
+const district=(root,obstacles,id,cx,cz,material,windowMaterial,accent)=>{for(let i=0;i<6;i++){const h=7+(i%3)*5,x=cx+(i-2.5)*7,z=cz+(i%2?9:-9);root.addChild(box(id+'_Building_'+i,[x,h/2,z],[5.5,h,7],material));root.addChild(box(id+'_Base_'+i,[x,.32,z],[5.9,.64,7.4],accent));root.addChild(box(id+'_Roof_'+i,[x,h+.18,z],[5.85,.36,7.35],accent));const windows=box(id+'_Windows_'+i,[x,h*.56,z-3.53],[3.8,h*.5,.08],windowMaterial);root.addChild(windows);facadeDetails(root,id,i,x,z,h,windowMaterial,accent);obstacles.push({x,z,hw:2.75,hd:3.5});}};
 
 export function createStage4World(app,{spawnLegacyCharacters=false}={}){
  const root=new pc.Entity('Stage4World');app.root.addChild(root);
@@ -18,6 +19,13 @@ export function createStage4World(app,{spawnLegacyCharacters=false}={}){
  root.addChild(box('Ground',[0,-.3,0],[420,.5,420],grass));const obstacles=[];
  for(const x of [-86,0,86])root.addChild(box('RoadV',[x,0,0],[14,.08,420],asphalt));
  for(const z of [-138,-70,0,70,138])root.addChild(box('RoadH',[0,.01,z],[420,.08,14],asphalt));
+ for(const x of [-93,-79,-7,7,79,93])root.addChild(box('CurbV',[x,.14,0],[.7,.24,420],concrete));
+ for(const z of [-145,-131,-77,-63,-7,7,63,77,131,145])root.addChild(box('CurbH',[0,.15,z],[420,.24,.7],concrete));
+ for(const [x,z,w,d] of [[-43,35,32,18],[43,35,32,18],[-43,-35,32,18],[43,-35,32,18],[-118,-24,28,20],[118,-24,28,20]]){
+  root.addChild(box('PlazaPaving',[x,.035,z],[w,.06,d],materials.sidewalk));
+  root.addChild(box('PlazaAccent',[x,.08,z],[w*.68,.04,.42],roadLine));
+  root.addChild(box('PlazaAccentCross',[x,.085,z],[.42,.04,d*.68],roadLine));
+ }
  district(root,obstacles,'Pasto',0,108,pasto,window,pastoAccent);district(root,obstacles,'Canales',-118,20,canal,window,canalGlow);district(root,obstacles,'Industrial',118,18,industrial,window,industrialSteel);district(root,obstacles,'Mirador',0,-62,mirador,window,miradorAccent);
  // Non-colliding district wayfinding: paired posts, horizontal header and colored marker.
  for(const [id,x,z,accent] of [['Pasto',-18,82,pastoAccent],['Canales',-136,48,canalGlow],['Industrial',100,48,industrialSteel],['Mirador',-18,-42,miradorAccent]]){

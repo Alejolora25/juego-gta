@@ -1,8 +1,9 @@
 name: Game regression tests
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main, engine-upgrade, stage2-map, stage3-rapier, stage3-physics-controller, fix-gps-camera-alignment, fix-gps-signed-angle, fix-gps-cache-refresh, stage4-playcanvas-spike]
+    branches: ['**']
   pull_request:
     branches: [main]
 
@@ -28,3 +29,12 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run real browser smoke test
         run: npm run test:browser
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore

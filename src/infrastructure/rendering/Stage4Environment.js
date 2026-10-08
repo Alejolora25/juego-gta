@@ -12,6 +12,12 @@ export class Stage4Environment {
   const glass=box(name+'Glass',this.materials.window,x,h*.58,z-d*.505,w*.72,h*.52,.06);this.root.addChild(glass);
   const base=box(name+'Base',this.materials.concrete,x,.35,z,w*1.04,.7,d*1.04);this.root.addChild(base);
   const crown=box(name+'Crown',this.materials.concrete,x,h+.18,z,w*1.035,.36,d*1.035);this.root.addChild(crown);
+  const accent=this.materials[material+'Accent']??this.materials.roadLine;
+  for(const side of [-1,1]){
+   const rib=box(name+'Rib'+side,accent,x+side*w*.39,h*.5,z-d*.512,.14,h*.78,.12);this.root.addChild(rib);
+   const sideGlass=box(name+'SideGlass'+side,this.materials.window,x+side*w*.505,h*.55,z,.06,h*.44,d*.56);this.root.addChild(sideGlass);
+  }
+  for(let row=0;row<Math.max(2,Math.floor(h/5));row++){const y=2.1+row*2.6;if(y<h-.9)this.root.addChild(box(name+'WindowBand'+row,this.materials.window,x,y,z-d*.518,w*.52,.18,.08));}
   return b;
  }
  addTree(x,z,scale=1){
