@@ -10,7 +10,7 @@ export class Stage4Session {
  }
  reset(){
   this.projectiles.clear();this.state.reset();this.combat.playerCooldown=this.combat.enemyCooldown=0;this.bossEncounter.setLock(false);
-  this.actor.setPosition(0,0,108);this.warden.setPosition(0,0,-150);this.warden.enabled=false;
+  this.actor.setPosition(0,this.actor.__stage4GroundLift??0,108);this.warden.setPosition(0,this.warden.__stage4GroundLift??0,-150);this.warden.enabled=false;
   if(this.controls){this.controls.locked=false;this.controls.setCombat(false);}
   this.hud?.combat(false);this.hud?.sync(this.state);return this.state;
  }

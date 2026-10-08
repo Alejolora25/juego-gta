@@ -15,7 +15,7 @@ export class Stage4SkeletalAnimation {
  playSemantic(state){
   if(!this.ready)return false;
   const map={idle:['idle','stand'],walk:['walk'],run:['run','jog'],combat:['attack','combat','shoot'],hit:['hit','damage'],defeated:['death','die','defeat']};
-  let clip=this.find(...(map[state]??[state]));if(!clip&&(state==='walk'||state==='run'))clip=this.clips[0]??null;if(!clip)return false;const index=Math.max(0,this.clips.indexOf(clip));
+  let clip=this.find(...(map[state]??[state]));if(!clip&&(state==='idle'||state==='walk'||state==='run'))clip=this.clips[0]??null;if(!clip)return false;const index=Math.max(0,this.clips.indexOf(clip));
   try{const anim=this.entity.anim??this.entity.c?.anim;if(!anim?.baseLayer)return false;anim.baseLayer.transition('clip'+index,.18);this.current=clip;return true;}catch{return false;}
  }
 }
