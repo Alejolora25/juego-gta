@@ -117,3 +117,6 @@ test('Stage 5 vertical slice adds a production-quality street showcase',async()=
 
 
 test('Stage 5 Alejandro proxy gains more human-readable facial and clothing details',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4CharacterFactory.js','utf8');for(const token of ['FaceNose','FaceBrowL','FaceBrowR','JacketCollarL','JacketCollarR','Belt','Buckle','KneePanelL','KneePanelR'])assert.match(src,new RegExp(token));});
+
+
+test('Stage 6 replaces cube districts with modular urban visual overhaul',async()=>{const [stage6,probe]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage6UrbanOverhaul.js','utf8'),fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8')]);for(const token of ['Stage6UrbanOverhaul','hideLegacyBoxes','Stage6RoadDeckV','Stage6CurbH','PastoCore','CanalQuarter','IndustrialYard','MiradorTerraces','Stage6ArenaCore','Stage6TransitKiosk','Stage6TreeCrown'])assert.match(stage6,new RegExp(token));assert.match(stage6,/Pasto_Building_/);assert.match(stage6,/Balcony_/);assert.match(stage6,/LobbyGlass/);assert.match(probe,/new Stage6UrbanOverhaul\(this\.app,\{materials:world\.materials\}\)\.build\(\{baseWorld:world\.root\}\)/);assert.match(probe,/stage6City/);});
