@@ -13,6 +13,12 @@ test('urban pilot preserves human scale, idle NPCs, locomotion and clear road co
    const deadline=Date.now()+15000;
    while(!s.physics.ready&&Date.now()<deadline)await new Promise(r=>setTimeout(r,50));
    if(!s.physics.ready)throw new Error('Rapier unavailable');
+   const pilot=s.urbanPilot;
+   const baked=pilot.chunks.every(chunk=>chunk.high.findComponents('render').every(render=>render.meshInstances.every(mesh=>mesh.material.lightMap===pilot.lightmap&&mesh.material.lightMapUv===1)));
+   pilot.updateLOD({x:0,z:105});const near=pilot.chunks.map(c=>c.tier);
+   pilot.updateLOD({x:70,z:105});const far=pilot.chunks.map(c=>c.tier);
+   pilot.updateLOD({x:300,z:105});const culled=pilot.chunks.map(c=>c.tier);
+   if(!baked||!near.every(t=>t==='high')||!far.every(t=>t==='low')||!culled.every(t=>t==='culled'))throw new Error('Baked lighting or building LOD contract failed');
    const c=s.characters.get('stage4-player');
    const bounds=()=>{let lo=Infinity,hi=-Infinity;for(const r of c.visual.findComponents('render'))for(const m of r.meshInstances){lo=Math.min(lo,m.aabb.center.y-m.aabb.halfExtents.y);hi=Math.max(hi,m.aabb.center.y+m.aabb.halfExtents.y);}return {lo,hi};};
    await new Promise(r=>setTimeout(r,180));const idle=bounds();

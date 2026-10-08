@@ -22,7 +22,7 @@ prototype, not a final bespoke villain.
 
 ## Rebuild
 
-`blender --background --factory-startup --python tools/build-urban-pilot.py`
+`npm run assets:pilot` (requires Blender and installed npm dependencies).
 
 The `.blend` files preserve editable source scenes. GLB files are self-contained;
 the game does not contact an external model host. Animation clip names and source
@@ -38,10 +38,13 @@ placement list and do not overlap the central road or mission characters.
 Chromium at `/usr/bin/chromium`. It checks animation semantics and rendered bounds
 and produces screenshots under `/tmp`.
 
-Current lighting uses the existing renderer plus soft character contact shadows.
-Offline static lightmaps, district rollout, building LOD meshes and KTX2/mesh
-compression remain pending. Embedded 512px JPEG textures and shared static
-materials are implemented; do not describe these as completed GPU compression.
+Static lighting is baked in Blender into a shared 1024px UV1 atlas. Character
+contact shadows remain dynamic. Each building has high/low geometry, switching
+at 35 metres and culling at 120 metres without changing collision footprints.
+Runtime GLBs use Draco geometry compression with a locally hosted decoder
+(Google Draco, Apache 2.0; see assets/vendor/draco/LICENSE).
+District rollout and KTX2 GPU texture compression remain pending. Embedded
+512px JPEG textures are not GPU-compressed textures.
 
 Samsung acceptance must happen on the actual device before replacing the rest
 of the city. Automated Chromium screenshots cannot certify mobile GPU performance.

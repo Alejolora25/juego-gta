@@ -64,6 +64,7 @@ export class PlayCanvasProbe {
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
 const thirdPersonCamera=new Stage4ThirdPersonCamera(camera);
 if(pilotEnabled){thirdPersonCamera.height=3.3;thirdPersonCamera.distance=6;thirdPersonCamera.targetHeight=1.4;lighting.sun.light.color=new pc.Color(1,.95,.87);lighting.sun.light.intensity=1.5;lighting.rim.light.intensity=.1;this.app.root.findByName('Stage4HorizonGlow').enabled=false;}
+if(urbanPilot)this.app.on('update',()=>urbanPilot.updateLOD(camera.getPosition()));
 const physics=new PhysicsWorld();
 const state=new GameState();
 const missions=new Stage4MissionCoordinator(state,characters);

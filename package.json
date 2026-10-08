@@ -6,10 +6,15 @@
     "test": "node --test tests/*.test.js",
     "test:smoke": "node --test tests/bootstrap-smoke.test.js",
     "test:browser": "playwright test",
-    "test:playcanvas": "node --test tests/playcanvas-engine.test.js"
+    "test:playcanvas": "node --test tests/playcanvas-engine.test.js",
+    "assets:pilot": "blender --background --factory-startup --python tools/build-urban-pilot.py && blender --background --factory-startup --python tools/bake-pilot-lightmap.py && node tools/compress-pilot.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "^1.55.0"
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "@playwright/test": "^1.55.0",
+    "draco3dgltf": "^1.5.7"
   },
   "dependencies": {
     "playcanvas": "2.23.0"

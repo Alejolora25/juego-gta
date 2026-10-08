@@ -125,7 +125,7 @@ def texture_material(name,base,brick=False):
 
 def buildings():
  for name,base,brick in [('brick-shop',(.43,.27,.19),True),('plaster-apartments',(.65,.62,.53),False)]:
-  clear();wall=texture_material('Facade',base,brick);stone=material('Limestone',(.45,.44,.4));trim=material('Frames',(.12,.14,.15),.55,.25);glass=material('Glass',(.085,.14,.18),.18,.5);door=material('Timber',(.20,.13,.08));roof=material('Roof',(.17,.18,.18));canvas=material('Canvas',(.21,.28,.23))
+  clear();wall=texture_material(name+'Facade',base,brick);stone=material('Limestone',(.45,.44,.4));trim=material('Frames',(.12,.14,.15),.55,.25);glass=material('Glass',(.085,.14,.18),.18,.5);door=material('Timber',(.20,.13,.08));roof=material('Roof',(.17,.18,.18));canvas=material('Canvas',(.21,.28,.23))
   cube('BuildingShell',(0,0,5),(6,8,10),wall,.07)
   cube('Foundation',(0,0,.18),(6,.0+8,.36),stone)
   cube('RoofCornice',(0,0,10),(6.15,8.15,.25),stone,.04)
@@ -165,12 +165,13 @@ def pilot_scene():
    cube('LampHousing',(side*7.4,z,4.69),(.7,.35,.12),steel,.04)
  for z in range(85,132,8):cube('LaneDash',(0,z,.065),(.12,3,.012),paint)
  cube('JuanPlaza',(-28,80,.065),(14,6,.12),paving)
- for building in LAYOUT['buildings']:
+ for index,building in enumerate(LAYOUT['buildings']):
   x,z,kind=building['x'],building['z'],building['model']
   before=set(bpy.context.scene.objects)
   bpy.ops.import_scene.gltf(filepath=os.path.join(OUT,kind+'.glb'))
   # Imported glTF has Blender Z up restored by importer.
   for o in set(bpy.context.scene.objects)-before:
+   if o.type=='MESH':o['pilot_part']='building-'+str(index)
    if o.parent is None:o.location.x+=x;o.location.y+=z
  for o in bpy.context.scene.objects:
   if o.parent is None:o.location.y*=-1
@@ -178,6 +179,8 @@ def pilot_scene():
  meshes=[o for o in bpy.context.scene.objects if o.type=='MESH']
  shared={}
  for o in meshes:
+  group=o.vertex_groups.new(name=o.get('pilot_part','street'))
+  group.add(list(range(len(o.data.vertices))),1,'REPLACE')
   for i,m in enumerate(o.data.materials):
    key=m.name.split('.')[0]
    if key not in shared:shared[key]=m
