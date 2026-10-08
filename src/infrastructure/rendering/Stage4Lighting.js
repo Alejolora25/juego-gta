@@ -5,7 +5,7 @@ export function configureStage4Lighting(app,{mobile=false}={}){
  app.scene.skyboxMip=mobile?2:1;
  app.scene.exposure=mobile?1.14:1.24;
  app.scene.toneMapping=pc.TONEMAP_ACES;
- app.scene.fog=pc.FOG_EXP2;
+ app.scene.fog.type=pc.FOG_EXP2;
  app.scene.fogColor=new pc.Color(.13,.24,.34);
  app.scene.fogDensity=mobile?.0038:.0031;
  const sun=new pc.Entity('Stage4Sun');sun.addComponent('light',{type:'directional',color:new pc.Color(1,.82,.58),intensity:mobile?2.05:2.55,castShadows:true,shadowBias:.13,normalOffsetBias:.055,shadowDistance:mobile?62:128,shadowResolution:mobile?1024:2048});sun.setEulerAngles(46,-34,0);app.root.addChild(sun);
