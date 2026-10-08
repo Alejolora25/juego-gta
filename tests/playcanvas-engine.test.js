@@ -21,7 +21,7 @@ test('Stage 4 defines approved Alejandro and armored Warden humanoids',async()=>
 test('Stage 4 environment covers PBR buildings glass and vegetation',async()=>{const [src,materials]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage4Environment.js','utf8'),fs.readFile('src/infrastructure/rendering/Stage4MaterialLibrary.js','utf8')]);assert.match(src,/Stage4MaterialLibrary/);assert.match(materials,/StandardMaterial/);assert.match(materials,/metalness/);assert.match(src,/materials\.window/);assert.match(src,/addBuilding/);assert.match(src,/addTree/);});
 
 
-test('Stage 4 lighting uses ACES, shadows, sky and mobile quality profile',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4Lighting.js','utf8');assert.match(src,/TONEMAP_ACES/);assert.match(src,/castShadows:true/);assert.match(src,/shadowResolution:mobile\?1024:2048/);assert.match(src,/Stage4SkyDome/);assert.match(src,/profile:mobile\?'mobile':'high'/);});
+test('Stage 4 lighting uses ACES stable sun no moving shadow seam and mobile profile',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4Lighting.js','utf8');assert.match(src,/TONEMAP_ACES/);assert.match(src,/castShadows:false/);assert.match(src,/shadowResolution:mobile\?1024:2048/);assert.match(src,/Stage4SkyDome/);assert.match(src,/profile:mobile\?'mobile':'high'/);});
 
 
 test('Stage 4 asset pipeline loads and instantiates GLB containers',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4AssetPipeline.js','utf8');assert.match(src,/new pc\.Asset\(name,'container'/);assert.match(src,/instantiateRenderEntity/);assert.match(src,/loadAndInstantiate/);});

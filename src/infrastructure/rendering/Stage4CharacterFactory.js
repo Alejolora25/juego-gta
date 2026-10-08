@@ -30,6 +30,8 @@ export function createAlejandroCharacter({name='Alejandro'}={}){
 export function createStage4Character({name='Alejandro',villain=false}={}){if(!villain)return createAlejandroCharacter({name});
  const root=new pc.Entity(name),dark=material(new pc.Color(.025,.03,.04),{metalness:.65,gloss:.7}),red=material(new pc.Color(.65,.02,.015),{metalness:.55,gloss:.8});
  part(root,'WardenTorso','capsule',[.82,.92,.5],[0,1.55,0],dark);part(root,'WardenHead','sphere',[.52,.58,.5],[0,2.55,0],dark);part(root,'WardenVisor','box',[.65,.12,.08],[0,2.58,-.48],red);
- for(const side of [-1,1]){part(root,side<0?'WardenArmL':'WardenArmR','capsule',[.28,.82,.28],[side*.72,1.55,0],dark);part(root,side<0?'WardenLegL':'WardenLegR','capsule',[.34,.9,.34],[side*.32,.38,0],dark);}
+ part(root,'WardenChestPlate','box',[1.05,.62,.18],[0,1.58,-.36],dark);part(root,'WardenCoreGlow','sphere',[.22,.22,.08],[0,1.58,-.48],red);part(root,'WardenBackReactor','box',[.5,.82,.28],[0,1.65,.46],dark);
+ part(root,'WardenHelmetCrest','box',[.22,.5,.22],[0,2.98,0],dark);part(root,'WardenHornL','cone',[.14,.48,.14],[-.32,2.93,.02],dark).setLocalEulerAngles(0,0,-22);part(root,'WardenHornR','cone',[.14,.48,.14],[.32,2.93,.02],dark).setLocalEulerAngles(0,0,22);
+ for(const side of [-1,1]){part(root,side<0?'WardenShoulderL':'WardenShoulderR','box',[.48,.24,.48],[side*.72,1.95,0],dark);part(root,side<0?'WardenArmL':'WardenArmR','capsule',[.28,.82,.28],[side*.78,1.35,0],dark);part(root,side<0?'WardenClawL':'WardenClawR','cone',[.18,.38,.18],[side*.82,.58,-.06],red).setLocalEulerAngles(90,0,0);part(root,side<0?'WardenLegL':'WardenLegR','capsule',[.34,.9,.34],[side*.32,.38,0],dark);part(root,side<0?'WardenKneeL':'WardenKneeR','box',[.34,.22,.26],[side*.32,.68,-.24],dark);}
  root.tags.add('villain');return root;
 }

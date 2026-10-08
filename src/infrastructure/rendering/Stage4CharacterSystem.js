@@ -8,12 +8,13 @@ export class Stage4CharacterSystem {
  constructor({pipeline,root}){this.pipeline=pipeline;this.root=root;this.characters=new Map();}
  async spawn({id,name,url,assetId=id,role='npc',position=[0,0,0],scale=[1,1,1],profile=null}){
   let entity,source='procedural';
-  try{entity=await this.pipeline.loadAndInstantiate(assetId,url,{parent:this.root,position,scale});source='glb';}
-  catch(error){entity=createStage4Character({name,villain:role==='boss'});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
+  if(role==='player'||role==='boss'){entity=createStage4Character({name,villain:role==='boss'});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
+  else try{entity=await this.pipeline.loadAndInstantiate(assetId,url,{parent:this.root,position,scale});source='glb';}
+  catch(error){entity=createStage4Character({name,villain:false});entity.setPosition(...position);entity.setLocalScale(...scale);this.root.addChild(entity);}
   if(source==='glb'){const lift=role==='player'?1.02:(role==='npc'?0.92:(role==='boss'?1.08:0));entity.setPosition(position[0],position[1]+lift,position[2]);entity.__stage4GroundLift=lift;}
   entity.name=name;entity.tags.add(role);if(profile)applyCharacterProfile(entity,{...profile,scale:profile.scale??scale});applyStage4Identity(entity,role,name);
   const animation=new Stage4AnimationController(entity);
-  const skeletal=new Stage4SkeletalAnimation(entity);if(source==='glb'){skeletal.configure(this.pipeline.animations(assetId));skeletal.playSemantic('idle');}
+  const skeletal=new Stage4SkeletalAnimation(entity);if(source==='glb'&&role!=='npc'){skeletal.configure(this.pipeline.animations(assetId));skeletal.playSemantic('idle');}
   const character={id,name,role,entity,animation,skeletal,source};this.characters.set(id,character);return character;
  }
  get(id){return this.characters.get(id);}

@@ -8,7 +8,7 @@ export function configureStage4Lighting(app,{mobile=false}={}){
  app.scene.fog.type=pc.FOG_EXP2;
  app.scene.fogColor=new pc.Color(.13,.24,.34);
  app.scene.fogDensity=mobile?.0038:.0031;
- const sun=new pc.Entity('Stage4Sun');sun.addComponent('light',{type:'directional',color:new pc.Color(1,.82,.58),intensity:mobile?2.05:2.55,castShadows:true,shadowBias:.13,normalOffsetBias:.055,shadowDistance:mobile?62:128,shadowResolution:mobile?1024:2048});sun.setEulerAngles(46,-34,0);app.root.addChild(sun);
+ const sun=new pc.Entity('Stage4Sun');sun.addComponent('light',{type:'directional',color:new pc.Color(1,.82,.58),intensity:mobile?2.05:2.55,castShadows:false,shadowBias:.13,normalOffsetBias:.055,shadowDistance:mobile?62:128,shadowResolution:mobile?1024:2048});sun.setEulerAngles(46,-34,0);app.root.addChild(sun);
  const fill=new pc.Entity('Stage4SkyFill');fill.addComponent('light',{type:'directional',color:new pc.Color(.36,.52,.82),intensity:.52,castShadows:false});fill.setEulerAngles(-26,145,0);app.root.addChild(fill);
  const rim=new pc.Entity('Stage4WarmRim');rim.addComponent('light',{type:'directional',color:new pc.Color(1,.38,.2),intensity:mobile?.22:.32,castShadows:false});rim.setEulerAngles(12,118,0);app.root.addChild(rim);
  return {sun,fill,rim,profile:mobile?'mobile':'high'};
