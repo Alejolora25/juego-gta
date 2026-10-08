@@ -8,14 +8,14 @@ export class Stage4SkeletalAnimation {
   const states=[{name:'START'},...clips.map((_,i)=>({name:'clip'+i,speed:1,loop:true}))];
   anim.loadStateGraph({layers:[{name:'base',states,transitions:[]}],parameters:{}});
   clips.forEach((clip,i)=>anim.assignAnimation('clip'+i,clip.resource??clip,'base'));
-  this.clips=clips.map((clip,i)=>clip.name||('clip'+i));this.ready=true;return true;
+  this.clips=clips.map((clip,i)=>clip.resource?.name||clip.name||('clip'+i));this.ready=true;return true;
  }
  available(){return this.clips;}
  find(...patterns){for(const pattern of patterns){const rx=new RegExp(pattern,'i'),hit=this.clips.find(n=>rx.test(n));if(hit)return hit;}return null;}
  playSemantic(state){
   if(!this.ready)return false;
   const map={idle:['idle','stand'],walk:['walk'],run:['run','jog'],combat:['attack','combat','shoot'],hit:['hit','damage'],defeated:['death','die','defeat']};
-  let clip=this.find(...(map[state]??[state]));if(!clip&&(state==='idle'||state==='walk'||state==='run'))clip=this.clips[0]??null;if(!clip)return false;const index=Math.max(0,this.clips.indexOf(clip));
+  let clip=this.find(...(map[state]??[state]));if(!clip&&(state==='idle'||state==='walk'||state==='run'))clip=this.clips[0]??null;if(!clip)return false;if(this.current===clip)return true;const index=Math.max(0,this.clips.indexOf(clip));
   try{const anim=this.entity.anim??this.entity.c?.anim;if(!anim?.baseLayer)return false;anim.baseLayer.transition('clip'+index,.18);this.current=clip;return true;}catch{return false;}
  }
 }

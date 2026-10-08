@@ -7,6 +7,8 @@ import {Stage4AssetPipeline} from './Stage4AssetPipeline.js';
 import {Stage4CharacterSystem} from './Stage4CharacterSystem.js';
 import {Stage5VerticalSlice} from './Stage5VerticalSlice.js';
 import {Stage6UrbanOverhaul} from './Stage6UrbanOverhaul.js';
+import {PilotCharacterSystem} from './PilotCharacterSystem.js';
+import {buildUrbanPilot} from './UrbanPilot.js';
 import {stage4AssetFor} from './Stage4AssetCatalog.js';
 import {Stage4LodManager} from './Stage4LodManager.js';
 import {Stage4PerformanceBudget} from './Stage4PerformanceBudget.js';
@@ -48,7 +50,9 @@ export class PlayCanvasProbe {
   environment.addBuilding({name:'TechTower',x:14,z:-22,w:9,d:9,h:24,material:'industrial'});
   for(const [x,z,s] of [[-18,18,1],[18,18,1.15],[-28,-5,.9],[28,-5,.9]])environment.addTree(x,z,s);
   const pipeline=new Stage4AssetPipeline(this.app);
-  const characters=new Stage4CharacterSystem({pipeline,root:this.app.root});
+  const pilotEnabled=new URLSearchParams(location.search).get('pilot')==='1';
+  const urbanPilot=pilotEnabled?await buildUrbanPilot({world,stage5Slice,stage6City,environment,pipeline,app:this.app}):null;
+  const characters=new (pilotEnabled?PilotCharacterSystem:Stage4CharacterSystem)({pipeline,root:this.app.root});
   const playerAsset=stage4AssetFor('player'),npcAsset=stage4AssetFor('npc'),wardenAsset=stage4AssetFor('boss');
   const actorRecord=await characters.spawn({id:'stage4-player',name:'Stage4ActorProbe',url:playerAsset.url,assetId:playerAsset.id,role:'player',position:[0,0,108],scale:[1,1,1],profile:profiles.player});
   const npcRecords=[];
@@ -59,6 +63,7 @@ export class PlayCanvasProbe {
   const performance=new Stage4PerformanceBudget({mobile});
   const dynamicEntities=[actorRecord.entity,...npcRecords.map(r=>r.entity),wardenRecord.entity];
 const thirdPersonCamera=new Stage4ThirdPersonCamera(camera);
+if(pilotEnabled){thirdPersonCamera.height=3.3;thirdPersonCamera.distance=6;thirdPersonCamera.targetHeight=1.4;lighting.sun.light.color=new pc.Color(1,.95,.87);lighting.sun.light.intensity=1.5;lighting.rim.light.intensity=.1;this.app.root.findByName('Stage4HorizonGlow').enabled=false;}
 const physics=new PhysicsWorld();
 const state=new GameState();
 const missions=new Stage4MissionCoordinator(state,characters);
@@ -78,7 +83,7 @@ if(this.controls){this.previousLock=this.controls.onLock;this.previousShoot=this
 this.projectiles=projectiles;
 if(this.controls){this.previousAction=this.controls.onAction;this.controls.onAction=()=>{const result=missions.interact(actorRecord.entity);if(result.completed)session.missionDialog(result);this.onMissionInteraction?.(result,state);return result;};}
   let budgetTimer=0,npcShadowLimit=npcRecords.length;this.app.on('update',dt=>{performance.frame(dt);budgetTimer+=dt;if(budgetTimer>=1){const rec=performance.recommendations();lod.setQualityScale(rec.shadowScale);const baseShadow=mobile?1024:2048;const shadowResolution=Math.max(512,Math.round(baseShadow*rec.shadowScale));if(lighting.sun.light.shadowResolution!==shadowResolution)lighting.sun.light.shadowResolution=shadowResolution;npcShadowLimit=Math.floor(npcRecords.length*rec.npcScale);budgetTimer=0;}lod.update(camera.getPosition(),dynamicEntities);npcRecords.forEach((record,index)=>{if(index>=npcShadowLimit)for(const render of record.entity.findComponents?.('render')??[])render.castShadows=false;});wardenRecord.entity.enabled=state.bossActive&&!state.finished;if(controlsBridge){const cameraDelta=this.controls?.cameraDelta??0;if(bossEncounter.manualCamera(cameraDelta)&&this.controls){if(this.controls.setLocked)this.controls.setLocked(false);else this.controls.locked=false;}controlsBridge.update(playerController,dt);}const encounter=bossEncounter.update(actorRecord.entity,wardenRecord.entity,dt);if(encounter.started){session.activateBoss();if(this.controls){if(this.controls.setLocked)this.controls.setLocked(true);else this.controls.locked=true;this.controls.setCombat(true);}this.hud?.combat(true);this.hud?.sync(state);}const bossStep=bossController.update(actorRecord.entity,dt,state);if(state.bossActive&&!state.finished)projectiles.shootEnemy(wardenRecord.entity,actorRecord.entity);const hpBefore=state.playerHP,bossHpBefore=state.bossHP;projectiles.update(dt,wardenRecord.entity,actorRecord.entity);if(state.playerHP!==hpBefore||state.bossHP!==bossHpBefore)this.hud?.sync(state);if(state.finished&&!this.finishedHandled){this.finishedHandled=true;session.finish(state.bossHP<=0);}thirdPersonCamera.update(actorRecord.entity,dt);if(bossEncounter.locked&&state.bossActive)thirdPersonCamera.lockTarget(actorRecord.entity,wardenRecord.entity,.34);const objective=objectives.measure(actorRecord.entity,thirdPersonCamera.yaw);if(objective)this.hud?.objective(objective.distance,objective.angle,objective.name);if(physics.ready){physics.syncPlayer(actorRecord.entity.getPosition());physics.syncBoss(wardenRecord.entity.getPosition());physics.step(dt);}});
-  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,state,missions,objectives,combat,bossEncounter,bossController,projectiles,session,resetSession,physics,ensurePhysics,world,environment,stage5Slice,stage6City,lighting,sky};
+  this.app.start();return {backend:this.backend,actor:actorRecord.entity,warden:wardenRecord.entity,npcs:npcRecords.map(r=>r.entity),characters,lod,performance,thirdPersonCamera,playerController,controlsBridge,state,missions,objectives,combat,bossEncounter,bossController,projectiles,session,resetSession,physics,ensurePhysics,world,environment,stage5Slice,stage6City,urbanPilot,lighting,sky};
  }
  destroy(){this.projectiles?.clear();if(this.controls){this.controls.onAction=this.previousAction;this.controls.onShoot=this.previousShoot;this.controls.onLock=this.previousLock;}this.app?.destroy();this.app=null;}
 }

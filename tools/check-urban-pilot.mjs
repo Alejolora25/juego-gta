@@ -1,0 +1,42 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--ignore-certificate-errors']});
+const page=await browser.newPage({viewport:{width:590,height:1100},ignoreHTTPSErrors:true});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://127.0.0.1:4173/?pilot=1',{waitUntil:'networkidle'});
+const result=await page.evaluate(async()=>{
+ const {PlayCanvasProbe}=await import('/src/infrastructure/rendering/PlayCanvasProbe.js');
+ const canvas=document.createElement('canvas');document.body.appendChild(canvas);canvas.style.position='fixed';canvas.style.inset='0';canvas.style.zIndex='1000';
+ const probe=new PlayCanvasProbe(canvas);await probe.init();const s=await probe.start();
+ window.pilot={probe,s};
+ const deadline=Date.now()+15000;
+ while(!s.physics.ready&&Date.now()<deadline)await new Promise(r=>setTimeout(r,50));
+ if(!s.physics.ready)throw new Error('Rapier did not become ready');
+ const records=[...s.characters.characters.values()].map(c=>({name:c.name,source:c.source,clips:c.skeletal.available(),current:c.skeletal.current}));
+ return {records,buildings:s.urbanPilot.buildings,assets:s.characters.pipeline.assets.size};
+});
+await page.waitForTimeout(1600);
+await page.screenshot({path:'/tmp/urban-pilot-idle.png'});
+await page.evaluate(()=>{window.pilot.s.thirdPersonCamera.yaw=.8;});
+await page.waitForTimeout(500);
+await page.screenshot({path:'/tmp/urban-pilot-street.png'});
+const motion=await page.evaluate(async()=>{
+ const {s}=window.pilot;const c=s.characters.get('stage4-player');
+ const footBounds=()=>{let min=Infinity,max=-Infinity;for(const render of c.visual.findComponents('render'))for(const m of render.meshInstances){min=Math.min(min,m.aabb.center.y-m.aabb.halfExtents.y);max=Math.max(max,m.aabb.center.y+m.aabb.halfExtents.y);}return {min,max};};
+ const idle=footBounds();s.playerController.update({joy:{x:0,y:-1},dt:1/60});
+ await new Promise(r=>setTimeout(r,900));const walk=footBounds();const walkClip=c.skeletal.current;
+ s.playerController.update({joy:{x:0,y:-1},running:true,dt:1/60});
+ await new Promise(r=>setTimeout(r,900));const run=footBounds();
+ const blocked=s.physics.resolveMovement({x:9,z:94},{x:13,z:94});
+ const road=s.physics.resolveMovement({x:0,z:108},{x:0,z:98});
+ return {idle,walk,run,walkClip,runClip:c.skeletal.current,blocked,road};
+});
+await page.screenshot({path:'/tmp/urban-pilot-run.png'});
+console.log(JSON.stringify({result,motion,errors},null,2));
+assert.equal(errors.length,0);
+assert.equal(result.records.length,5);
+assert.ok(result.records.every(c=>c.source==='glb'&&c.current==='Idle'));
+assert.equal(motion.walkClip,'Walk');assert.equal(motion.runClip,'Run');
+assert.equal(motion.blocked.x,9);assert.equal(motion.road.z,98);
+for(const b of [motion.idle,motion.walk,motion.run]){assert.ok(b.min>-.04&&b.min<.35);assert.ok(b.max>1.4&&b.max<2.1);}
+await browser.close();
