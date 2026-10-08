@@ -111,3 +111,9 @@ test('Stage 4 applies adaptive mobile shadow budget without hiding mission NPCs'
 
 
 test('Stage 4 has a production bootstrap ready for the single index entrypoint',async()=>{const src=await fs.readFile('src/presentation/Stage4Bootstrap.js','utf8');assert.match(src,/new TouchControls/);assert.match(src,/new HudController/);assert.match(src,/new PlayCanvasProbe/);assert.match(src,/await runtime\.init\(\)/);assert.match(src,/await runtime\.start\(\)/);assert.match(src,/session\.resetSession\(\)/);assert.match(src,/runtime\.destroy\(\)/);});
+
+
+test('Stage 5 vertical slice adds a production-quality street showcase',async()=>{const [slice,probe]=await Promise.all([fs.readFile('src/infrastructure/rendering/Stage5VerticalSlice.js','utf8'),fs.readFile('src/infrastructure/rendering/PlayCanvasProbe.js','utf8')]);for(const token of ['Stage5VerticalSlice','Stage5AtriumTower','Stage5BrickLofts','Stage5TransitHub','Stage5ShowcaseRoad','Stage5LampPost','Stage5KioskBase','Stage5Planter'])assert.match(slice,new RegExp(token));assert.match(slice,/useMetalness=true/);assert.match(slice,/GroundFloorGlass/);assert.match(slice,/Balcony_/);assert.match(probe,/new Stage5VerticalSlice\(this\.app,\{materials:world\.materials\}\)\.build\(\)/);assert.match(probe,/stage5Slice/);});
+
+
+test('Stage 5 Alejandro proxy gains more human-readable facial and clothing details',async()=>{const src=await fs.readFile('src/infrastructure/rendering/Stage4CharacterFactory.js','utf8');for(const token of ['FaceNose','FaceBrowL','FaceBrowR','JacketCollarL','JacketCollarR','Belt','Buckle','KneePanelL','KneePanelR'])assert.match(src,new RegExp(token));});

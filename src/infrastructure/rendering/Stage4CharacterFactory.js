@@ -14,10 +14,13 @@ export function createAlejandroCharacter({name='Alejandro'}={}){
  part(torso,'Backpack','box',[.58,.72,.22],[0,.02,.31],black);part(torso,'BackpackStripe','box',[.34,.055,.035],[0,.18,.435],blue);
  const neck=part(root,'Neck','cylinder',[.16,.16,.16],[0,2.02,0],skin),head=part(root,'Head','sphere',[.39,.48,.38],[0,2.34,0],skin);
  part(root,'Hair','sphere',[.405,.22,.39],[0,2.68,.015],hair);part(root,'HairFront','box',[.3,.11,.08],[.06,2.61,-.34],hair);
+ part(root,'FaceNose','box',[.075,.13,.07],[0,2.36,-.385],skin);part(root,'FaceBrowL','box',[.11,.035,.035],[-.12,2.47,-.375],hair);part(root,'FaceBrowR','box',[.11,.035,.035],[.12,2.47,-.375],hair);
  part(root,'Stubble','box',[.29,.11,.035],[0,2.18,-.37],hair);
+ part(torso,'JacketCollarL','box',[.16,.24,.075],[-.22,.34,-.245],black).setLocalEulerAngles(0,0,-18);part(torso,'JacketCollarR','box',[.16,.24,.075],[.22,.34,-.245],black).setLocalEulerAngles(0,0,18);
+ part(torso,'Belt','box',[.66,.08,.08],[0,-.45,-.205],rubber);part(torso,'Buckle','box',[.16,.1,.09],[0,-.45,-.255],blue);
  for(const side of [-1,1]){
   const arm=pivot(torso,side<0?'ArmPivotL':'ArmPivotR',[side*.52,.27,0]);part(arm,side<0?'JacketArmL':'JacketArmR','capsule',[.18,.58,.18],[0,-.32,0],black);part(arm,side<0?'SleeveAccentL':'SleeveAccentR','box',[.19,.12,.2],[0,-.18,-.02],blue);part(arm,side<0?'GloveL':'GloveR','sphere',[.17,.15,.18],[0,-.88,0],rubber);
-  const leg=pivot(root,side<0?'LegPivotL':'LegPivotR',[side*.25,.94,0]);part(leg,side<0?'CargoLegL':'CargoLegR','capsule',[.27,.72,.3],[0,-.45,0],beige);part(leg,side<0?'CargoPocketL':'CargoPocketR','box',[.08,.28,.24],[side*.25,-.34,0],beige);part(leg,side<0?'SneakerL':'SneakerR','box',[.34,.22,.58],[0,-1.14,-.1],shoe);part(leg,side<0?'SoleL':'SoleR','box',[.36,.07,.61],[0,-1.25,-.1],rubber);
+  const leg=pivot(root,side<0?'LegPivotL':'LegPivotR',[side*.25,.94,0]);part(leg,side<0?'CargoLegL':'CargoLegR','capsule',[.27,.72,.3],[0,-.45,0],beige);part(leg,side<0?'CargoPocketL':'CargoPocketR','box',[.08,.28,.24],[side*.25,-.34,0],beige);part(leg,side<0?'KneePanelL':'KneePanelR','box',[.24,.13,.26],[0,-.52,-.16],rubber);part(leg,side<0?'SneakerL':'SneakerR','box',[.34,.22,.58],[0,-1.14,-.1],shoe);part(leg,side<0?'SoleL':'SoleR','box',[.36,.07,.61],[0,-1.25,-.1],rubber);
  }
  part(root,'SmartWatch','box',[.2,.11,.2],[.53,.66,-.02],blue);
  root.__alejandroRig={torso,leftArm:torso.findByName('ArmPivotL'),rightArm:torso.findByName('ArmPivotR'),leftLeg:root.findByName('LegPivotL'),rightLeg:root.findByName('LegPivotR')};
