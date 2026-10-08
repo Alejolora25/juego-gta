@@ -28,7 +28,7 @@ async function startProbe(page,{controls=null,hud=null,suffix='smoke'}={}){
    const names=e=>{const out=[];const walk=n=>{out.push(n.name);for(const child of n.children??[])walk(child)};walk(e);return out};
    const juan=s.characters.get('stage4-juan'),sara=s.characters.get('stage4-sara'),david=s.characters.get('stage4-david');
    const player=s.characters.get('stage4-player'),warden=s.characters.get('stage4-warden');
-   return {ok:true,backend:s.backend,player:s.actor.name,npcs:s.npcs.map(n=>n.name),boss:s.warden.name,count:s.characters.characters.size,assetCount:s.characters.pipeline.assets.size,stage5:s.stage5Slice.root.children.length,playerSource:player.source,wardenSource:warden.source,playerParts:names(player.entity),wardenParts:names(warden.entity),wardenAnimated:warden.skeletal.ready,juan:juan.entity.getPosition(),sara:sara.entity.getPosition(),david:david.entity.getPosition()};
+   return {ok:true,backend:s.backend,player:s.actor.name,npcs:s.npcs.map(n=>n.name),boss:s.warden.name,count:s.characters.characters.size,assetCount:s.characters.pipeline.assets.size,stage5:s.stage5Slice.root.children.length,playerSource:player.source,wardenSource:warden.source,playerAnimated:player.skeletal.ready,wardenAnimated:warden.skeletal.ready,playerParts:names(player.entity),npcParts:[...names(juan.entity),...names(sara.entity),...names(david.entity)],wardenParts:names(warden.entity),juan:juan.entity.getPosition(),sara:sara.entity.getPosition(),david:david.entity.getPosition()};
   }catch(e){return {ok:false,error:e?.message||String(e),stack:e?.stack};}
   finally{probe.destroy();canvas.remove();}
  },{controls,hud,suffix});
@@ -56,12 +56,14 @@ test('PlayCanvas runtime spawns cast, Stage 5 street, identities and GLB animati
  expect(result.npcs).toEqual(['Juan','Sara','David']);
  expect(result.boss).toBe('Stage4WardenProbe');
  expect(result.count).toBe(5);
- expect(result.assetCount).toBe(2);
+ expect(result.assetCount).toBe(3);
  expect(result.stage5).toBeGreaterThan(120);
- expect(result.playerSource).toBe('procedural');
+ expect(result.playerSource).toBe('glb');
+ expect(result.playerAnimated).toBe(true);
  expect(result.wardenSource).toBe('glb');
  expect(result.wardenAnimated).toBe(true);
- expect(result.playerParts).toEqual(expect.arrayContaining(['AlejandroTorso','FaceNose','JacketCollarL','Belt','KneePanelL','SmartWatch']));
+ expect(result.playerParts).toEqual(expect.arrayContaining(['AlejandroIdentity','AlejandroJacket','AlejandroTechPanel','AlejandroBackpack','AlejandroWristTech']));
+ expect(result.npcParts).toEqual(expect.arrayContaining(['JuanJacket','JuanRolePanelDevOps','SaraJacket','SaraRolePanelBackend','DavidJacket','DavidRolePanelLab']));
  expect(result.wardenParts).toEqual(expect.arrayContaining(['WardenIdentity','WardenChestArmor','WardenVisor','WardenCore','WardenBackReactor']));
  expect(result.playerParts).not.toContain('WardenVisor');
  expect(result.wardenParts).not.toContain('JacketBody');
