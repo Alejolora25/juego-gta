@@ -1,14 +1,6 @@
 import {test,expect} from '@playwright/test';
-import {spawn} from 'node:child_process';
 
 const base='http://127.0.0.1:4173/';
-let server;
-
-test.beforeAll(async()=>{
- server=spawn('python3',['-m','http.server','4173','--bind','127.0.0.1'],{stdio:'ignore'});
- await new Promise(r=>setTimeout(r,800));
-});
-test.afterAll(()=>server?.kill());
 
 async function open(page){
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
