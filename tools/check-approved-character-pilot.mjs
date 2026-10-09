@@ -63,8 +63,21 @@ try{
   const {session:s}=window.approvedPilotReview;
   return {engine:'PlayCanvas 2.23.0',cast:[...s.characters.characters.values()].map(c=>({id:c.id,url:c.assetUrl,approved:c.approvedVisual,clip:c.skeletal.current,position:Array.from(c.entity.getPosition().toArray())})),buildings:s.urbanPilot.buildings.length,districts:s.urbanPilot.districts.length,stage:s.state.stage,xp:s.state.xp,groundSurfaces:s.approvedPresentation.surfaces.length};
  });
+ await page.evaluate(()=>{
+  const {session:s}=window.approvedPilotReview;
+  s.actor.setPosition(0,0,-132);s.warden.setPosition(0,0,-142);
+  s.combat.enemyCooldown=10;s.approvedPresentation.update();
+ });
+ await capture('warden-in-arena');
+ const wardenReview=await page.evaluate(()=>{
+  const {session:s,probe}=window.approvedPilotReview,c=s.characters.get('stage4-warden');
+  const textures=(s.characters.pipeline.assets.get(c.assetId).resource.textures??[]).map(a=>({width:a.resource.width,height:a.resource.height,gpuBytes:a.resource.gpuSize,format:a.resource.format}));
+  return {asset:c.assetUrl,clip:c.skeletal.current,clips:c.skeletal.available(),textures,textureGpuBytes:textures.reduce((n,t)=>n+t.gpuBytes,0),
+   primitives:c.visual.findComponents('render').reduce((n,r)=>n+r.meshInstances.length,0),active:s.state.bossActive,
+   renderer:probe.app.graphicsDevice.deviceType};
+ });
  if(errors.length||result.stage!==3||result.xp!==300)throw new Error('Pilot review failed: '+JSON.stringify({errors,result}));
- await fs.writeFile(path.join(output,'report.json'),JSON.stringify({...result,quality,captures,errors,samsungValidated:false,warden:'Existing pilot robot retained; selected Vanguard official source pending'},null,2)+'\n');
+ await fs.writeFile(path.join(output,'report.json'),JSON.stringify({...result,quality,captures,errors,wardenReview,samsungValidated:false,warden:'Selected Vanguard official source adapted with rigid rig and optimized materials'},null,2)+'\n');
  await page.evaluate(()=>window.approvedPilotReview.probe.destroy());await context.close();
  console.log('APPROVED_CHARACTER_PILOT_CAPTURED',captures.map(c=>c.name));
 }finally{await browser.close();}

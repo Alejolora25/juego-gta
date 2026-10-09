@@ -13,19 +13,19 @@ export class PilotCharacterSystem extends Stage4CharacterSystem {
  }
  async spawn({id,name,role='npc',position=[0,0,0]}) {
   const key=role==='player'?'alejandro':role==='boss'?'warden':name.toLowerCase();
-  // The approved pilot replaces only its four humans. Warden keeps the
-  // existing robot until the selected Vanguard source is available.
-  const approvedAsset=role==='boss'?null:this.approvedAssets?.[key];
+  const approvedAsset=this.approvedAssets?.[key];
   const assetId=approvedAsset?.id??'pilot-'+key;
   // Keep the robot's original animation hierarchy: Blender's round-trip of
   // this multipart rig changes its animated rest transforms.
-  const url=role==='boss'?'./assets/pilot/source/robot.glb':(approvedAsset?.url??`./assets/pilot/${key}.glb`);
+  const url=approvedAsset?.url??(role==='boss'?'./assets/pilot/source/robot.glb':`./assets/pilot/${key}.glb`);
   const asset=await this.pipeline.loadGlb(assetId,url);
   const entity=new pc.Entity(name);entity.tags.add(role);entity.setPosition(...position);this.root.addChild(entity);
+  if(role==='boss'&&approvedAsset)entity.name='Firewall Warden';
   const facing=new pc.Entity('ModelFacing');entity.addChild(facing);
   // Imported human faces -Z; locomotion roots face +Z. Rotate only visuals,
   // outside the animated hierarchy, preserving authored scale and bind pose.
-  if(role!=='boss')facing.setLocalEulerAngles(0,180,0);
+  // Vanguard faces +Z, whereas the existing boss pursuit root aims -Z.
+  if(role!=='boss'||approvedAsset)facing.setLocalEulerAngles(0,180,0);
   const visual=asset.resource.instantiateRenderEntity();facing.addChild(visual);
   if(role==='boss'){
    let lo=Infinity,hi=-Infinity;

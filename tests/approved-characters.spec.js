@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-test('optimized approved human pilot preserves ground contact, facing, missions and combat in the existing city',async({page})=>{
+test('optimized five-character pilot preserves ground contact, facing, missions and Vanguard combat in the existing city',async({page})=>{
  test.setTimeout(90000);
  const errors=[],loadedAssets=[];
  page.on('pageerror',error=>errors.push(error.message));
@@ -122,9 +122,17 @@ test('optimized approved human pilot preserves ground contact, facing, missions 
    }
    const completedState={stage:s.state.stage,xp:s.state.xp};
    // Exercise the existing encounter and projectile callbacks with the new
-   // humans. The current Warden remains the original pilot asset.
+   // humans and the adapted Vanguard, keeping the existing combat rules.
    player.entity.setPosition(0,0,-130);warden.entity.setPosition(0,0,-150);advance();
    const encounter={active:s.state.bossActive,locked:s.bossEncounter.locked,visible:warden.entity.enabled};
+   s.combat.enemyCooldown=10;
+   const rigPose=()=>withVisibleCharacter(warden,()=>Array.from(new Set(warden.visual.findComponents('render').flatMap(r=>r.meshInstances.flatMap(m=>m.skinInstance?.bones??[])))).map(b=>Array.from(b.getLocalRotation().toArray())));
+   const poseBefore=rigPose();advance(48);
+   const facingDirection=warden.facing.getWorldTransform().transformVector(new pc.Vec3(0,0,1)).normalize();
+   const toPlayer=player.entity.getPosition().clone().sub(warden.entity.getPosition()).normalize();
+   const vanguard={bounds:bounds(warden),surface:s.approvedPresentation.heightAt(warden.entity.getPosition().x,warden.entity.getPosition().z),
+    clip:warden.skeletal.current,frontDot:facingDirection.dot(toPlayer),poseBefore,poseAfter:rigPose(),clips:warden.skeletal.available(),
+    primitives:warden.visual.findComponents('render').reduce((n,r)=>n+r.meshInstances.length,0)};
    s.projectiles.clear();s.combat.playerCooldown=0;s.combat.enemyCooldown=10;controls.onLock(true);
    const bossHPBefore=s.state.bossHP;
    const playerShot=controls.onShoot();
@@ -143,7 +151,7 @@ test('optimized approved human pilot preserves ground contact, facing, missions 
     root:position(player.entity),bounds:bounds(player),surface:s.approvedPresentation.heightAt(0,108),clip:player.skeletal.current,
     bossVisible:warden.entity.enabled,physicsY:s.physics.playerBody.translation().y,npcs:npcs.map(character=>character.skeletal.current)};
    result={ok:true,cast,culledRigRestored,playerTextures,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
-    encounter,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,hudEvents,physicsColliders,
+    encounter,vanguard,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,hudEvents,physicsColliders,
     obstacleCount:s.world.obstacles.length,obstaclesUnchanged:obstaclesBefore===JSON.stringify(s.world.obstacles)};
   }catch(error){result={ok:false,error:error?.message??String(error),stack:error?.stack};}
   finally{
@@ -154,11 +162,13 @@ test('optimized approved human pilot preserves ground contact, facing, missions 
  });
  expect(result.ok,result.error+'\n'+result.stack).toBe(true);
  const expectedPaths=['alejandro','juan','sara','david'].map(name=>`/assets/characters/runtime-optimized/${name}.glb`);
- expect(result.cast.map(character=>new URL(character.url,'http://127.0.0.1:4173/').pathname)).toEqual([...expectedPaths,'/assets/pilot/source/robot.glb']);
- expect(result.cast.map(character=>character.approved)).toEqual([true,true,true,true,false]);
+ expect(result.cast.map(character=>new URL(character.url,'http://127.0.0.1:4173/').pathname)).toEqual([...expectedPaths,'/assets/characters/warden-vanguard/warden.glb']);
+ expect(result.cast.map(character=>character.approved)).toEqual([true,true,true,true,true]);
  expect(result.cast.every(character=>character.ready)).toBe(true);
  for(const path of expectedPaths)expect(loadedAssets).toContainEqual({url:path,status:200});
  for(const npc of result.cast.slice(1,4))expect(npc.bones,npc.name+' skeleton').toBe(62);
+ expect(result.cast[4].bones,'Vanguard rigid rig').toBe(5);
+ expect(loadedAssets).toContainEqual({url:'/assets/characters/warden-vanguard/warden.glb',status:200});
  expect(result.culledRigRestored).toBe(true);
  expect(result.playerTextures).toHaveLength(7);
  expect(result.playerTextures.every(texture=>texture.width>=128&&texture.height>=128&&texture.gpuBytes>0&&texture.mipmaps)).toBe(true);
@@ -194,6 +204,13 @@ test('optimized approved human pilot preserves ground contact, facing, missions 
  expect(result.hudEvents.dialogs.map(dialog=>dialog.name.split(' · ')[0])).toEqual(['Juan','Sara','David']);
  expect(result.hudEvents.dialogs.every(dialog=>dialog.text.length>20)).toBe(true);expect(result.hudEvents.objectives.length).toBeGreaterThan(0);
  expect(result.encounter).toEqual({active:true,locked:true,visible:true});expect(result.playerShot).toBe(true);expect(result.enemyShot).toBe(true);
+ expect(result.vanguard.primitives).toBe(8);
+ expect(result.vanguard.clips).toEqual(expect.arrayContaining(['Idle','Walk','Run','Combat','Hit','Defeated']));
+ expect(result.vanguard.poseAfter).not.toEqual(result.vanguard.poseBefore);
+ expect(result.vanguard.clip).toBe('Walk');expect(result.vanguard.frontDot).toBeGreaterThan(.99);
+ expect(result.vanguard.bounds.max-result.vanguard.bounds.min).toBeGreaterThan(2.4);
+ expect(result.vanguard.bounds.max-result.vanguard.bounds.min).toBeLessThan(2.9);
+ expect(result.vanguard.bounds.min).toBeGreaterThanOrEqual(result.vanguard.surface-.05);
  expect(result.bossHPAfter).toBe(result.bossHPBefore-12);expect(result.playerHPAfter).toBe(result.playerHPBefore-1);
  expect(result.victory).toEqual({finished:true,bossHP:0,visible:false,locked:false,combat:false,finish:true});
  expect([result.reset.stage,result.reset.xp,result.reset.hp,result.reset.bossHP,result.reset.bossActive,result.reset.finished]).toEqual([0,0,3,100,false,false]);

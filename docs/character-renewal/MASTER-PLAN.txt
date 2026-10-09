@@ -20,8 +20,8 @@ DECISIONES CORREGIDAS
   https://quaternius.com/packs/universalbasecharacters.html
   https://quaternius.itch.io/universal-base-characters
 - Warden: Vanguard-Class Mech Titan (Game Ready), autor ThankSang0301,
-  como candidato principal. La ficha anuncia CC BY; falta acceder al archivo
-  y comprobar rig, animaciones, materiales y versión exacta de la licencia.
+  como modelo elegido. GLB oficial recibido; licencia CC BY 4.0 confirmada.
+  Original preservado; rig mecánico y animaciones creados para la adaptación.
   https://sketchfab.com/3d-models/vanguard-class-mech-titan-game-ready-84f5e9a69d734bbd97b10634e379b235
 - NPC: Quaternius Ultimate Modular Men para Juan y David, y Ultimate Modular
   Women para Sara. Licencia publicada: CC0.
@@ -33,8 +33,8 @@ DECISIONES CORREGIDAS
   indiquen una solución útil; no bloquea el avance de los personajes.
 - Recursos Quaternius seleccionados: descargados y comprobados en Blender y
   PlayCanvas/Chromium. Originales preservados. Alejandro explorador y tres NPC
-  aprobados e integrados en un piloto explícito de desarrollo. Warden: archivo
-  pendiente de acceso y validación. La versión pública conserva 3e0ec79.
+  aprobados e integrados en un piloto explícito de desarrollo. Vanguard recibido,
+  adaptado y optimizado en Stage12. La versión pública conserva 3e0ec79.
 
 ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
 
@@ -47,7 +47,7 @@ ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
    Explorador definitivo aprobado; integrado en el piloto de desarrollo.
 4. NPC y Warden -> Fases 4 y 5.
    Tres NPC definitivos aprobados e integrados en el piloto de desarrollo.
-   Vanguard elegido para Warden pendiente del archivo oficial.
+   Vanguard elegido para Warden adaptado e integrado; revisión Samsung pendiente.
 5. Distritos modulares -> Fase 11.
    Realizados y aprobados por el usuario.
 6. Visuales, colisiones y circulación -> Fase 7.
@@ -75,11 +75,13 @@ Entregable: inventario, resultados de referencia y respaldo verificable.
 Criterio de cierre: recuperación demostrada y versión aprobada protegida.
 
 FASE 2. OBTENCIÓN Y VALIDACIÓN DE RECURSOS
-Estado: parcial. 26 archivos Quaternius preservados y verificados.
+Estado: recursos Quaternius y Vanguard obtenidos y técnicamente inspeccionados.
+26 archivos Quaternius preservados y verificados; GLB Vanguard oficial con CC BY 4.0.
 La base gratuita obtenida es Superhero Male, con 65 huesos; la biblioteca
 Standard aporta 43 clips sin root motion. Los NPC candidatos tienen 24 clips.
-Warden sigue pendiente: Sketchfab deniega acceso al archivo desde este entorno.
-No se cierra la fase ni se sustituye el candidato sin revisión y aprobación.
+El usuario obtuvo el Vanguard oficialmente y lo subió a Stage12. Se conserva
+su original; 499 mallas, 42.294 triángulos y ningún rig o clip original.
+La adaptación crea rig y clips propios; informe PHASE-4-5-VANGUARD.md.
 Tareas:
 - Obtener las ediciones gratuitas y conservar los originales.
 - Registrar procedencia, autor, licencia y modificaciones.
@@ -116,9 +118,10 @@ pies sobre el suelo y orientación correcta.
 FASE 4. DISEÑO DE WARDEN Y TRES NPC
 Estado: Juan, Sara y David aprobados por el usuario; condición de la espalda
 de David comprobada en seis poses de Chromium. Registro de aprobación en
-assets/characters/npc-phase4/approval.json. Warden pendiente de obtener y validar
-el Vanguard elegido. El usuario confirmó mantenerlo; no se sustituirá por
-otro robot. Fase todavía parcial.
+assets/characters/npc-phase4/approval.json. Warden utiliza el Vanguard elegido.
+El usuario confirmó mantenerlo; no se sustituirá por
+otro robot. Actualización: archivo recibido, rig y clips preparados e integración
+autorizada expresamente. Resultado listo para revisión visual en Samsung.
 Tareas:
 - Dar a Warden una silueta amenazante, armadura tecnológica, visor y núcleo
   luminoso.
@@ -129,16 +132,16 @@ Entregable: Warden y tres NPC listos para revisión visual e integración.
 Criterio de cierre: aprobación visual y modelos técnicamente utilizables.
 
 FASE 5. INTEGRACIÓN PILOTO DE LOS CINCO PERSONAJES
-Estado: parcial. Alejandro explorador y tres NPC aprobados integrados en
+Estado: cinco personajes integrados; validación Samsung pendiente. Base humana en
 stage11-approved-character-pilot, modo ?pilot=1&characters=approved.
 En stage12-character-quality hay copias optimizadas separadas, mediante
 ?pilot=1&characters=approved&quality=optimized. El modo anterior conserva
 los GLB originales para comparar y recuperar.
 Ocho grupos de regresión y seis pruebas Chromium satisfactorios; capturas
 reales con controles y HUD existentes. Informe en PHASE-5-PILOT.md.
-La renovación de Warden queda pendiente del archivo Vanguard; se conserva
-el Warden actual para verificar mecánicas, sin considerarlo el diseño elegido.
-Falta completar los cinco personajes y validar esta integración en Samsung.
+Actualización: los cinco personajes están integrados; Warden utiliza el Vanguard
+oficial adaptado y comprimido. Informe PHASE-4-5-VANGUARD.md.
+Falta validar y aprobar el conjunto en Samsung.
 Tareas:
 - Integrarlos en una rama de desarrollo sobre la ciudad aprobada.
 - Ajustar modelos, materiales, orientación y clips al contrato existente.
@@ -153,7 +156,8 @@ FASE 6. CONSERVACIÓN Y REVISIÓN DEL PATRÓN URBANO
 Estado: base completada y revisión satisfactoria para los cuatro humanos.
 Se conserva la ciudad de cuatro distritos y 83 edificios. No se encontraron
 incompatibilidades que requieran reconstrucción. Informe PHASE-6-7-URBAN-REVIEW.md.
-El encaje del Vanguard se revisará cuando exista su modelo validado.
+El Vanguard adaptado conserva raíz y colisión existentes, con apoyo visual
+en la arena verificado en Chromium; recorrido Samsung pendiente.
 Tareas:
 - Reutilizar la manzana y los distritos actuales.
 - Revisar que los nuevos personajes encajen en calles, andenes, accesos
@@ -168,7 +172,8 @@ Estado: revisión satisfactoria para los cuatro humanos. Rutas de 1.455 m
 en 5.820 pasos, 107 colisionadores coincidentes, 428 aproximaciones bloqueadas
 y circulación fuera de los límites de 18 árboles. Tres misiones y entrada
 a la arena comprobadas. No se cambió lógica ni se añadió navegación.
-Pendientes Vanguard y recorrido táctil completo en Samsung.
+Vanguard conserva persecución y colisión comprobadas en Chromium; pendiente
+recorrido táctil completo en Samsung.
 Tareas:
 - Mantener la separación entre modelos visuales y colisionadores, junto
   con las reglas de colocación existentes.
@@ -182,7 +187,8 @@ FASE 8. ILUMINACIÓN Y MATERIALES DE PERSONAJES
 Estado: materiales e iluminación de los cuatro humanos revisados en Chromium.
 Sin defectos de importación demostrados; se conservan colores y luces
 aprobados. Variante comprimida revisada mediante capturas reales.
-Informe PHASE-8-9-CHARACTER-QUALITY.md. Vanguard y Samsung pendientes.
+Informe PHASE-8-9-CHARACTER-QUALITY.md y actualización PHASE-4-5-VANGUARD.md.
+Materiales del Vanguard integrados; revisión Samsung pendiente.
 Tareas:
 - Conservar la iluminación urbana aprobada.
 - Ajustar piel, ropa, metal, normales y superficies luminosas de los nuevos
@@ -197,6 +203,9 @@ frente a 6.938.532 originales; 64.055 triángulos y animaciones conservados.
 Se verifican los 58 buffers en el decodificador real del motor. Comparación
 de descarga y memoria de texturas en Chromium documentada; los FPS del
 renderizador por software no representan el teléfono. Samsung pendiente.
+Vanguard: 8.895.364 bytes frente a 22.368.716 originales, ocho primitivas
+frente a 499 y texturas estimadas en Chromium de 167.772.120 a 25.166.304 bytes.
+Se conserva su geometría y original; informe PHASE-4-5-VANGUARD.md.
 Tareas:
 - Reutilizar LOD, Draco y KTX2 donde corresponda.
 - Medir carga, FPS, caídas de fluidez y memoria estimada antes y después
@@ -210,7 +219,8 @@ documentadas.
 FASE 10. VALIDACIÓN INTEGRAL DE LOS NUEVOS PERSONAJES
 Estado: Chromium satisfactorio para los cuatro humanos, incluidos modelos
 comprimidos, orientación, apoyo, controles, misiones, combate y reinicio.
-Pendientes Vanguard y aprobación del piloto en Samsung; fase no cerrada.
+Vanguard integrado y probado en Chromium. Pendiente aprobación del piloto
+de cinco personajes en Samsung; fase no cerrada.
 Tareas:
 - Ejecutar regresión, Chromium y pruebas en Samsung.
 - Comprobar orientación, animaciones, controles táctiles, cámara,
@@ -272,12 +282,14 @@ REGLAS OBLIGATORIAS
 - Promover a main únicamente tras CI satisfactorio y autorización de promoción.
 - Mantener el trabajo en planificación hasta autorizar expresamente la ejecución.
 
-Ejecución autorizada: fase 1 cerrada, fase 2 parcial por Vanguard y fase 3
+Ejecución autorizada: fase 1 cerrada, fase 2 con recursos recibidos y fase 3
 cerrada con Alejandro explorador aprobado. En fase 4 se aprobaron los tres
 NPC; la espalda de David se verificó corregida antes de continuar.
-Fase 5 parcial implementada para los cuatro humanos aprobados. Warden y
-Samsung pendientes. El juego público conserva 3e0ec79; no se ha promovido.
+Fase 5 implementada para los cinco personajes: cuatro humanos aprobados
+y Vanguard oficial adaptado. Samsung pendiente. El juego público conserva 3e0ec79; no se ha promovido.
 Continuación autorizada: revisiones de 6 y 7 y trabajo de 8 y 9 ejecutados
 para los cuatro humanos, conservando ciudad, motor y reglas del juego.
 Los informes nuevos distinguen comprobaciones realizadas y validaciones
-pendientes; la ausencia del archivo Vanguard impide cerrar el conjunto.
+pendientes. Actualización autorizada: Vanguard recibido, adaptado y optimizado
+en Stage12, conservando original y licencia. La publicación requiere aprobación
+y la validación completa de Samsung sigue pendiente.

@@ -1,0 +1,425 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "original": {
+    "textureCount": 30,
+    "textureGpuBytes": 167772120,
+    "textures": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 20,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 7,
+        "mipmaps": true,
+        "gpuBytes": 5592404
+      }
+    ]
+  },
+  "optimized": {
+    "textureCount": 28,
+    "textureGpuBytes": 25166304,
+    "textures": [
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 61,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 28,
+        "mipmaps": true,
+        "gpuBytes": 1398128
+      },
+      {
+        "width": 1024,
+        "height": 1024,
+        "format": 22,
+        "mipmaps": true,
+        "gpuBytes": 699064
+      }
+    ]
+  },
+  "scope": "Engine texture estimates, not total GPU/process residency or Samsung performance",
+  "samsungValidated": false,
+  "textureSavedPercent": 84.99971032135733,
+  "errors": []
+}

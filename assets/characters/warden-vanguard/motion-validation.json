@@ -1,0 +1,49 @@
+{
+  "source": "warden.blend",
+  "halfFrameSamples": true,
+  "clips": [
+    {
+      "clip": "Idle",
+      "samples": 121,
+      "minimumFootY": 0.003999944310635328,
+      "maximumFootLift": 0.003999944310635328,
+      "groundedSupport": true
+    },
+    {
+      "clip": "Walk",
+      "samples": 121,
+      "minimumFootY": 0.003819127567112446,
+      "maximumFootLift": 0.05900001525878906,
+      "groundedSupport": true
+    },
+    {
+      "clip": "Run",
+      "samples": 121,
+      "minimumFootY": 0.003677327185869217,
+      "maximumFootLift": 0.09399998188018799,
+      "groundedSupport": true
+    },
+    {
+      "clip": "Combat",
+      "samples": 121,
+      "minimumFootY": 0.003999944310635328,
+      "maximumFootLift": 0.003999944310635328,
+      "groundedSupport": true
+    },
+    {
+      "clip": "Hit",
+      "samples": 121,
+      "minimumFootY": 0.003999944310635328,
+      "maximumFootLift": 0.003999944310635328,
+      "groundedSupport": true
+    },
+    {
+      "clip": "Defeated",
+      "samples": 121,
+      "minimumFootY": 0.003999944310635328,
+      "maximumFootLift": 0.003999944310635328,
+      "groundedSupport": true
+    }
+  ],
+  "scope": "authored geometry; Chromium validates the compressed rig separately"
+}

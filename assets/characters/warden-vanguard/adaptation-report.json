@@ -1,0 +1,60 @@
+{
+  "sourceSha256": "fbfd269f5d7f859f0ae7049e55488689c27fc755a4a5e328974eba7f9f01cb68",
+  "sourceBytes": 22368716,
+  "sourceMeshes": 499,
+  "sourceTriangles": 42294,
+  "heightMeters": 2.65,
+  "rig": "five rigid articulated joints, vertex weights 1.0; source had no skin/clips",
+  "joints": {
+    "Chassis": [
+      0.0,
+      0.0,
+      1.350000023841858
+    ],
+    "ArmL": [
+      0.7156728506088257,
+      -0.39906802773475647,
+      2.1697216033935547
+    ],
+    "ArmR": [
+      -0.7156728506088257,
+      -0.39906802773475647,
+      2.1697216033935547
+    ],
+    "LegL": [
+      0.3156982660293579,
+      -0.37860971689224243,
+      1.495985984802246
+    ],
+    "LegR": [
+      -0.3156982660293579,
+      -0.37860971689224243,
+      1.495985984802246
+    ]
+  },
+  "clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Combat",
+    "Hit",
+    "Defeated"
+  ],
+  "meshGroups": {
+    "Chassis": 23422,
+    "ArmL": 4288,
+    "ArmR": 4288,
+    "LegL": 5148,
+    "LegR": 5148
+  },
+  "authoredLoopSeconds": {
+    "Idle": 2,
+    "Walk": 0.8,
+    "Run": 0.6,
+    "Combat": 2,
+    "Hit": 2,
+    "Defeated": 2
+  },
+  "gameplayRootMotion": false,
+  "sourcePreserved": true
+}

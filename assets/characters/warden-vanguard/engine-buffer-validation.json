@@ -1,0 +1,79 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "realDracoWorkerAndVertexFormat": true,
+  "scope": "offline decoded buffer compatibility; no GPU rendering or mobile claim",
+  "totalValidPrimitives": 8,
+  "actors": [
+    {
+      "id": "warden",
+      "sha256": "cffa8f750e35819fea6f68443eba0435487ea29126342656f27e337f01ff4d0c",
+      "validatedPrimitives": 8,
+      "primitives": [
+        {
+          "material": "Material_03",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 6244,
+          "vertexBufferBytes": 324688
+        },
+        {
+          "material": "Material_06",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 6258,
+          "vertexBufferBytes": 325416
+        },
+        {
+          "material": "Material_01",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 4063,
+          "vertexBufferBytes": 211276
+        },
+        {
+          "material": "Material_02",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 5284,
+          "vertexBufferBytes": 274768
+        },
+        {
+          "material": "Material_05",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 11154,
+          "vertexBufferBytes": 580008
+        },
+        {
+          "material": "Material_08",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 11162,
+          "vertexBufferBytes": 580424
+        },
+        {
+          "material": "Material_04",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 7273,
+          "vertexBufferBytes": 378196
+        },
+        {
+          "material": "Material_07",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 7268,
+          "vertexBufferBytes": 377936
+        }
+      ]
+    }
+  ]
+}

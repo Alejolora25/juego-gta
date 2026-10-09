@@ -1,6 +1,5 @@
-// Visual ground contact for the partial, approved-human pilot. This never
-// moves gameplay roots, physics bodies or the current Warden. Its selected
-// Vanguard source remains pending; this helper does not substitute a villain.
+// Visual ground contact for the approved-character pilot, including Vanguard.
+// This never moves gameplay roots or physics bodies.
 const GROUND_NAMES=new Set([
  'CityGround','DistrictPaving','CityRoadV','CityRoadH',
  'SidewalkV','SidewalkH','CurbV','CurbH','MissionForecourt','TreeGarden',

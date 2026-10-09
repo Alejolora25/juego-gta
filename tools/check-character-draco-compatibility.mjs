@@ -12,7 +12,8 @@ import {VertexBuffer} from '../node_modules/playcanvas/build/playcanvas/src/plat
 import {gltfToEngineSemanticMap} from '../node_modules/playcanvas/build/playcanvas/src/framework/parsers/glb/gltf-accessor.js';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const directory=path.join(root,'assets/characters/runtime-optimized');
+const vanguard=process.argv.includes('--vanguard');
+const directory=path.join(root,vanguard?'assets/characters/warden-vanguard':'assets/characters/runtime-optimized');
 const engine=JSON.parse(await fs.readFile(path.join(root,'node_modules/playcanvas/package.json'),'utf8'));
 assert.equal(engine.version,'2.23.0','The asset compatibility proof targets the approved engine version.');
 const decoder=await draco3d.createDecoderModule(),previousSelf=globalThis.self;
@@ -25,7 +26,7 @@ DracoWorker();handler({data:{type:'init'}});await Promise.resolve();
 const device={isWebGPU:false,_vram:{vb:0},buffers:new Set(),createVertexBufferImpl:()=>({unlock(){}})};
 const actors=[];
 try{
- for(const id of ['alejandro','juan','sara','david']){
+ for(const id of vanguard?['warden']:['alejandro','juan','sara','david']){
   const bytes=await fs.readFile(path.join(directory,id+'.glb'));
   assert.equal(bytes.readUInt32LE(0),0x46546c67,'Invalid GLB header.');
   const jsonLength=bytes.readUInt32LE(12),gltf=JSON.parse(bytes.subarray(20,20+jsonLength).toString());

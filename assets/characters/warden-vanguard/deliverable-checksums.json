@@ -1,0 +1,17 @@
+{
+  "files": {
+    "original/vanguard.glb": {
+      "bytes": 22368716,
+      "sha256": "fbfd269f5d7f859f0ae7049e55488689c27fc755a4a5e328974eba7f9f01cb68"
+    },
+    "warden.blend": {
+      "bytes": 20392310,
+      "sha256": "ca788eb7753e158774eb5ff8cf3b3ade04e135a55d19870e0c4d111634af8e10"
+    },
+    "warden.glb": {
+      "bytes": 8895364,
+      "sha256": "cffa8f750e35819fea6f68443eba0435487ea29126342656f27e337f01ff4d0c"
+    }
+  },
+  "sourcePreserved": true
+}

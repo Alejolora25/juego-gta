@@ -1,0 +1,415 @@
+{
+  "originalBytes": 22368716,
+  "runtimeBytes": 8895364,
+  "savedPercent": 60.23301471573066,
+  "originalSha256": "fbfd269f5d7f859f0ae7049e55488689c27fc755a4a5e328974eba7f9f01cb68",
+  "runtimeSha256": "cffa8f750e35819fea6f68443eba0435487ea29126342656f27e337f01ff4d0c",
+  "originalPrimitives": 499,
+  "runtimePrimitives": 8,
+  "triangles": 42294,
+  "maxPositionErrorMeters": 0.000012189149856567383,
+  "joints": 5,
+  "clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Combat",
+    "Hit",
+    "Defeated"
+  ],
+  "rigAndClipsPreserved": true,
+  "textures": [
+    {
+      "name": "Image_10",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 858443,
+      "compressedBytes": 635193
+    },
+    {
+      "name": "Image_8",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 518168,
+      "compressedBytes": 193926
+    },
+    {
+      "name": "Image_9",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 957915,
+      "compressedBytes": 174409
+    },
+    {
+      "name": "Image_22",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 856810,
+      "compressedBytes": 634306
+    },
+    {
+      "name": "Image_19",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 527354,
+      "compressedBytes": 196097
+    },
+    {
+      "name": "Image_20",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 975041,
+      "compressedBytes": 176436
+    },
+    {
+      "name": "Image_2",
+      "slots": [
+        "emissiveTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 19006,
+      "compressedBytes": 4869
+    },
+    {
+      "name": "Image_3",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 691335,
+      "compressedBytes": 554954
+    },
+    {
+      "name": "Image_0",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 501231,
+      "compressedBytes": 183365
+    },
+    {
+      "name": "Image_1",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 780131,
+      "compressedBytes": 154455
+    },
+    {
+      "name": "Image_6",
+      "slots": [
+        "emissiveTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 16516,
+      "compressedBytes": 3812
+    },
+    {
+      "name": "Image_7",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 760510,
+      "compressedBytes": 564224
+    },
+    {
+      "name": "Image_4",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 376337,
+      "compressedBytes": 158856
+    },
+    {
+      "name": "Image_5",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 840584,
+      "compressedBytes": 154829
+    },
+    {
+      "name": "Image_17",
+      "slots": [
+        "emissiveTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 20878,
+      "compressedBytes": 5780
+    },
+    {
+      "name": "Image_18",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 906971,
+      "compressedBytes": 667321
+    },
+    {
+      "name": "Image_15",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 587148,
+      "compressedBytes": 210802
+    },
+    {
+      "name": "Image_16",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 1054096,
+      "compressedBytes": 189206
+    },
+    {
+      "name": "Image_28",
+      "slots": [
+        "emissiveTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 20741,
+      "compressedBytes": 5646
+    },
+    {
+      "name": "Image_29",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 907917,
+      "compressedBytes": 668180
+    },
+    {
+      "name": "Image_26",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 590447,
+      "compressedBytes": 212289
+    },
+    {
+      "name": "Image_27",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 1096160,
+      "compressedBytes": 190864
+    },
+    {
+      "name": "Image_14",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 883829,
+      "compressedBytes": 659486
+    },
+    {
+      "name": "Image_11",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 612442,
+      "compressedBytes": 227292
+    },
+    {
+      "name": "Image_12",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 918795,
+      "compressedBytes": 168642
+    },
+    {
+      "name": "Image_25",
+      "slots": [
+        "normalTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "RGB UASTC",
+      "colorSpace": "linear",
+      "sourceBytes": 883812,
+      "compressedBytes": 659483
+    },
+    {
+      "name": "Image_23",
+      "slots": [
+        "baseColorTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "srgb",
+      "sourceBytes": 610608,
+      "compressedBytes": 226856
+    },
+    {
+      "name": "Image_24",
+      "slots": [
+        "metallicRoughnessTexture"
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "encoding": "ETC1S",
+      "colorSpace": "linear",
+      "sourceBytes": 932722,
+      "compressedBytes": 169571
+    }
+  ]
+}
