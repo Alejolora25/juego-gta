@@ -1,6 +1,7 @@
-# Alejandro — propuesta de fase 3
+# Alejandro — diseño aprobado de fase 3
 
-Estado: **pendiente de aprobación visual del usuario**. Esta carpeta conserva
+Estado: **aprobado visualmente por el usuario el 9 de octubre de 2026**.
+Fase 3 cerrada; decisión y hashes de los entregables en `approval.json`. Esta carpeta conserva
 un personaje y una escena de revisión independientes. No sustituye al Alejandro
 publicado ni modifica el controlador, la ciudad o las misiones.
 
@@ -67,7 +68,7 @@ clip. El empaquetado deduplica muestras, conserva animaciones en formato glTF
 normal y adapta texturas; no introduce dependencia de Draco o Basis en este
 visor. El `.blend` conserva las imágenes de autoría.
 
-Pendiente: aprobación de rostro, vestimenta y accesorios; integración de fase 5,
+Pendiente: integración autorizada de fase 5,
 ritmo de animación respecto a las velocidades existentes, revisión en la ciudad
 y mediciones/validación Samsung de las fases posteriores. Las vistas de estudio
 usan iluminación de revisión; no certifican el aspecto de la ciudad en Samsung.

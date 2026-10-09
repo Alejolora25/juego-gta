@@ -90,7 +90,9 @@ Criterio de cierre: archivos accesibles, licencia compatible y limitaciones
 documentadas.
 
 FASE 3. DISEÑO DEFINITIVO DE ALEJANDRO
-Estado: propuesta preparada en Blender y PlayCanvas; aprobación visual pendiente.
+Estado: completada; apariencia y animaciones aprobadas por el usuario
+el 9 de octubre de 2026. Registro verificable en
+assets/characters/alejandro-phase3/approval.json. La integración sigue en fase 5.
 La ejecución de esta fase fue autorizada expresamente. Fuente editable, GLB,
 diez clips y vistas de revisión en assets/characters/alejandro-phase3/.
 Tareas:

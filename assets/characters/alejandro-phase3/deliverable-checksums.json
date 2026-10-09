@@ -1,6 +1,6 @@
 {
   "phase": 3,
-  "status": "awaiting-visual-approval",
+  "status": "visually-approved",
   "files": {
     "alejandro.blend": {
       "bytes": 14528633,
@@ -22,5 +22,6 @@
       "bytes": 1095731,
       "sha256": "b23f9139aebb4e409a5352f4b6e40c57af2199426108abe096d6c6c3c15cb25a"
     }
-  }
+  },
+  "approval_record": "approval.json"
 }

@@ -4,7 +4,7 @@ La ejecución de esta fase fue autorizada expresamente el 9 de octubre de 2026.
 Se trabaja sobre `stage9-alejandro-design`; la base pública continúa en
 `3e0ec79613a548fc0013ef60663dd22cd3cfdce5`.
 
-## Propuesta preparada
+## Diseño aprobado
 
 La base Quaternius Standard validada en fase 2 se adaptó como ingeniero urbano:
 peinado castaño, rostro afeitado con ojos modelados, chaqueta técnica oscura,
@@ -38,8 +38,11 @@ La biblioteca de Warden sigue pendiente en fase 2 y no afecta a las fuentes ya
 validadas de Alejandro. No se trabajó en fase 4 ni se integró el nuevo personaje
 en fase 5. No se modificó motor, programación, mapa ni recursos publicados.
 
-**La fase 3 no se declara cerrada hasta recibir aprobación visual** del rostro,
-ropa, accesorios y animaciones mostradas. Las pruebas de Samsung y de juego
+**Fase 3 cerrada: aprobación visual recibida el 9 de octubre de 2026**
+con el mensaje «Si la apruebo». La decisión corresponde al rostro, ropa,
+accesorios y animaciones mostradas del commit `a8194d6`. El registro
+`assets/characters/alejandro-phase3/approval.json` identifica los entregables
+por SHA-256; el modelo y las imágenes aprobados se conservan sin cambios. Las pruebas de Samsung y de juego
 completo se realizarán tras una integración autorizada; la prueba aislada no
 las sustituye.
 
