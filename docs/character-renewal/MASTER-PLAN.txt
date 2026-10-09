@@ -32,8 +32,9 @@ DECISIONES CORREGIDAS
 - La latencia leve de edificios es secundaria: optimizar cuando las mediciones
   indiquen una solución útil; no bloquea el avance de los personajes.
 - Recursos Quaternius seleccionados: descargados y comprobados en Blender y
-  PlayCanvas/Chromium. Originales preservados. No están adaptados ni integrados
-  en el juego. Warden: archivo pendiente de acceso y validación.
+  PlayCanvas/Chromium. Originales preservados. Alejandro explorador y tres NPC
+  aprobados e integrados en un piloto explícito de desarrollo. Warden: archivo
+  pendiente de acceso y validación. La versión pública conserva 3e0ec79.
 
 ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
 
@@ -43,9 +44,10 @@ ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
 2. Manzana piloto -> Fase 6.
    Realizada; se conserva como patrón.
 3. Alejandro humanoide -> Fases 3 y 5.
-   Integración funcional conseguida. Falta su diseño definitivo.
+   Explorador definitivo aprobado; integrado en el piloto de desarrollo.
 4. NPC y Warden -> Fases 4 y 5.
-   Prototipos funcionales. Falta renovar sus modelos e identidades.
+   Tres NPC definitivos aprobados e integrados en el piloto de desarrollo.
+   Vanguard elegido para Warden pendiente del archivo oficial.
 5. Distritos modulares -> Fase 11.
    Realizados y aprobados por el usuario.
 6. Visuales, colisiones y circulación -> Fase 7.
@@ -111,8 +113,9 @@ Criterio de cierre: apariencia y animaciones aprobadas, escala correcta,
 pies sobre el suelo y orientación correcta.
 
 FASE 4. DISEÑO DE WARDEN Y TRES NPC
-Estado: ejecución autorizada; tres NPC preparados para aprobación visual
-en assets/characters/npc-phase4/. Warden pendiente de obtener y validar
+Estado: Juan, Sara y David aprobados por el usuario; condición de la espalda
+de David comprobada en seis poses de Chromium. Registro de aprobación en
+assets/characters/npc-phase4/approval.json. Warden pendiente de obtener y validar
 el Vanguard elegido. El usuario confirmó mantenerlo; no se sustituirá por
 otro robot. Fase todavía parcial.
 Tareas:
@@ -125,7 +128,13 @@ Entregable: Warden y tres NPC listos para revisión visual e integración.
 Criterio de cierre: aprobación visual y modelos técnicamente utilizables.
 
 FASE 5. INTEGRACIÓN PILOTO DE LOS CINCO PERSONAJES
-Estado: pendiente.
+Estado: parcial. Alejandro explorador y tres NPC aprobados integrados en
+stage11-approved-character-pilot, modo ?pilot=1&characters=approved.
+Ocho grupos de regresión y seis pruebas Chromium satisfactorios; capturas
+reales con controles y HUD existentes. Informe en PHASE-5-PILOT.md.
+La renovación de Warden queda pendiente del archivo Vanguard; se conserva
+el Warden actual para verificar mecánicas, sin considerarlo el diseño elegido.
+Falta completar los cinco personajes y validar esta integración en Samsung.
 Tareas:
 - Integrarlos en una rama de desarrollo sobre la ciudad aprobada.
 - Ajustar modelos, materiales, orientación y clips al contrato existente.
@@ -243,6 +252,8 @@ REGLAS OBLIGATORIAS
 - Promover a main únicamente tras CI satisfactorio y autorización de promoción.
 - Mantener el trabajo en planificación hasta autorizar expresamente la ejecución.
 
-Ejecución autorizada de las primeras fases: fase 1 cerrada y fase 2 parcial.
-Las fases de diseño e integración permanecen pendientes de autorización y
-aprobación visual. El juego público conserva 3e0ec79.
+Ejecución autorizada: fase 1 cerrada, fase 2 parcial por Vanguard y fase 3
+cerrada con Alejandro explorador aprobado. En fase 4 se aprobaron los tres
+NPC; la espalda de David se verificó corregida antes de continuar.
+Fase 5 parcial implementada para los cuatro humanos aprobados. Warden y
+Samsung pendientes. El juego público conserva 3e0ec79; no se ha promovido.

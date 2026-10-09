@@ -1,0 +1,235 @@
+{
+  "date": "2026-10-09",
+  "phase": 5,
+  "status": "partial-four-approved-humans-integrated",
+  "branch": "stage11-approved-character-pilot",
+  "predecessorCommit": "9c9f258",
+  "publicBaseCommit": "3e0ec79613a548fc0013ef60663dd22cd3cfdce5",
+  "engine": "PlayCanvas 2.23.0",
+  "chromiumExecutable": "/usr/bin/chromium",
+  "tests": {
+    "regression": {
+      "passedFileGroups": 8,
+      "failed": 0,
+      "durationMs": 643.628853
+    },
+    "chromium": {
+      "passed": 6,
+      "failed": 0,
+      "reportedDuration": "1.4m",
+      "newPilotTestSeconds": 6.4
+    },
+    "remoteCI": "pending-push-and-verification"
+  },
+  "visualCaptureReport": "report.json",
+  "davidBackReport": "../david-back/report.json",
+  "approvedDeliverablesVerified": [
+    {
+      "path": "assets/characters/alejandro-explorer/alejandro.blend",
+      "bytes": 8775093,
+      "sha256": "1b0ec09f46f09c1e17434bcf2d263ceb702576b6e6af48775244f19ec05ad88f"
+    },
+    {
+      "path": "assets/characters/alejandro-explorer/alejandro.glb",
+      "bytes": 3796564,
+      "sha256": "44f29cc2c0f50d381a42c55fce37438e96b6467b9e49401d680a0e6a8b5e78c2"
+    },
+    {
+      "path": "assets/characters/alejandro-explorer/review/alejandro-three-views.png",
+      "bytes": 1778307,
+      "sha256": "66f461fca815730db19a7e2234070005219b1228535cf29b6f3b1687e7c3c885"
+    },
+    {
+      "path": "assets/characters/alejandro-explorer/review/alejandro-portrait.png",
+      "bytes": 1104074,
+      "sha256": "bdbaf15c628507adad50291a796f66737f656577fb97f4b702078d13a01122cc"
+    },
+    {
+      "path": "assets/characters/alejandro-explorer/review/alejandro-motion.mp4",
+      "bytes": 391590,
+      "sha256": "2033e827bbb6d90bf094cac21047495ab9809ca17b75426af1b9fa216127a073"
+    },
+    {
+      "path": "assets/characters/npc-phase4/CREDITS.md",
+      "bytes": 1781,
+      "sha256": "fbffb93cd1b90b9bdaca2649dab210348ebe387b152f3d079b7ffcb4307fa904"
+    },
+    {
+      "path": "assets/characters/npc-phase4/README.md",
+      "bytes": 3042,
+      "sha256": "2fbb9fc9a5b626c2c422903ecbd7e05582b20b9dd89e2f665d45ba18a9d05944"
+    },
+    {
+      "path": "assets/characters/npc-phase4/build-report.json",
+      "bytes": 1248,
+      "sha256": "ee17d90a5b9fe3f35f3591873114b2446792e70615fbd37d349264ea56a46207"
+    },
+    {
+      "path": "assets/characters/npc-phase4/chromium-report.json",
+      "bytes": 19240,
+      "sha256": "6c321e3e2d5cc0077a8b83a1163150176d8633d13fe3135a4ac52be708bf709a"
+    },
+    {
+      "path": "assets/characters/npc-phase4/david/david.blend",
+      "bytes": 657144,
+      "sha256": "7c5ab07825ea29975a7f2bb440ce4b29896cba8258b5d937a1c0baf18205ea09"
+    },
+    {
+      "path": "assets/characters/npc-phase4/david/david.glb",
+      "bytes": 1175924,
+      "sha256": "5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc"
+    },
+    {
+      "path": "assets/characters/npc-phase4/geometry-validation.json",
+      "bytes": 143527,
+      "sha256": "e1cd3f3f6a87fb5ff58aa84233cb99d9b4558a33606e5e616db473e7ba9289fd"
+    },
+    {
+      "path": "assets/characters/npc-phase4/juan/juan.blend",
+      "bytes": 650815,
+      "sha256": "874b0c94de94f412e4726b4fe8ac61355b3c8d5be41e9e9104cab9f4af53fa2a"
+    },
+    {
+      "path": "assets/characters/npc-phase4/juan/juan.glb",
+      "bytes": 974808,
+      "sha256": "bb09020c1a3aa2137eb4053cc84d8bea4c76e38973388a0a1c88533799a44ad0"
+    },
+    {
+      "path": "assets/characters/npc-phase4/package-report.json",
+      "bytes": 879,
+      "sha256": "0b58061be9068d6e174b33030c0627aa408730bcd74e417e5667510e74cb5f32"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/chromium-david.png",
+      "bytes": 93456,
+      "sha256": "b6065b4bd12e1a99315080df8b9e054d07253b968d73141cc34368182c07fa98"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/chromium-juan.png",
+      "bytes": 98098,
+      "sha256": "7acedc24ed52dff28099fe019be78c3256602910f6b2da38b8193d8389e0dd77"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/chromium-sara.png",
+      "bytes": 95117,
+      "sha256": "4613790e8c9685ece8a999c4a513233558cf6942b730ab6c7fa218e829023adb"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/david-portrait.png",
+      "bytes": 772449,
+      "sha256": "919b1563f18354b6628950f414460e9ff6ddb9575d3c1920f9e4d1fe8843e003"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/index.html",
+      "bytes": 2440,
+      "sha256": "cee12c99b1512c43babe0f225630411b9c1f17130ad543eeceb53f06dc896e87"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/juan-portrait.png",
+      "bytes": 796914,
+      "sha256": "1a865f291bf466a4a06c5fba620ef926cf3cbf423af44964f60582bc5642ea3c"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/npc-back.png",
+      "bytes": 1943100,
+      "sha256": "4bf9a11528fe5dd88519e1943d848755f017cfbcc1194d7b0e1c68f9d016404d"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/npc-lineup.png",
+      "bytes": 1953089,
+      "sha256": "a63c24c80c518084e385c4ec06d51ff7af1d1353e3e681bf803fc2d2c6956314"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/npc-motion.mp4",
+      "bytes": 566883,
+      "sha256": "b6569d8a0a1d4b474acb2148e7fb0d7158905f74c3ee96adf60380f71fee40df"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/recording-timeline.json",
+      "bytes": 505,
+      "sha256": "ec1e0b6786818b27632be27b36302e9601beea3443b1f4d90bb14a3a5a462ed9"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/sara-portrait.png",
+      "bytes": 777195,
+      "sha256": "7398f4eccf0b952a44fafc778fa8f01a354fee4856d4bd7888a7b0ad4a27a4b7"
+    },
+    {
+      "path": "assets/characters/npc-phase4/review/viewer.js",
+      "bytes": 4537,
+      "sha256": "859a104b8ee03a629c929e9fd2020d8377c8061334808df543e735b0732d8e93"
+    },
+    {
+      "path": "assets/characters/npc-phase4/sara/sara.blend",
+      "bytes": 626567,
+      "sha256": "77013675861e6284934c2642e2926b8a4a557b6c3b334955bb02d5200992892b"
+    },
+    {
+      "path": "assets/characters/npc-phase4/sara/sara.glb",
+      "bytes": 991236,
+      "sha256": "9a59aee49687efbfac5e2ecc72b5fad2e8679c701152cdb842c20737484161dc"
+    },
+    {
+      "path": "assets/characters/npc-phase4/verification-report.json",
+      "bytes": 1763,
+      "sha256": "ac444f8e46f02529087848b3c09583aed92da801d3e84889bd643ed8af99c066"
+    }
+  ],
+  "originalFilesVerified": 26,
+  "unchangedExistingSourceFiles": [
+    "src/application/usecases/CombatService.js",
+    "src/application/usecases/Stage4BossController.js",
+    "src/application/usecases/Stage4BossEncounter.js",
+    "src/application/usecases/Stage4MissionCoordinator.js",
+    "src/application/usecases/Stage4ObjectiveTracker.js",
+    "src/application/usecases/Stage4ProjectileSystem.js",
+    "src/application/usecases/Stage4Session.js",
+    "src/domain/entities/GameState.js",
+    "src/infrastructure/input/Stage4ControlsBridge.js",
+    "src/infrastructure/input/TouchControls.js",
+    "src/infrastructure/physics/PhysicsWorld.js",
+    "src/infrastructure/rendering/PilotContactShadow.js",
+    "src/infrastructure/rendering/Stage4AnimationController.js",
+    "src/infrastructure/rendering/Stage4AssetCatalog.js",
+    "src/infrastructure/rendering/Stage4AssetPipeline.js",
+    "src/infrastructure/rendering/Stage4CharacterFactory.js",
+    "src/infrastructure/rendering/Stage4CharacterIdentity.js",
+    "src/infrastructure/rendering/Stage4CharacterProfiles.js",
+    "src/infrastructure/rendering/Stage4CharacterSystem.js",
+    "src/infrastructure/rendering/Stage4Environment.js",
+    "src/infrastructure/rendering/Stage4Lighting.js",
+    "src/infrastructure/rendering/Stage4LodManager.js",
+    "src/infrastructure/rendering/Stage4MaterialLibrary.js",
+    "src/infrastructure/rendering/Stage4PerformanceBudget.js",
+    "src/infrastructure/rendering/Stage4PlayerController.js",
+    "src/infrastructure/rendering/Stage4SkeletalAnimation.js",
+    "src/infrastructure/rendering/Stage4ThirdPersonCamera.js",
+    "src/infrastructure/rendering/Stage4WorldFactory.js",
+    "src/infrastructure/rendering/Stage5VerticalSlice.js",
+    "src/infrastructure/rendering/Stage6UrbanOverhaul.js",
+    "src/infrastructure/rendering/UrbanBuildingContactShadows.js",
+    "src/infrastructure/rendering/UrbanDistrictLayout.js",
+    "src/infrastructure/rendering/UrbanDistrictSurfaces.js",
+    "src/infrastructure/rendering/UrbanPilot.js",
+    "src/infrastructure/rendering/VisualProfile.js",
+    "src/infrastructure/rendering/WorldFactory.js",
+    "src/presentation/GameBootstrap.js",
+    "src/presentation/HudController.js",
+    "src/presentation/Stage4Bootstrap.js"
+  ],
+  "changedExistingSources": [
+    "src/infrastructure/rendering/PilotCharacterSystem.js",
+    "src/infrastructure/rendering/PlayCanvasProbe.js"
+  ],
+  "changes": "Explicit human asset selection and visual-only ground compensation; no gameplay rule or physics-root change",
+  "humanGlbBytes": 6938532,
+  "samsungValidated": false,
+  "promotedToMain": false,
+  "pending": [
+    "Official selected Vanguard archive, textures and exact license",
+    "Warden rig/adaptation/visual approval",
+    "Complete five-character pilot",
+    "Samsung validation and measured performance",
+    "Explicit main promotion authorization"
+  ]
+}

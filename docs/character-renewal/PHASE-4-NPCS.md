@@ -1,7 +1,7 @@
 # Fase 4 — diseño de personajes secundarios
 
-Fecha: 9 de octubre de 2026. **Estado: parcial. Tres NPC preparados para
-aprobación visual; Warden pendiente del recurso seleccionado.**
+Fecha: 9 de octubre de 2026. **Estado: parcial. Tres NPC aprobados por el
+usuario; Warden pendiente del recurso seleccionado.**
 
 El usuario autorizó revisar las fases anteriores y avanzar en fase 4. Se
 comprobó de nuevo la integridad del respaldo, de la copia restaurada, de los
@@ -74,6 +74,20 @@ y la grabación real de Chromium. Sus hashes se guardan en
 La bata de David abre y ensancha su borde inferior para evitar que el cierre
 del traje original atraviese el pantalón al alargarlo.
 
+## Aprobación y condición de David
+
+El usuario aprobó los tres NPC y pidió continuar condicionado a que se hubiera
+corregido la pieza azul en la espalda baja de David. Se comprobaron seis vistas
+reales en Chromium: reposo, conversación y saludo a 0,6 y 1,2 segundos. La bata
+queda continua; la tableta lateral es un accesorio separado. El GLB conserva
+su SHA-256 `5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc`.
+
+La aprobación y los 25 hashes de la propuesta presentada están en
+`assets/characters/npc-phase4/approval.json`. Se conservaron los entregables de
+esa revisión; las capturas nuevas quedan en `docs/character-renewal/evidence/david-back/`.
+Se autoriza avanzar con el piloto de los cuatro humanos aprobados. Warden
+continúa pendiente y la fase 4 completa no se da por cerrada.
+
 ## Pendiente de Warden y de cierre
 
 El Vanguard elegido devuelve 403 al volver a consultar su ficha desde este
@@ -82,5 +96,6 @@ entorno; no se recibió el ZIP oficial. El usuario decidió expresamente:
 Se presentó [Animated Mech Pack de Quaternius](https://quaternius.com/packs/animatedmech.html)
 como alternativa, pero no se eligió ni descargó en sustitución del Vanguard.
 
-La fase 4 se cerrará cuando Warden sea técnicamente utilizable y el usuario
-apruebe los diseños. La integración pertenece a fase 5; no se promovió a main.
+La fase 4 se cerrará cuando Vanguard esté adaptado y visualmente aprobado.
+La integración de los humanos continúa en fase 5, en una rama separada;
+no se promovió a main.

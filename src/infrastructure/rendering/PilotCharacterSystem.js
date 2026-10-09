@@ -7,12 +7,19 @@ import {addPilotContactShadow} from './PilotContactShadow.js';
 // Stable gameplay root at ground level; authored visual scale and bind pose
 // stay inside the imported hierarchy, never on the physics/controller entity.
 export class PilotCharacterSystem extends Stage4CharacterSystem {
+ constructor({pipeline,root,approvedAssets=null}) {
+  super({pipeline,root});
+  this.approvedAssets=approvedAssets;
+ }
  async spawn({id,name,role='npc',position=[0,0,0]}) {
   const key=role==='player'?'alejandro':role==='boss'?'warden':name.toLowerCase();
-  const assetId='pilot-'+key;
+  // The approved pilot replaces only its four humans. Warden keeps the
+  // existing robot until the selected Vanguard source is available.
+  const approvedAsset=role==='boss'?null:this.approvedAssets?.[key];
+  const assetId=approvedAsset?.id??'pilot-'+key;
   // Keep the robot's original animation hierarchy: Blender's round-trip of
   // this multipart rig changes its animated rest transforms.
-  const url=role==='boss'?'./assets/pilot/source/robot.glb':`./assets/pilot/${key}.glb`;
+  const url=role==='boss'?'./assets/pilot/source/robot.glb':(approvedAsset?.url??`./assets/pilot/${key}.glb`);
   const asset=await this.pipeline.loadGlb(assetId,url);
   const entity=new pc.Entity(name);entity.tags.add(role);entity.setPosition(...position);this.root.addChild(entity);
   const facing=new pc.Entity('ModelFacing');entity.addChild(facing);
@@ -30,7 +37,7 @@ export class PilotCharacterSystem extends Stage4CharacterSystem {
   const animation=new Stage4AnimationController(entity);
   const skeletal=new Stage4SkeletalAnimation(visual);
   skeletal.configure(this.pipeline.animations(assetId));skeletal.playSemantic('idle');
-  const character={id,name,role,entity,visual,animation,skeletal,source:'glb'};
+  const character={id,name,role,entity,visual,animation,skeletal,source:'glb',assetId,assetUrl:url,facing,approvedVisual:!!approvedAsset};
   this.characters.set(id,character);return character;
  }
 }

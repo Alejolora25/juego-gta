@@ -90,8 +90,10 @@ Los cinco candidatos importaron y reprodujeron Idle en PlayCanvas. Incluyen
 interacción y otros 23 clips, aunque los NPC estacionarios utilizarán reposo.
 Usan materiales de color sin texturas externas; son bases estilizadas que aún
 necesitaban identidad visual al cerrar esta inspección. La fase 4 autorizada
-prepara propuestas independientes de Juan, Sara y David para aprobación visual
-en `assets/characters/npc-phase4/`; su integración todavía no está realizada.
+preparó propuestas independientes de Juan, Sara y David en
+`assets/characters/npc-phase4/`, posteriormente aprobadas por el usuario.
+El piloto de fase 5 integra esos recursos y Alejandro explorador únicamente
+en la rama de desarrollo; ver `PHASE-5-PILOT.md`.
 
 En la inspección produjeron entre 9 y 13 instancias de malla por personaje.
 La consolidación de materiales/meshes se evaluará con mediciones; no se afirma

@@ -1,0 +1,80 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "modelSha256": "5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc",
+  "modelUnchanged": true,
+  "captures": [
+    {
+      "clip": "Idle",
+      "seconds": 0.6,
+      "animationTime": 0.6,
+      "activeState": "clip0",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-idle-600ms.png"
+    },
+    {
+      "clip": "Idle",
+      "seconds": 1.2,
+      "animationTime": 1.2,
+      "activeState": "clip0",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-idle-1200ms.png"
+    },
+    {
+      "clip": "Interact",
+      "seconds": 0.6,
+      "animationTime": 0.6,
+      "activeState": "clip1",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-interact-600ms.png"
+    },
+    {
+      "clip": "Interact",
+      "seconds": 1.2,
+      "animationTime": 1.2,
+      "activeState": "clip1",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-interact-1200ms.png"
+    },
+    {
+      "clip": "Wave",
+      "seconds": 0.6,
+      "animationTime": 0.6,
+      "activeState": "clip2",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-wave-600ms.png"
+    },
+    {
+      "clip": "Wave",
+      "seconds": 1.2,
+      "animationTime": 1.2,
+      "activeState": "clip2",
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "file": "david-back-wave-1200ms.png"
+    }
+  ],
+  "errors": []
+}

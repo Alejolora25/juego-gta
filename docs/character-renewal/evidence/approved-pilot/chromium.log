@@ -1,0 +1,18 @@
+
+Running 6 tests using 1 worker
+
+(node:30945) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/approved-characters.spec.js:3:1 › approved human pilot preserves ground contact, facing, missions and combat in the existing city (6.4s)
+  ✓  2 tests/browser-smoke.spec.js:29:1 › public game boots Stage 5 entrypoint without browser errors (23.5s)
+  ✓  3 tests/browser-smoke.spec.js:43:1 › PlayCanvas runtime spawns cast, Stage 5 street, identities and GLB animation once (17.5s)
+  ✓  4 tests/browser-smoke.spec.js:67:1 › gameplay loop covers movement, missions, boss combat, projectiles and reset in one runtime (19.6s)
+  ✓  5 tests/browser-smoke.spec.js:110:1 › legacy Rapier rollback contract still loads in Chromium (8.2s)
+  ✓  6 tests/urban-pilot.spec.js:3:1 › urban pilot preserves human scale, idle NPCs, locomotion and clear road collisions (9.7s)
+
+  6 passed (1.4m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
