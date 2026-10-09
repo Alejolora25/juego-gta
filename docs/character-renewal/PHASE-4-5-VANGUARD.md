@@ -78,3 +78,23 @@ El modo normal, motor PlayCanvas 2.23.0, distribución de los distritos y
 reglas del juego permanecen existentes. Falta probar y aprobar visualmente
 el piloto de los cinco personajes en Samsung antes de consolidar la versión
 pública; no se declaran cerradas las fases 10 y 12.
+
+
+## Continuación: validación de reinicios y distritos
+
+El mismo test de Chromium ahora completa una victoria, reinicia, repite las
+misiones, pierde por un proyectil enemigo, reinicia nuevamente y completa
+otra victoria. Comprueba recuperación de salud y reposo del Vanguard,
+resultado del HUD, desbloqueo de controles y ausencia de estados residuales.
+Pasó localmente en 8,6 segundos, reutilizando una única escena.
+
+El recorrido actualizado utiliza los cinco modelos optimizados y conserva
+la evidencia histórica de cuatro humanos. Verificó cuatro distritos,
+83 edificios, 1.455 metros, 5.820 pasos de 25 cm y 428 aproximaciones
+bloqueadas. Las tres misiones terminaron con 300 XP y la entrada a la arena
+activó el encuentro. Colisionadores y posiciones de NPC permanecieron
+iguales. Evidencia: `evidence/five-character-routes/`.
+
+Estos resultados completan esta revisión de escritorio de las fases 10 y
+11; la aprobación visual y comprobación en Samsung siguen pendientes. No
+se ha promovido la rama a main ni publicado una nueva versión.

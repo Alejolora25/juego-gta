@@ -1,4 +1,4 @@
-// Read-only review of the approved city with the four approved humans.
+// Read-only review of the approved city with the five optimized characters.
 // Walk the existing Rapier resolver in quarter-metre increments. This is a
 // route/collision check, not a replacement for Samsung or visual approval.
 import {chromium} from 'playwright';
@@ -8,7 +8,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const output=path.join(root,'docs/character-renewal/evidence/urban-routes');
+const output=path.join(root,'docs/character-renewal/evidence/five-character-routes');
 const base=process.env.LORA25_REVIEW_URL??'http://127.0.0.1:4173';
 const executablePath=process.env.LORA25_CHROMIUM??'/usr/bin/chromium';
 const routes=[
@@ -34,7 +34,7 @@ try{
  await page.route('https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/build/playcanvas.mjs',route=>
   route.fulfill({path:path.join(root,'node_modules/playcanvas/build/playcanvas.mjs'),
    contentType:'application/javascript',headers:{'Access-Control-Allow-Origin':'*'}}));
- await page.goto(base+'/?pilot=1&characters=approved',{waitUntil:'networkidle'});
+ await page.goto(base+'/?pilot=1&characters=approved&quality=optimized',{waitUntil:'networkidle'});
  const result=await page.evaluate(async routes=>{
   const [{PlayCanvasProbe},{validateUrbanDistrictLayout,clearUrbanPlacement}]=await Promise.all([
    import('/src/infrastructure/rendering/PlayCanvasProbe.js'),
@@ -119,6 +119,11 @@ try{
      'Expected obstacle to block '+side+' approach: '+JSON.stringify(footprint));
     blockedApproaches++;
    }
+   const cast=['stage4-player','stage4-juan','stage4-sara','stage4-david','stage4-warden'].map(id=>{
+    const character=s.characters.get(id);assert(character.approvedVisual&&character.skeletal.ready,'Approved rig unavailable: '+id);
+    return {id,url:character.assetUrl,clips:character.skeletal.available()};
+   });
+   assert(cast[4].url.includes('/warden-vanguard/warden.glb'),'Selected Vanguard is not integrated');
    const player=s.characters.get('stage4-player');
    let matrixIndex=1000000;
    const sample=()=>{
@@ -181,7 +186,7 @@ try{
    assert(s.state.stage===3&&s.state.xp===300,'Existing mission progression changed');
    assert(dialogs.length===3,'Existing mission dialogs were not invoked');
    // Advance the unmodified encounter once at the end of the real entrance
-   // route. Warden is still the pre-existing robot, not the selected Vanguard.
+   // route with the adapted Vanguard and the unchanged encounter rules.
    probe.app.update(1/60);s.approvedPresentation.update();
    const arena={position:point(s.actor),distance:s.bossEncounter.distance(s.actor,s.warden),
     active:s.state.bossActive,locked:s.bossEncounter.locked,rootY:s.actor.getPosition().y};
@@ -189,7 +194,7 @@ try{
    assert(before===JSON.stringify(s.world.obstacles),'Route review mutated the approved footprints');
    assert(JSON.stringify(originalNpcs)===JSON.stringify(s.npcs.map(point)),'Route review moved a mission NPC');
    return {engine:'PlayCanvas 2.23.0',buildings:city.length,districts:s.urbanPilot.districts.map(d=>({id:d.id,name:d.name})),
-    footprints,colliders,blockedApproaches,npcPlacement,trees,routes:traversed,
+    cast,footprints,colliders,blockedApproaches,npcPlacement,trees,routes:traversed,
     totalDistance:traversed.reduce((sum,route)=>sum+route.distance,0),
     totalSteps:traversed.reduce((sum,route)=>sum+route.steps,0),
     unchangedFootprints:true,unchangedNpcRoots:true,gameplayRootsY:0,
@@ -201,7 +206,7 @@ try{
  await fs.writeFile(path.join(output,'report.json'),JSON.stringify({...result,footprintSha256,pageErrors,
   checkedAt:new Date().toISOString(),samsungValidated:false,
   limitations:[
-   'Four approved humans only; the selected Vanguard official source is still pending.',
+   'Five optimized characters including the officially supplied Vanguard; Samsung validation remains pending.',
    'Routes sample the existing movement resolver at 0.25 metres; they do not test touch ergonomics or user-controlled camera occlusion.',
    'Visual support uses the existing static flat surfaces; raised arena decorations are excluded.',
    'No navigation graph, gameplay logic, approved building, collider, original model or city layout was changed.'

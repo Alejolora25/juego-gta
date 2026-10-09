@@ -150,8 +150,24 @@ test('optimized five-character pilot preserves ground contact, facing, missions 
    const reset={stage:s.state.stage,xp:s.state.xp,hp:s.state.playerHP,bossHP:s.state.bossHP,bossActive:s.state.bossActive,finished:s.state.finished,
     root:position(player.entity),bounds:bounds(player),surface:s.approvedPresentation.heightAt(0,108),clip:player.skeletal.current,
     bossVisible:warden.entity.enabled,physicsY:s.physics.playerBody.translation().y,npcs:npcs.map(character=>character.skeletal.current)};
+   const replayMissions=()=>{for(const character of npcs){
+    const p=character.entity.getPosition();player.entity.setPosition(p.x+1.5,0,p.z);
+    const interaction=controls.onAction();if(!interaction.completed)throw new Error('Replay mission failed: '+character.name);advance();
+   }};
+   const enterArena=()=>{player.entity.setPosition(0,0,-130);warden.entity.setPosition(0,0,-150);advance();s.combat.enemyCooldown=10;};
+   replayMissions();enterArena();
+   s.state.playerHP=1;s.combat.enemyCooldown=0;
+   const lethalEnemyShot=s.projectiles.shootEnemy(warden.entity,player.entity);
+   for(let i=0;i<120&&!s.state.finished;i++){s.projectiles.update(1/60,warden.entity,player.entity);s.physics.step(1/60);}advance();
+   const defeat={shot:lethalEnemyShot,finished:s.state.finished,hp:s.state.playerHP,finish:hudEvents.finish.at(-1),locked:s.bossEncounter.locked,combat:controls.combat};
+   s.resetSession();advance();
+   const defeatReset={finished:s.state.finished,hp:s.state.playerHP,bossHP:s.state.bossHP,clip:warden.skeletal.current,visible:warden.entity.enabled};
+   replayMissions();enterArena();controls.onLock(true);
+   s.state.bossHP=12;s.combat.playerCooldown=0;const replayShot=controls.onShoot();
+   for(let i=0;i<120&&!s.state.finished;i++){s.projectiles.update(1/60,warden.entity,player.entity);s.physics.step(1/60);}advance();
+   const replayVictory={shot:replayShot,finished:s.state.finished,bossHP:s.state.bossHP,xp:s.state.xp,clip:warden.skeletal.current,visible:warden.entity.enabled,finish:hudEvents.finish.at(-1)};
    result={ok:true,cast,culledRigRestored,playerTextures,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
-    encounter,vanguard,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,hudEvents,physicsColliders,
+    encounter,vanguard,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,defeat,defeatReset,replayVictory,hudEvents,physicsColliders,
     obstacleCount:s.world.obstacles.length,obstaclesUnchanged:obstaclesBefore===JSON.stringify(s.world.obstacles)};
   }catch(error){result={ok:false,error:error?.message??String(error),stack:error?.stack};}
   finally{
@@ -201,7 +217,7 @@ test('optimized five-character pilot preserves ground contact, facing, missions 
  expect(result.missions.map(mission=>mission.character)).toEqual(['Juan','Sara','David']);
  expect(result.missions.map(mission=>mission.xp)).toEqual([100,200,300]);expect(result.missions.every(mission=>mission.completed&&mission.clip==='Idle')).toBe(true);
  expect(result.completedState).toEqual({stage:3,xp:300});
- expect(result.hudEvents.dialogs.map(dialog=>dialog.name.split(' · ')[0])).toEqual(['Juan','Sara','David']);
+ expect(result.hudEvents.dialogs.map(dialog=>dialog.name.split(' · ')[0])).toEqual(['Juan','Sara','David','Juan','Sara','David','Juan','Sara','David']);
  expect(result.hudEvents.dialogs.every(dialog=>dialog.text.length>20)).toBe(true);expect(result.hudEvents.objectives.length).toBeGreaterThan(0);
  expect(result.encounter).toEqual({active:true,locked:true,visible:true});expect(result.playerShot).toBe(true);expect(result.enemyShot).toBe(true);
  expect(result.vanguard.primitives).toBe(8);
@@ -216,5 +232,9 @@ test('optimized five-character pilot preserves ground contact, facing, missions 
  expect([result.reset.stage,result.reset.xp,result.reset.hp,result.reset.bossHP,result.reset.bossActive,result.reset.finished]).toEqual([0,0,3,100,false,false]);
  expect(result.reset.root).toEqual([0,0,108]);expect(result.reset.physicsY).toBeCloseTo(1,5);expect(result.reset.bossVisible).toBe(false);
  expect(result.reset.clip).toBe('Idle');expect(result.reset.npcs).toEqual(['Idle','Idle','Idle']);expectGrounded(result.reset,'Reset');
+ expect(result.defeat).toEqual({shot:true,finished:true,hp:0,finish:false,locked:false,combat:false});
+ expect(result.defeatReset).toEqual({finished:false,hp:3,bossHP:100,clip:'Idle',visible:false});
+ expect(result.replayVictory).toEqual({shot:true,finished:true,bossHP:0,xp:800,clip:'Defeated',visible:false,finish:true});
+ expect(result.hudEvents.finish).toEqual([true,false,true]);
  expect(result.callbacksRestored).toBe(true);expect(errors).toEqual([]);
 });
