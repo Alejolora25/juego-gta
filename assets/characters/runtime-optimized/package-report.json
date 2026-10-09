@@ -1,0 +1,1006 @@
+{
+  "schemaVersion": 1,
+  "scope": "four approved humans; selected Vanguard not available",
+  "build": {
+    "dracoMethod": "sequential",
+    "weld": false,
+    "simplification": false,
+    "quantizationBits": {
+      "POSITION": 16,
+      "NORMAL": 14,
+      "TEX_COORD": 16,
+      "GENERIC": 16
+    },
+    "toktxVersion": "toktx v4.4.2",
+    "normalMaps": "RGB UASTC, linear, unchanged orientation",
+    "colorMaps": "ETC1S, source slot color space",
+    "mipmaps": true,
+    "targetEngine": "PlayCanvas 2.23.0",
+    "omittedDerivedAttribute": "COLOR_1 (ignored by target engine on approved sources)"
+  },
+  "results": [
+    {
+      "id": "alejandro",
+      "source": "assets/characters/alejandro-explorer/alejandro.glb",
+      "runtime": "assets/characters/runtime-optimized/alejandro.glb",
+      "sourceBytes": 3796564,
+      "runtimeBytes": 1737824,
+      "savedBytes": 2058740,
+      "sourceSha256": "44f29cc2c0f50d381a42c55fce37438e96b6467b9e49401d680a0e6a8b5e78c2",
+      "runtimeSha256": "8b5410e055e5cc67c79d9d42a5c3858599bbdb0a0dba7b31cd4e6a83a0cd796a",
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression",
+        "KHR_texture_basisu"
+      ],
+      "textures": [
+        {
+          "name": "T_Superhero_Male_Normal-Design",
+          "slots": [
+            "normalTexture"
+          ],
+          "encoding": "UASTC",
+          "colorSpace": "linear",
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "sourceBytes": 469341,
+          "runtimeBytes": 229071,
+          "sourceSha256": "9bd0e68afa311f74e3ed2404144f2e31091002ac4fd2c15427bab0b58b4f2ff0",
+          "runtimeSha256": "1b5a6c0883170326437d076d622c4e493d22e588bd3cac7cbfcfb3e64375ccc0",
+          "normalConvention": "unchanged RGB"
+        },
+        {
+          "name": "T_Superhero_Male_Dark-Design",
+          "slots": [
+            "baseColorTexture"
+          ],
+          "encoding": "ETC1S",
+          "colorSpace": "srgb",
+          "width": 1024,
+          "height": 1024,
+          "mipLevels": 11,
+          "sourceBytes": 102674,
+          "runtimeBytes": 116593,
+          "sourceSha256": "f6aa2ce0a9484e2ffed1ef022ec3ef2b64e4d9e4fb335dbe328ff43dfe62ded6",
+          "runtimeSha256": "19fc69254d50639d3a228be9b0b2e866aa26d3e3c76a7383eb478e4939e3dd9c"
+        },
+        {
+          "name": "T_Superhero_Male_Roughness-Design",
+          "slots": [
+            "metallicRoughnessTexture"
+          ],
+          "encoding": "ETC1S",
+          "colorSpace": "linear",
+          "width": 256,
+          "height": 256,
+          "mipLevels": 9,
+          "sourceBytes": 14878,
+          "runtimeBytes": 16903,
+          "sourceSha256": "a0803fc421800e14020d944e9931de21736f952cf15126db15ef226e2dea8792",
+          "runtimeSha256": "73e633763fca7e5ae47e807782d43c62112dc3a71d0b5a7b97626301fcdead43"
+        },
+        {
+          "name": "T_Hair_1_Normal",
+          "slots": [
+            "normalTexture"
+          ],
+          "encoding": "UASTC",
+          "colorSpace": "linear",
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "sourceBytes": 456705,
+          "runtimeBytes": 242780,
+          "sourceSha256": "52b408f0293342fa3cbc486004c90f0ceaf0a3f612f2dd820a787173a5d8b919",
+          "runtimeSha256": "5c9e38e17e1d414c539f7b6bf1aa9dda62c28e006585f29ab0318a33815e6605",
+          "normalConvention": "unchanged RGB"
+        },
+        {
+          "name": "T_Eye_Normal",
+          "slots": [
+            "normalTexture"
+          ],
+          "encoding": "UASTC",
+          "colorSpace": "linear",
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "sourceBytes": 44349,
+          "runtimeBytes": 56703,
+          "sourceSha256": "7181dd618e12c00fc534106a263c7e8cd2eb90e3185d2e347bf4dbd2fbfb7072",
+          "runtimeSha256": "c4598febb447863ed757705b550fa119a5ecf41e6e7a51fd58cf7e349a05d212",
+          "normalConvention": "unchanged RGB"
+        },
+        {
+          "name": "T_Eye_Brown",
+          "slots": [
+            "baseColorTexture"
+          ],
+          "encoding": "ETC1S",
+          "colorSpace": "srgb",
+          "width": 256,
+          "height": 256,
+          "mipLevels": 9,
+          "sourceBytes": 7495,
+          "runtimeBytes": 9191,
+          "sourceSha256": "6e96d84abd87bb8f2103314bb9f07fe22e2167e3037d2715cbe17fdf18c0ed4f",
+          "runtimeSha256": "9f4883bd2370f1c5749fec06bbf08a7bae12f2ff090a9efc141b2ff1f4eaa0d0"
+        },
+        {
+          "name": "NavyFabric128",
+          "slots": [
+            "baseColorTexture"
+          ],
+          "encoding": "ETC1S",
+          "colorSpace": "srgb",
+          "width": 128,
+          "height": 128,
+          "mipLevels": 8,
+          "sourceBytes": 2535,
+          "runtimeBytes": 773,
+          "sourceSha256": "64fef191bae9c28ae783a70d9b75157c0d2a83f51ddadffffb199b9f52eb069b",
+          "runtimeSha256": "d27bb600809653fe39dfb152c185fd9da02de44a2cc47dbb9543a7284efda654"
+        }
+      ],
+      "excludedSourceAttributes": [
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 0,
+          "material": "AlejandroWarmSkin",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 3882,
+          "normalized": true,
+          "sourceArraySha256": "09579e44b58e0e707692f15f22b662c4cb5be336fafb13d20e59007ca68e8dd3",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 1,
+          "material": "AlejandroBlackTechnologyTee",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1685,
+          "normalized": true,
+          "sourceArraySha256": "e2ebc274fd39985dfcce8241b2e3c20a8375e654d9caa45c12923c2a5a9b7a68",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 2,
+          "material": "AlejandroSandCargo",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1618,
+          "normalized": true,
+          "sourceArraySha256": "d9332a1a52f57cf07773fcaf96d16b88636807151cb5831cf90a46bab668457c",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 3,
+          "material": "AlejandroChestnutHair",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1403,
+          "normalized": true,
+          "sourceArraySha256": "e17642dd25ef5be148375a9375cc9026b7a6849fe3cca934d3a635deac40ceb1",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 4,
+          "material": "AlejandroBrownEyes",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 556,
+          "normalized": true,
+          "sourceArraySha256": "3eea1e9874abc53e932cdcfe2369e8416a5e30e9b2645c59b8683e5703860b8e",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 5,
+          "material": "AlejandroTechnicalNavy",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 4567,
+          "normalized": true,
+          "sourceArraySha256": "d8528681b1ce8ad7b3c23cbe4f908c207f81a688b21a4c871eb140715d621985",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 6,
+          "material": "AlejandroGraphiteTrim",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 3570,
+          "normalized": true,
+          "sourceArraySha256": "a6e431ddcf7e522413d8790a1b25edb03219ed193e97c73da1674cbf6745ff79",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 7,
+          "material": "AlejandroBrushedMetal",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1970,
+          "normalized": true,
+          "sourceArraySha256": "1d31807b4daf89bcaa87b41500a99ff5f2fc44406ab4ecfe471b5eda5ba36957",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 8,
+          "material": "AlejandroExplorerBlue",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1725,
+          "normalized": true,
+          "sourceArraySha256": "391c51d4c7d351ea1bd28a2c8b1dc1bfae1283b9e81c295aa3f3136b37612967",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 9,
+          "material": "AlejandroRubberSole",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 220,
+          "normalized": true,
+          "sourceArraySha256": "a7b8e680bc07806bab5111264b750f0aeb5b677b01fcdc860752b6962f023190",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 10,
+          "material": "AlejandroTrailShoe",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 414,
+          "normalized": true,
+          "sourceArraySha256": "1fa7330b398eac6db72a2e7a012308f62f3e75035fb3164acbea583f011a26e8",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 11,
+          "material": "AlejandroAviatorFrame",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 981,
+          "normalized": true,
+          "sourceArraySha256": "7c7e92e6cd578561fc7f4004c66785bd93b7fcff945ddc763ebad11c4b4e43b5",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 12,
+          "material": "AlejandroBlueAviatorLens",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 20,
+          "normalized": true,
+          "sourceArraySha256": "0052516839b94ee314a4e3b398c8036de3790d672194987a394ee60323848539",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 13,
+          "material": "AlejandroSandStitch",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 162,
+          "normalized": true,
+          "sourceArraySha256": "c561f0815fecaf74a2f375f05e41536825cb806926c37431f0ba2657999bdba5",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 14,
+          "material": "AlejandroBlueLettering",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 153,
+          "normalized": true,
+          "sourceArraySha256": "4a706c148022dff7d6c02d7f032c7e90897b14675a998fe920b4fd9bb05cd801",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        }
+      ],
+      "validation": {
+        "triangles": 37121,
+        "sourceVertices": 22926,
+        "outputVertices": 22926,
+        "primitives": 15,
+        "verifiedFaceCorners": 111363,
+        "triangleOrderAndJointAssignmentsPreserved": true,
+        "allAnimationSamplesAndChannelsPreserved": true,
+        "nodeHierarchyRestTransformsAndInverseBindMatricesPreserved": true,
+        "materialParametersAndTextureSlotsPreserved": true,
+        "skins": [
+          {
+            "name": "AlejandroRig",
+            "joints": 65
+          }
+        ],
+        "clips": [
+          "Idle",
+          "Walk",
+          "Run",
+          "Interact",
+          "Combat",
+          "Shoot",
+          "Hit",
+          "Defeated",
+          "TurnLeft",
+          "TurnRight"
+        ],
+        "invariantSha256": "c80f7e0b9d05d3cb176b1170e00b9df6e5abfd5cea465ca38be2676dd84dac0f",
+        "maxComponentErrors": {
+          "POSITION": 0.000013768672943115234,
+          "NORMAL": 0.00022152066230773926,
+          "TEXCOORD_0": 0.000008285045623779297,
+          "TEXCOORD_1": 0.000030040740966796875,
+          "TEXCOORD_2": 0.000007569789886474609,
+          "COLOR_0": 0,
+          "JOINTS_0": 0,
+          "WEIGHTS_0": 0.000005662441253662109,
+          "TEXCOORD_3": 0.0000073909759521484375
+        },
+        "visibleVertexAttributesPreservedWithinQuantization": true,
+        "excludedSourceAttribute": "COLOR_1, ignored by PlayCanvas 2.23 on the approved uncompressed source"
+      }
+    },
+    {
+      "id": "juan",
+      "source": "assets/characters/npc-phase4/juan/juan.glb",
+      "runtime": "assets/characters/runtime-optimized/juan.glb",
+      "sourceBytes": 974808,
+      "runtimeBytes": 299104,
+      "savedBytes": 675704,
+      "sourceSha256": "bb09020c1a3aa2137eb4053cc84d8bea4c76e38973388a0a1c88533799a44ad0",
+      "runtimeSha256": "17426500bae2fd7a67b6b631b8e4feb5a3993cc8af4c26529f037d5fd505b80a",
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [],
+      "excludedSourceAttributes": [],
+      "validation": {
+        "triangles": 9326,
+        "sourceVertices": 14597,
+        "outputVertices": 9315,
+        "primitives": 13,
+        "verifiedFaceCorners": 27978,
+        "triangleOrderAndJointAssignmentsPreserved": true,
+        "allAnimationSamplesAndChannelsPreserved": true,
+        "nodeHierarchyRestTransformsAndInverseBindMatricesPreserved": true,
+        "materialParametersAndTextureSlotsPreserved": true,
+        "skins": [
+          {
+            "name": "NPCRig",
+            "joints": 62
+          }
+        ],
+        "clips": [
+          "Idle",
+          "Interact",
+          "Wave"
+        ],
+        "invariantSha256": "efefd57d80e2b88a5189853cf4242e183ddac2729b8ae4c14af4691e9725c130",
+        "maxComponentErrors": {
+          "POSITION": 0.000012278556823730469,
+          "NORMAL": 0.0002142786979675293,
+          "TEXCOORD_0": 0.00000762939453125,
+          "JOINTS_0": 0,
+          "WEIGHTS_0": 0.0000055730342864990234
+        },
+        "visibleVertexAttributesPreservedWithinQuantization": true,
+        "excludedSourceAttribute": "COLOR_1, ignored by PlayCanvas 2.23 on the approved uncompressed source"
+      }
+    },
+    {
+      "id": "sara",
+      "source": "assets/characters/npc-phase4/sara/sara.glb",
+      "runtime": "assets/characters/runtime-optimized/sara.glb",
+      "sourceBytes": 991236,
+      "runtimeBytes": 315844,
+      "savedBytes": 675392,
+      "sourceSha256": "9a59aee49687efbfac5e2ecc72b5fad2e8679c701152cdb842c20737484161dc",
+      "runtimeSha256": "255181b2ce7e7e0fd8bee247b03dc80cebf72a9df96d392056c15a140c42b230",
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [],
+      "excludedSourceAttributes": [],
+      "validation": {
+        "triangles": 8480,
+        "sourceVertices": 14420,
+        "outputVertices": 8864,
+        "primitives": 14,
+        "verifiedFaceCorners": 25440,
+        "triangleOrderAndJointAssignmentsPreserved": true,
+        "allAnimationSamplesAndChannelsPreserved": true,
+        "nodeHierarchyRestTransformsAndInverseBindMatricesPreserved": true,
+        "materialParametersAndTextureSlotsPreserved": true,
+        "skins": [
+          {
+            "name": "NPCRig",
+            "joints": 62
+          }
+        ],
+        "clips": [
+          "Idle",
+          "Interact",
+          "Wave"
+        ],
+        "invariantSha256": "2e3abc36c2b229165269e6451bad626c1daab505cf57a29517a25c87b5ba4779",
+        "maxComponentErrors": {
+          "POSITION": 0.000011935830116271973,
+          "NORMAL": 0.00020778179168701172,
+          "TEXCOORD_0": 0.00000762939453125,
+          "JOINTS_0": 0,
+          "WEIGHTS_0": 0.0000053942203521728516
+        },
+        "visibleVertexAttributesPreservedWithinQuantization": true,
+        "excludedSourceAttribute": "COLOR_1, ignored by PlayCanvas 2.23 on the approved uncompressed source"
+      }
+    },
+    {
+      "id": "david",
+      "source": "assets/characters/npc-phase4/david/david.glb",
+      "runtime": "assets/characters/runtime-optimized/david.glb",
+      "sourceBytes": 1175924,
+      "runtimeBytes": 298516,
+      "savedBytes": 877408,
+      "sourceSha256": "5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc",
+      "runtimeSha256": "8d1583214de28cb035a8707912de58675cd6e26cd816d4b9b78c798bbab7f785",
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "textures": [],
+      "excludedSourceAttributes": [
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 0,
+          "material": "Skin",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 4612,
+          "normalized": true,
+          "sourceArraySha256": "1945e6a0531264605307cf71d7bd5ce5118d0e5bf556bc293bf9b0a88dfb0e65",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 1,
+          "material": "Tie",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 36,
+          "normalized": true,
+          "sourceArraySha256": "c49fd3b652e068233b78f7300696e2201ddf3932072b8b303de297e7d0354827",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 2,
+          "material": "Suit",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1566,
+          "normalized": true,
+          "sourceArraySha256": "8fffce295991bce4f740d1bed1ade05cbec96a535d4f3f097a66feb2c423dd60",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 3,
+          "material": "White",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 418,
+          "normalized": true,
+          "sourceArraySha256": "d7928f823ca7e1ed20aa3e85b8fa0919749c90f6f097fc300b5ccab84401dbbb",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 4,
+          "material": "Black",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1056,
+          "normalized": true,
+          "sourceArraySha256": "b4c464f1d9132f0399f5358b5de6cd2611968b632bc4771f93d820e96b1de2a2",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 5,
+          "material": "Eyebrows",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 48,
+          "normalized": true,
+          "sourceArraySha256": "a292bc4a1d8d3caa7dd32d1858f7d642a27373526b84cde7df8634faad708d2a",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 6,
+          "material": "Hair",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 3920,
+          "normalized": true,
+          "sourceArraySha256": "7b626f68b7d2eff95faf106535dd0411c5df9bba4dc0021c155d0c77a1369650",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 7,
+          "material": "Suit.001",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 1489,
+          "normalized": true,
+          "sourceArraySha256": "da353a34806dda21fb8329b72f46b4bf1f496f574c913697883996ae809faf66",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 8,
+          "material": "DavidCottonIvory",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 206,
+          "normalized": true,
+          "sourceArraySha256": "50c56f1c51e10a4bdd0d62b48da6f5e1b5b23e51f908578dbd0ab49dc2175bdd",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 9,
+          "material": "DavidIris",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 50,
+          "normalized": true,
+          "sourceArraySha256": "c323c96b39b5155a4788a606c6fc05571befd551e693af4ec6b7f369cc42a834",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 10,
+          "material": "DavidPupil",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 50,
+          "normalized": true,
+          "sourceArraySha256": "c323c96b39b5155a4788a606c6fc05571befd551e693af4ec6b7f369cc42a834",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 11,
+          "material": "DavidGraphiteTrim",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 480,
+          "normalized": true,
+          "sourceArraySha256": "877efe413fb39caaf868c25879411ca55649261dafde6ce5301bfe6ce713180b",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 12,
+          "material": "DavidNaturalLip",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 81,
+          "normalized": true,
+          "sourceArraySha256": "b1de08dd2c1549b3a72fd3c44a3835074fde3b5eb438087c94cee8e3ccf4c4f1",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 13,
+          "material": "DavidLABAmber",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 78,
+          "normalized": true,
+          "sourceArraySha256": "a4564ed5148060186d107ec763ec916fcf7b7f011e34e909e556bf1a847e8919",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 14,
+          "material": "DavidBrushedMetal",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 666,
+          "normalized": true,
+          "sourceArraySha256": "f18f920729b1e3bbd65207423a0df6b96bc828707e816fe19b85bd51de174788",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        },
+        {
+          "meshIndex": 0,
+          "primitiveIndex": 15,
+          "material": "DavidTechnologyBlue",
+          "semantic": "COLOR_1",
+          "componentType": 5123,
+          "type": "VEC4",
+          "count": 168,
+          "normalized": true,
+          "sourceArraySha256": "57d773026e0220fd7348ad05187b0ebc61bc8b233c54c4eb12cf9b92765465ec",
+          "reason": "Not recognized by PlayCanvas 2.23 gltfToEngineSemanticMap. Keeping it in Draco makes worker stride exceed VertexFormat.size and VertexBuffer.setData rejects the data."
+        }
+      ],
+      "validation": {
+        "triangles": 9128,
+        "sourceVertices": 14924,
+        "outputVertices": 9375,
+        "primitives": 16,
+        "verifiedFaceCorners": 27384,
+        "triangleOrderAndJointAssignmentsPreserved": true,
+        "allAnimationSamplesAndChannelsPreserved": true,
+        "nodeHierarchyRestTransformsAndInverseBindMatricesPreserved": true,
+        "materialParametersAndTextureSlotsPreserved": true,
+        "skins": [
+          {
+            "name": "NPCRig",
+            "joints": 62
+          }
+        ],
+        "clips": [
+          "Idle",
+          "Interact",
+          "Wave"
+        ],
+        "invariantSha256": "8cdbdbf9a60b4833d27389bfd9fa8b3e3e1df280cb10022d364c9ee242b59db0",
+        "maxComponentErrors": {
+          "POSITION": 0.000012576580047607422,
+          "NORMAL": 0.0002218484878540039,
+          "TEXCOORD_0": 0.00000762939453125,
+          "COLOR_0": 0,
+          "JOINTS_0": 0,
+          "WEIGHTS_0": 0.000005379319190979004
+        },
+        "visibleVertexAttributesPreservedWithinQuantization": true,
+        "excludedSourceAttribute": "COLOR_1, ignored by PlayCanvas 2.23 on the approved uncompressed source"
+      }
+    }
+  ],
+  "totals": {
+    "sourceBytes": 6938532,
+    "runtimeBytes": 2651288,
+    "savedBytes": 4287244,
+    "savedPercent": 61.79,
+    "triangles": 64055
+  },
+  "protectedFiles": {
+    "verifiedBeforeAndAfter": true,
+    "count": 56,
+    "files": [
+      {
+        "file": "assets/characters/alejandro-explorer/alejandro.blend",
+        "bytes": 8775093,
+        "sha256": "1b0ec09f46f09c1e17434bcf2d263ceb702576b6e6af48775244f19ec05ad88f"
+      },
+      {
+        "file": "assets/characters/alejandro-explorer/alejandro.glb",
+        "bytes": 3796564,
+        "sha256": "44f29cc2c0f50d381a42c55fce37438e96b6467b9e49401d680a0e6a8b5e78c2"
+      },
+      {
+        "file": "assets/characters/alejandro-explorer/review/alejandro-three-views.png",
+        "bytes": 1778307,
+        "sha256": "66f461fca815730db19a7e2234070005219b1228535cf29b6f3b1687e7c3c885"
+      },
+      {
+        "file": "assets/characters/alejandro-explorer/review/alejandro-portrait.png",
+        "bytes": 1104074,
+        "sha256": "bdbaf15c628507adad50291a796f66737f656577fb97f4b702078d13a01122cc"
+      },
+      {
+        "file": "assets/characters/alejandro-explorer/review/alejandro-motion.mp4",
+        "bytes": 391590,
+        "sha256": "2033e827bbb6d90bf094cac21047495ab9809ca17b75426af1b9fa216127a073"
+      },
+      {
+        "file": "assets/characters/npc-phase4/CREDITS.md",
+        "bytes": 1781,
+        "sha256": "fbffb93cd1b90b9bdaca2649dab210348ebe387b152f3d079b7ffcb4307fa904"
+      },
+      {
+        "file": "assets/characters/npc-phase4/README.md",
+        "bytes": 3042,
+        "sha256": "2fbb9fc9a5b626c2c422903ecbd7e05582b20b9dd89e2f665d45ba18a9d05944"
+      },
+      {
+        "file": "assets/characters/npc-phase4/build-report.json",
+        "bytes": 1248,
+        "sha256": "ee17d90a5b9fe3f35f3591873114b2446792e70615fbd37d349264ea56a46207"
+      },
+      {
+        "file": "assets/characters/npc-phase4/chromium-report.json",
+        "bytes": 19240,
+        "sha256": "6c321e3e2d5cc0077a8b83a1163150176d8633d13fe3135a4ac52be708bf709a"
+      },
+      {
+        "file": "assets/characters/npc-phase4/david/david.blend",
+        "bytes": 657144,
+        "sha256": "7c5ab07825ea29975a7f2bb440ce4b29896cba8258b5d937a1c0baf18205ea09"
+      },
+      {
+        "file": "assets/characters/npc-phase4/david/david.glb",
+        "bytes": 1175924,
+        "sha256": "5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc"
+      },
+      {
+        "file": "assets/characters/npc-phase4/geometry-validation.json",
+        "bytes": 143527,
+        "sha256": "e1cd3f3f6a87fb5ff58aa84233cb99d9b4558a33606e5e616db473e7ba9289fd"
+      },
+      {
+        "file": "assets/characters/npc-phase4/juan/juan.blend",
+        "bytes": 650815,
+        "sha256": "874b0c94de94f412e4726b4fe8ac61355b3c8d5be41e9e9104cab9f4af53fa2a"
+      },
+      {
+        "file": "assets/characters/npc-phase4/juan/juan.glb",
+        "bytes": 974808,
+        "sha256": "bb09020c1a3aa2137eb4053cc84d8bea4c76e38973388a0a1c88533799a44ad0"
+      },
+      {
+        "file": "assets/characters/npc-phase4/package-report.json",
+        "bytes": 879,
+        "sha256": "0b58061be9068d6e174b33030c0627aa408730bcd74e417e5667510e74cb5f32"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/chromium-david.png",
+        "bytes": 93456,
+        "sha256": "b6065b4bd12e1a99315080df8b9e054d07253b968d73141cc34368182c07fa98"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/chromium-juan.png",
+        "bytes": 98098,
+        "sha256": "7acedc24ed52dff28099fe019be78c3256602910f6b2da38b8193d8389e0dd77"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/chromium-sara.png",
+        "bytes": 95117,
+        "sha256": "4613790e8c9685ece8a999c4a513233558cf6942b730ab6c7fa218e829023adb"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/david-portrait.png",
+        "bytes": 772449,
+        "sha256": "919b1563f18354b6628950f414460e9ff6ddb9575d3c1920f9e4d1fe8843e003"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/index.html",
+        "bytes": 2440,
+        "sha256": "cee12c99b1512c43babe0f225630411b9c1f17130ad543eeceb53f06dc896e87"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/juan-portrait.png",
+        "bytes": 796914,
+        "sha256": "1a865f291bf466a4a06c5fba620ef926cf3cbf423af44964f60582bc5642ea3c"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/npc-back.png",
+        "bytes": 1943100,
+        "sha256": "4bf9a11528fe5dd88519e1943d848755f017cfbcc1194d7b0e1c68f9d016404d"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/npc-lineup.png",
+        "bytes": 1953089,
+        "sha256": "a63c24c80c518084e385c4ec06d51ff7af1d1353e3e681bf803fc2d2c6956314"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/npc-motion.mp4",
+        "bytes": 566883,
+        "sha256": "b6569d8a0a1d4b474acb2148e7fb0d7158905f74c3ee96adf60380f71fee40df"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/recording-timeline.json",
+        "bytes": 505,
+        "sha256": "ec1e0b6786818b27632be27b36302e9601beea3443b1f4d90bb14a3a5a462ed9"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/sara-portrait.png",
+        "bytes": 777195,
+        "sha256": "7398f4eccf0b952a44fafc778fa8f01a354fee4856d4bd7888a7b0ad4a27a4b7"
+      },
+      {
+        "file": "assets/characters/npc-phase4/review/viewer.js",
+        "bytes": 4537,
+        "sha256": "859a104b8ee03a629c929e9fd2020d8377c8061334808df543e735b0732d8e93"
+      },
+      {
+        "file": "assets/characters/npc-phase4/sara/sara.blend",
+        "bytes": 626567,
+        "sha256": "77013675861e6284934c2642e2926b8a4a557b6c3b334955bb02d5200992892b"
+      },
+      {
+        "file": "assets/characters/npc-phase4/sara/sara.glb",
+        "bytes": 991236,
+        "sha256": "9a59aee49687efbfac5e2ecc72b5fad2e8679c701152cdb842c20737484161dc"
+      },
+      {
+        "file": "assets/characters/npc-phase4/verification-report.json",
+        "bytes": 1763,
+        "sha256": "ac444f8e46f02529087848b3c09583aed92da801d3e84889bd643ed8af99c066"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/License_Standard.txt",
+        "bytes": 784,
+        "sha256": "e08f717c3cfd999f4b44f2be4522b11a3ac3c0e5b6364b3a8788d25d4c90ff94"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf",
+        "bytes": 30989,
+        "sha256": "e7fcea214ecf8855afbf910b50de6f9c7d1decfb71ca28bad8a4481452dafeb4"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/Superhero_Male_FullBody.bin",
+        "bytes": 720076,
+        "sha256": "459003f9745853ae562a85506a2b94dd56515c1f37728f9fa3d2ce1a3e4cd92f"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Hair_1_Normal.png",
+        "bytes": 4326126,
+        "sha256": "57fd0ad8c96a4d01b38769637e066cecaa285b456f6e48ce00863754a457affb"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Hair_1_BaseColor.png",
+        "bytes": 1570376,
+        "sha256": "bc7aa863bd22ab0a995cd838cceb4d3a5186ee54ee2fb0108fad85d20c057e6e"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Eye_Normal.png",
+        "bytes": 15099,
+        "sha256": "9ed61f7726a54fe346a78b9e5a18905d8e2b88f86235d97f53cd207a26f3f8c7"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Eye_Brown.png",
+        "bytes": 35958,
+        "sha256": "d08e3356a83211bc6ca21fe3a8e39f4b5c1a3b8f85457fc2c0fb57be09935025"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Superhero_Male_Normal.png",
+        "bytes": 4252937,
+        "sha256": "9b25cf9200216eb754b79cf4c63b5380c419780788322f3c57cdd2b3e02679a6"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Superhero_Male_Dark.png",
+        "bytes": 1384380,
+        "sha256": "df680cbc1967a61e85998bfafb8f7bc0a36dd604bb3266486c4b06b1a184bb45"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Base Characters/Godot - UE/T_Superhero_Male_Roughness.png",
+        "bytes": 3152049,
+        "sha256": "c70dabf48574cda55644d556beae1ee7cf1bdcf68a50d259d20f2f2358f27991"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_Buzzed.gltf",
+        "bytes": 2006,
+        "sha256": "43752a4c8f2464eb2494a8ab179bf7ad237638a3d47fb3de0a38361db40e1451"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_Buzzed.bin",
+        "bytes": 19892,
+        "sha256": "89992fc7a5319df6f2908e44a3b694329fac4b500629a573224702e5fdd16f77"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_SimpleParted.gltf",
+        "bytes": 2010,
+        "sha256": "ce6c666d00bcca2baa0c58d0442505f90f8feff952592effc4697a2341e9e56d"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_SimpleParted.bin",
+        "bytes": 32032,
+        "sha256": "57c6359703a37e346ee38a9c7ba55c8dee761c0a02da99847d06f5a91728f3cc"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Eyebrows_Regular.gltf",
+        "bytes": 2018,
+        "sha256": "a91059d18fad4bd3af7546a4226976d8a2139eb82c3fe0790a1c5287c6ac6ed8"
+      },
+      {
+        "file": "assets/character-library/originals/universal-base/Hairstyles/Origin at 0/glTF (Godot)/Eyebrows_Regular.bin",
+        "bytes": 26576,
+        "sha256": "434c62e704037b5d2a12a0c7237513617806fc6cf53d67608f120b0908dd3396"
+      },
+      {
+        "file": "assets/character-library/originals/universal-animation/License.txt",
+        "bytes": 320,
+        "sha256": "d77329b05c4c206e76c83285ecdd1e5f2b3df2350ec80657ebdb5a706a0fc0de"
+      },
+      {
+        "file": "assets/character-library/originals/universal-animation/README.txt",
+        "bytes": 683,
+        "sha256": "179f2b6a09ba516650aab0d89d2e573a7486ee49ae1518cc6941400510db4e69"
+      },
+      {
+        "file": "assets/character-library/originals/universal-animation/Unreal-Godot/UAL1_Standard.glb",
+        "bytes": 7618436,
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997"
+      },
+      {
+        "file": "assets/character-library/originals/modular-men/License.txt",
+        "bytes": 372,
+        "sha256": "e8dbf915a2b82229913e301a0787696611241bdefec4832bc084f54161db1efe"
+      },
+      {
+        "file": "assets/character-library/originals/modular-men/Individual Characters/glTF/Casual_Hoodie.gltf",
+        "bytes": 3104001,
+        "sha256": "dd74886c26998a0fa888b4ce557a0932d7d97b0265dd4c763154d081b7a6cb98"
+      },
+      {
+        "file": "assets/character-library/originals/modular-men/Individual Characters/glTF/Worker.gltf",
+        "bytes": 2967023,
+        "sha256": "e49f8ec0f8a7de72dd26b1c01e6413c9a87a9116eeee21f9364ccd36bc286335"
+      },
+      {
+        "file": "assets/character-library/originals/modular-men/Individual Characters/glTF/Suit.gltf",
+        "bytes": 3315342,
+        "sha256": "6c89fbb31b96c1a63ad94e3dee0942bd7b34bc789a5d39fd6a6a1738a9214fb3"
+      },
+      {
+        "file": "assets/character-library/originals/modular-women/License.txt",
+        "bytes": 372,
+        "sha256": "e8dbf915a2b82229913e301a0787696611241bdefec4832bc084f54161db1efe"
+      },
+      {
+        "file": "assets/character-library/originals/modular-women/Individual Characters/glTF/Casual.gltf",
+        "bytes": 3131788,
+        "sha256": "b0fe6e92219cd71808844a20a1a8b960fd1cf640a6546dc6362b5add6604e87c"
+      },
+      {
+        "file": "assets/character-library/originals/modular-women/Individual Characters/glTF/Formal.gltf",
+        "bytes": 3082953,
+        "sha256": "fdfcf454c4de037d31973eb28d8591bd7763035d49f46b380e63b1c832dc7ddf"
+      }
+    ]
+  },
+  "limitations": [
+    "Draco reduces transfer size; it does not itself reduce decoded triangle count or draw calls.",
+    "KTX2 uses lossy texture encoding. Appearance must be checked in the actual renderer.",
+    "GPU texture memory depends on the transcoding target; read engine gpuSize in the browser.",
+    "No Samsung frame-rate or memory measurement is claimed by this offline build."
+  ]
+}

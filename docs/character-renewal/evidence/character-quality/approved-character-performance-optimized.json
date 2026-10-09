@@ -1,0 +1,212 @@
+{
+  "quality": "optimized",
+  "engine": "PlayCanvas 2.23.0",
+  "viewport": [
+    360,
+    640
+  ],
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "readyMs": 787.3999999985099,
+  "views": [
+    {
+      "label": "start",
+      "frames": 45,
+      "meanFrameMs": 254.20444444451067,
+      "medianFrameMs": 249.79999999701977,
+      "p95FrameMs": 299.8999999985099,
+      "observedFps": 3.933841527378512,
+      "meanDrawCalls": 214,
+      "meanUpdateCpuMs": 1.1555555548932817
+    },
+    {
+      "label": "juan",
+      "frames": 45,
+      "meanFrameMs": 255.30444444451066,
+      "medianFrameMs": 265.5,
+      "p95FrameMs": 305.20000000298023,
+      "observedFps": 3.9168922506452715,
+      "meanDrawCalls": 160,
+      "meanUpdateCpuMs": 0.8111111119389534
+    },
+    {
+      "label": "sara",
+      "frames": 45,
+      "meanFrameMs": 248.83999999993378,
+      "medianFrameMs": 248.80000000447035,
+      "p95FrameMs": 287.5,
+      "observedFps": 4.018646519853183,
+      "meanDrawCalls": 112,
+      "meanUpdateCpuMs": 0.8377777781751421
+    },
+    {
+      "label": "david",
+      "frames": 45,
+      "meanFrameMs": 390.137777777844,
+      "medianFrameMs": 391.8999999985099,
+      "p95FrameMs": 467.6000000014901,
+      "observedFps": 2.5631970471965664,
+      "meanDrawCalls": 170,
+      "meanUpdateCpuMs": 0.7688888882597288
+    }
+  ],
+  "cast": [
+    {
+      "id": "stage4-player",
+      "url": "./assets/characters/runtime-optimized/alejandro.glb",
+      "textures": [
+        {
+          "name": "T_Superhero_Male_Dark-Design-35",
+          "width": 1024,
+          "height": 1024,
+          "format": 61,
+          "gpuBytes": 699064,
+          "mipmaps": true
+        },
+        {
+          "name": "T_Superhero_Male_Normal-Design-34",
+          "width": 512,
+          "height": 512,
+          "format": 28,
+          "gpuBytes": 349552,
+          "mipmaps": true
+        },
+        {
+          "name": "T_Superhero_Male_Roughness-Design-36",
+          "width": 256,
+          "height": 256,
+          "format": 22,
+          "gpuBytes": 43704,
+          "mipmaps": true
+        },
+        {
+          "name": "T_Hair_1_Normal-37",
+          "width": 512,
+          "height": 512,
+          "format": 28,
+          "gpuBytes": 349552,
+          "mipmaps": true
+        },
+        {
+          "name": "T_Eye_Brown-39",
+          "width": 256,
+          "height": 256,
+          "format": 61,
+          "gpuBytes": 43704,
+          "mipmaps": true
+        },
+        {
+          "name": "T_Eye_Normal-38",
+          "width": 512,
+          "height": 512,
+          "format": 28,
+          "gpuBytes": 349552,
+          "mipmaps": true
+        },
+        {
+          "name": "NavyFabric128-40",
+          "width": 128,
+          "height": 128,
+          "format": 61,
+          "gpuBytes": 10936,
+          "mipmaps": true
+        }
+      ],
+      "primitives": 15,
+      "clips": [
+        "Idle",
+        "Walk",
+        "Run",
+        "Interact",
+        "Combat",
+        "Shoot",
+        "Hit",
+        "Defeated",
+        "TurnLeft",
+        "TurnRight"
+      ]
+    },
+    {
+      "id": "stage4-juan",
+      "url": "./assets/characters/runtime-optimized/juan.glb",
+      "textures": [],
+      "primitives": 13,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ]
+    },
+    {
+      "id": "stage4-sara",
+      "url": "./assets/characters/runtime-optimized/sara.glb",
+      "textures": [],
+      "primitives": 14,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ]
+    },
+    {
+      "id": "stage4-david",
+      "url": "./assets/characters/runtime-optimized/david.glb",
+      "textures": [],
+      "primitives": 16,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "path": "/assets/characters/runtime-optimized/alejandro.glb",
+      "encodedBodySize": 1737824,
+      "transferSize": 1738124,
+      "durationMs": 7.5
+    },
+    {
+      "path": "/assets/characters/runtime-optimized/juan.glb",
+      "encodedBodySize": 299104,
+      "transferSize": 299404,
+      "durationMs": 6.300000004470348
+    },
+    {
+      "path": "/assets/characters/runtime-optimized/sara.glb",
+      "encodedBodySize": 315844,
+      "transferSize": 316144,
+      "durationMs": 4.899999998509884
+    },
+    {
+      "path": "/assets/characters/runtime-optimized/david.glb",
+      "encodedBodySize": 298516,
+      "transferSize": 298816,
+      "durationMs": 6.100000001490116
+    }
+  ],
+  "vram": {
+    "textureBytes": 9517644,
+    "vertexBytes": 5429972,
+    "indexBytes": 535164,
+    "totalBytes": 15531292
+  },
+  "jsHeap": {
+    "usedBytes": 67348288,
+    "totalBytes": 69128844
+  },
+  "city": {
+    "buildings": 83,
+    "districts": 4,
+    "obstacles": 107
+  },
+  "limitations": [
+    "Single run on local software WebGL; wall times include scheduler and shader compilation variability",
+    "Local HTTP and intercepted engine module do not represent mobile-network loading",
+    "GPU/heap counters are engine/browser estimates, not total process memory",
+    "Samsung FPS, thermals, memory and load times remain unmeasured",
+    "Skin CPU time is unavailable: the pinned engine does not update its skinTime counter; the zero counter was excluded from this report"
+  ],
+  "samsungValidated": false,
+  "errors": []
+}

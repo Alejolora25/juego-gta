@@ -1,0 +1,20 @@
+
+> test
+> node --test tests/*.test.js
+
+✔ tests/bootstrap-smoke.test.js (64.724495ms)
+✔ tests/domain.test.js (44.293999ms)
+✔ tests/physics-world.test.js (44.487044ms)
+✔ tests/playcanvas-engine.test.js (80.08304ms)
+✔ tests/syntax.test.js (259.344442ms)
+✔ tests/urban-assets.test.js (51.003195ms)
+✔ tests/urban-district-layout.test.js (52.979253ms)
+✔ tests/visual-profile.test.js (47.844767ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 655.034215

@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "variant": "runtime",
+  "measurement": "on-disk bytes and glTF structure; no frame-rate or mobile claim",
+  "assets": [
+    {
+      "id": "alejandro",
+      "file": "assets/characters/runtime-optimized/alejandro.glb",
+      "bytes": 1737824,
+      "sha256": "8b5410e055e5cc67c79d9d42a5c3858599bbdb0a0dba7b31cd4e6a83a0cd796a",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 364844
+        },
+        {
+          "type": "BIN",
+          "bytes": 1372952
+        }
+      ],
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression",
+        "KHR_texture_basisu"
+      ],
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "vertices": 22926,
+      "triangles": 37121,
+      "skins": [
+        {
+          "name": "AlejandroRig",
+          "joints": 65
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 1.3333333730697632
+        },
+        {
+          "name": "Run",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6666666865348816
+        },
+        {
+          "name": "Interact",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2
+        },
+        {
+          "name": "Combat",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.1666666716337204
+        },
+        {
+          "name": "Shoot",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6333333253860474
+        },
+        {
+          "name": "Hit",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.3333333432674408
+        },
+        {
+          "name": "Defeated",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2.4000000953674316
+        },
+        {
+          "name": "TurnLeft",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6000000238418579
+        },
+        {
+          "name": "TurnRight",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6000000238418579
+        }
+      ],
+      "textures": [
+        {
+          "name": "T_Superhero_Male_Normal-Design",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 229071,
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "T_Superhero_Male_Dark-Design",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 116593,
+          "width": 1024,
+          "height": 1024,
+          "mipLevels": 11,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "T_Superhero_Male_Roughness-Design",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 16903,
+          "width": 256,
+          "height": 256,
+          "mipLevels": 9,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "T_Hair_1_Normal",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 242780,
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "T_Eye_Normal",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 56703,
+          "width": 512,
+          "height": 512,
+          "mipLevels": 10,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "T_Eye_Brown",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 9191,
+          "width": 256,
+          "height": 256,
+          "mipLevels": 9,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        },
+        {
+          "name": "NavyFabric128",
+          "mimeType": "image/ktx2",
+          "encodedBytes": 773,
+          "width": 128,
+          "height": 128,
+          "mipLevels": 8,
+          "decodedRgbaWithMipmapsBytesEstimate": null,
+          "gpuBytesEstimate": null,
+          "gpuEstimateNote": "Basis target varies with device support; measure after runtime transcoding."
+        }
+      ],
+      "encodedTextureBytes": 672014,
+      "decodedGeometryAccessorBytesEstimate": 1990006,
+      "decodedAnimationAccessorBytesEstimate": 153124,
+      "decodedRgbaWithMipmapsBytesEstimate": null
+    },
+    {
+      "id": "juan",
+      "file": "assets/characters/runtime-optimized/juan.glb",
+      "bytes": 299104,
+      "sha256": "17426500bae2fd7a67b6b631b8e4feb5a3993cc8af4c26529f037d5fd505b80a",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 116436
+        },
+        {
+          "type": "BIN",
+          "bytes": 182640
+        }
+      ],
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "meshes": 1,
+      "primitives": 13,
+      "materials": 13,
+      "vertices": 9315,
+      "triangles": 9326,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.2666666507720947
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 540336,
+      "decodedAnimationAccessorBytesEstimate": 40012,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    },
+    {
+      "id": "sara",
+      "file": "assets/characters/runtime-optimized/sara.glb",
+      "bytes": 315844,
+      "sha256": "255181b2ce7e7e0fd8bee247b03dc80cebf72a9df96d392056c15a140c42b230",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 129988
+        },
+        {
+          "type": "BIN",
+          "bytes": 185828
+        }
+      ],
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "meshes": 1,
+      "primitives": 14,
+      "materials": 14,
+      "vertices": 8864,
+      "triangles": 8480,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 2.066666603088379
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.5833333730697632
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 2.066666603088379
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 511808,
+      "decodedAnimationAccessorBytesEstimate": 58312,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    },
+    {
+      "id": "david",
+      "file": "assets/characters/runtime-optimized/david.glb",
+      "bytes": 298516,
+      "sha256": "8d1583214de28cb035a8707912de58675cd6e26cd816d4b9b78c798bbab7f785",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 121132
+        },
+        {
+          "type": "BIN",
+          "bytes": 177356
+        }
+      ],
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression"
+      ],
+      "meshes": 1,
+      "primitives": 16,
+      "materials": 16,
+      "vertices": 9375,
+      "triangles": 9128,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.2666666507720947
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 579768,
+      "decodedAnimationAccessorBytesEstimate": 39948,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    }
+  ],
+  "totals": {
+    "bytes": 2651288,
+    "triangles": 64055,
+    "vertices": 50480,
+    "primitives": 58,
+    "encodedTextureBytes": 672014,
+    "decodedGeometryAccessorBytesEstimate": 3621918,
+    "decodedAnimationAccessorBytesEstimate": 291396,
+    "decodedRgbaWithMipmapsBytesEstimate": null
+  }
+}

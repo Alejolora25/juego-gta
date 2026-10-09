@@ -1,0 +1,500 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "realDracoWorkerAndVertexFormat": true,
+  "scope": "offline decoded buffer compatibility; no GPU rendering or mobile claim",
+  "totalValidPrimitives": 58,
+  "actors": [
+    {
+      "id": "alejandro",
+      "sha256": "8b5410e055e5cc67c79d9d42a5c3858599bbdb0a0dba7b31cd4e6a83a0cd796a",
+      "validatedPrimitives": 15,
+      "primitives": [
+        {
+          "material": "AlejandroWarmSkin",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 3882,
+          "vertexBufferBytes": 341616
+        },
+        {
+          "material": "AlejandroBlackTechnologyTee",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1685,
+          "vertexBufferBytes": 148280
+        },
+        {
+          "material": "AlejandroSandCargo",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1618,
+          "vertexBufferBytes": 142384
+        },
+        {
+          "material": "AlejandroChestnutHair",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1403,
+          "vertexBufferBytes": 123464
+        },
+        {
+          "material": "AlejandroBrownEyes",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 556,
+          "vertexBufferBytes": 48928
+        },
+        {
+          "material": "AlejandroTechnicalNavy",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 4567,
+          "vertexBufferBytes": 401896
+        },
+        {
+          "material": "AlejandroGraphiteTrim",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 3570,
+          "vertexBufferBytes": 314160
+        },
+        {
+          "material": "AlejandroBrushedMetal",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1970,
+          "vertexBufferBytes": 173360
+        },
+        {
+          "material": "AlejandroExplorerBlue",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1725,
+          "vertexBufferBytes": 151800
+        },
+        {
+          "material": "AlejandroRubberSole",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 220,
+          "vertexBufferBytes": 19360
+        },
+        {
+          "material": "AlejandroTrailShoe",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 414,
+          "vertexBufferBytes": 36432
+        },
+        {
+          "material": "AlejandroAviatorFrame",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 981,
+          "vertexBufferBytes": 86328
+        },
+        {
+          "material": "AlejandroBlueAviatorLens",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 20,
+          "vertexBufferBytes": 1760
+        },
+        {
+          "material": "AlejandroSandStitch",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 162,
+          "vertexBufferBytes": 14256
+        },
+        {
+          "material": "AlejandroBlueLettering",
+          "workerStride": 88,
+          "formatSize": 88,
+          "vertexBufferStorageCreated": true,
+          "vertices": 153,
+          "vertexBufferBytes": 13464
+        }
+      ]
+    },
+    {
+      "id": "juan",
+      "sha256": "17426500bae2fd7a67b6b631b8e4feb5a3993cc8af4c26529f037d5fd505b80a",
+      "validatedPrimitives": 13,
+      "primitives": [
+        {
+          "material": "Skin",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 2938,
+          "vertexBufferBytes": 152776
+        },
+        {
+          "material": "Purple",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1799,
+          "vertexBufferBytes": 93548
+        },
+        {
+          "material": "White",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 318,
+          "vertexBufferBytes": 16536
+        },
+        {
+          "material": "Eyebrows",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 62,
+          "vertexBufferBytes": 3224
+        },
+        {
+          "material": "Hair",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 1656,
+          "vertexBufferBytes": 86112
+        },
+        {
+          "material": "LightBlue",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 544,
+          "vertexBufferBytes": 28288
+        },
+        {
+          "material": "JuanCottonIvory",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 296,
+          "vertexBufferBytes": 15392
+        },
+        {
+          "material": "JuanIris",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2600
+        },
+        {
+          "material": "JuanPupil",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2600
+        },
+        {
+          "material": "JuanGraphiteTrim",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 711,
+          "vertexBufferBytes": 36972
+        },
+        {
+          "material": "JuanNaturalLip",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 81,
+          "vertexBufferBytes": 4212
+        },
+        {
+          "material": "JuanBrushedMetal",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 543,
+          "vertexBufferBytes": 28236
+        },
+        {
+          "material": "JuanTechnologyBlue",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 267,
+          "vertexBufferBytes": 13884
+        }
+      ]
+    },
+    {
+      "id": "sara",
+      "sha256": "255181b2ce7e7e0fd8bee247b03dc80cebf72a9df96d392056c15a140c42b230",
+      "validatedPrimitives": 14,
+      "primitives": [
+        {
+          "material": "Skin",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 3102,
+          "vertexBufferBytes": 161304
+        },
+        {
+          "material": "White",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 558,
+          "vertexBufferBytes": 29016
+        },
+        {
+          "material": "Grey",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 463,
+          "vertexBufferBytes": 24076
+        },
+        {
+          "material": "Hair_Brown",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 54,
+          "vertexBufferBytes": 2808
+        },
+        {
+          "material": "Hair_Blond",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 2431,
+          "vertexBufferBytes": 126412
+        },
+        {
+          "material": "SaraGraphiteDenim",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 813,
+          "vertexBufferBytes": 42276
+        },
+        {
+          "material": "SaraCottonIvory",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 368,
+          "vertexBufferBytes": 19136
+        },
+        {
+          "material": "SaraIris",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2600
+        },
+        {
+          "material": "SaraPupil",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2600
+        },
+        {
+          "material": "SaraGraphiteTrim",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 510,
+          "vertexBufferBytes": 26520
+        },
+        {
+          "material": "SaraNaturalLip",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 81,
+          "vertexBufferBytes": 4212
+        },
+        {
+          "material": "SaraBackendTeal",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 150,
+          "vertexBufferBytes": 7800
+        },
+        {
+          "material": "SaraTechnologyBlue",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 78,
+          "vertexBufferBytes": 4056
+        },
+        {
+          "material": "SaraBrushedMetal",
+          "workerStride": 52,
+          "formatSize": 52,
+          "vertexBufferStorageCreated": true,
+          "vertices": 156,
+          "vertexBufferBytes": 8112
+        }
+      ]
+    },
+    {
+      "id": "david",
+      "sha256": "8d1583214de28cb035a8707912de58675cd6e26cd816d4b9b78c798bbab7f785",
+      "validatedPrimitives": 16,
+      "primitives": [
+        {
+          "material": "Skin",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 2712,
+          "vertexBufferBytes": 151872
+        },
+        {
+          "material": "Tie",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 25,
+          "vertexBufferBytes": 1400
+        },
+        {
+          "material": "Suit",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 895,
+          "vertexBufferBytes": 50120
+        },
+        {
+          "material": "White",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 269,
+          "vertexBufferBytes": 15064
+        },
+        {
+          "material": "Black",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 612,
+          "vertexBufferBytes": 34272
+        },
+        {
+          "material": "Eyebrows",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 41,
+          "vertexBufferBytes": 2296
+        },
+        {
+          "material": "Hair",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 2270,
+          "vertexBufferBytes": 127120
+        },
+        {
+          "material": "Suit.001",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 776,
+          "vertexBufferBytes": 43456
+        },
+        {
+          "material": "DavidCottonIvory",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 206,
+          "vertexBufferBytes": 11536
+        },
+        {
+          "material": "DavidIris",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2800
+        },
+        {
+          "material": "DavidPupil",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 50,
+          "vertexBufferBytes": 2800
+        },
+        {
+          "material": "DavidGraphiteTrim",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 477,
+          "vertexBufferBytes": 26712
+        },
+        {
+          "material": "DavidNaturalLip",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 81,
+          "vertexBufferBytes": 4536
+        },
+        {
+          "material": "DavidLABAmber",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 78,
+          "vertexBufferBytes": 4368
+        },
+        {
+          "material": "DavidBrushedMetal",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 666,
+          "vertexBufferBytes": 37296
+        },
+        {
+          "material": "DavidTechnologyBlue",
+          "workerStride": 56,
+          "formatSize": 56,
+          "vertexBufferStorageCreated": true,
+          "vertices": 167,
+          "vertexBufferBytes": 9352
+        }
+      ]
+    }
+  ]
+}

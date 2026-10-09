@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "variant": "approved-source",
+  "measurement": "on-disk bytes and glTF structure; no frame-rate or mobile claim",
+  "assets": [
+    {
+      "id": "alejandro",
+      "file": "assets/characters/alejandro-explorer/alejandro.glb",
+      "bytes": 3796564,
+      "sha256": "44f29cc2c0f50d381a42c55fce37438e96b6467b9e49401d680a0e6a8b5e78c2",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 367832
+        },
+        {
+          "type": "BIN",
+          "bytes": 3428704
+        }
+      ],
+      "extensionsRequired": [],
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "vertices": 22926,
+      "triangles": 37121,
+      "skins": [
+        {
+          "name": "AlejandroRig",
+          "joints": 65
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2.5
+        },
+        {
+          "name": "Walk",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 1.3333333730697632
+        },
+        {
+          "name": "Run",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6666666865348816
+        },
+        {
+          "name": "Interact",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2
+        },
+        {
+          "name": "Combat",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.1666666716337204
+        },
+        {
+          "name": "Shoot",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6333333253860474
+        },
+        {
+          "name": "Hit",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.3333333432674408
+        },
+        {
+          "name": "Defeated",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 2.4000000953674316
+        },
+        {
+          "name": "TurnLeft",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6000000238418579
+        },
+        {
+          "name": "TurnRight",
+          "channels": 195,
+          "samplers": 195,
+          "durationSeconds": 0.6000000238418579
+        }
+      ],
+      "textures": [
+        {
+          "name": "T_Superhero_Male_Normal-Design",
+          "mimeType": "image/png",
+          "encodedBytes": 469341,
+          "width": 512,
+          "height": 512,
+          "decodedRgbaBytesEstimate": 1048576,
+          "decodedRgbaWithMipmapsBytesEstimate": 1398102
+        },
+        {
+          "name": "T_Superhero_Male_Dark-Design",
+          "mimeType": "image/jpeg",
+          "encodedBytes": 102674,
+          "width": 1024,
+          "height": 1024,
+          "decodedRgbaBytesEstimate": 4194304,
+          "decodedRgbaWithMipmapsBytesEstimate": 5592406
+        },
+        {
+          "name": "T_Superhero_Male_Roughness-Design",
+          "mimeType": "image/jpeg",
+          "encodedBytes": 14878,
+          "width": 256,
+          "height": 256,
+          "decodedRgbaBytesEstimate": 262144,
+          "decodedRgbaWithMipmapsBytesEstimate": 349526
+        },
+        {
+          "name": "T_Hair_1_Normal",
+          "mimeType": "image/png",
+          "encodedBytes": 456705,
+          "width": 512,
+          "height": 512,
+          "decodedRgbaBytesEstimate": 1048576,
+          "decodedRgbaWithMipmapsBytesEstimate": 1398102
+        },
+        {
+          "name": "T_Eye_Normal",
+          "mimeType": "image/png",
+          "encodedBytes": 44349,
+          "width": 512,
+          "height": 512,
+          "decodedRgbaBytesEstimate": 1048576,
+          "decodedRgbaWithMipmapsBytesEstimate": 1398102
+        },
+        {
+          "name": "T_Eye_Brown",
+          "mimeType": "image/jpeg",
+          "encodedBytes": 7495,
+          "width": 256,
+          "height": 256,
+          "decodedRgbaBytesEstimate": 262144,
+          "decodedRgbaWithMipmapsBytesEstimate": 349526
+        },
+        {
+          "name": "NavyFabric128",
+          "mimeType": "image/png",
+          "encodedBytes": 2535,
+          "width": 128,
+          "height": 128,
+          "decodedRgbaBytesEstimate": 65536,
+          "decodedRgbaWithMipmapsBytesEstimate": 87382
+        }
+      ],
+      "encodedTextureBytes": 1097977,
+      "decodedGeometryAccessorBytesEstimate": 2173414,
+      "decodedAnimationAccessorBytesEstimate": 153124,
+      "decodedRgbaWithMipmapsBytesEstimate": 10573146
+    },
+    {
+      "id": "juan",
+      "file": "assets/characters/npc-phase4/juan/juan.glb",
+      "bytes": 974808,
+      "sha256": "bb09020c1a3aa2137eb4053cc84d8bea4c76e38973388a0a1c88533799a44ad0",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 117488
+        },
+        {
+          "type": "BIN",
+          "bytes": 857292
+        }
+      ],
+      "extensionsRequired": [],
+      "meshes": 1,
+      "primitives": 13,
+      "materials": 13,
+      "vertices": 14597,
+      "triangles": 9326,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.2666666507720947
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 813312,
+      "decodedAnimationAccessorBytesEstimate": 40012,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    },
+    {
+      "id": "sara",
+      "file": "assets/characters/npc-phase4/sara/sara.glb",
+      "bytes": 991236,
+      "sha256": "9a59aee49687efbfac5e2ecc72b5fad2e8679c701152cdb842c20737484161dc",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 131192
+        },
+        {
+          "type": "BIN",
+          "bytes": 860016
+        }
+      ],
+      "extensionsRequired": [],
+      "meshes": 1,
+      "primitives": 14,
+      "materials": 14,
+      "vertices": 14420,
+      "triangles": 8480,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 2.066666603088379
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.5833333730697632
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 2.066666603088379
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 797736,
+      "decodedAnimationAccessorBytesEstimate": 58312,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    },
+    {
+      "id": "david",
+      "file": "assets/characters/npc-phase4/david/david.glb",
+      "bytes": 1175924,
+      "sha256": "5e4bf4eb5e9fb43e12cac163850cd0ae1ea4f7c7e18bdbbb292e70257b0fb5dc",
+      "chunks": [
+        {
+          "type": "JSON",
+          "bytes": 124364
+        },
+        {
+          "type": "BIN",
+          "bytes": 1051532
+        }
+      ],
+      "extensionsRequired": [],
+      "meshes": 1,
+      "primitives": 16,
+      "materials": 16,
+      "vertices": 14924,
+      "triangles": 9128,
+      "skins": [
+        {
+          "name": "NPCRig",
+          "joints": 62
+        }
+      ],
+      "animations": [
+        {
+          "name": "Idle",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        },
+        {
+          "name": "Interact",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.2666666507720947
+        },
+        {
+          "name": "Wave",
+          "channels": 186,
+          "samplers": 186,
+          "durationSeconds": 1.6666666269302368
+        }
+      ],
+      "textures": [],
+      "encodedTextureBytes": 0,
+      "decodedGeometryAccessorBytesEstimate": 1007616,
+      "decodedAnimationAccessorBytesEstimate": 39948,
+      "decodedRgbaWithMipmapsBytesEstimate": 0
+    }
+  ],
+  "totals": {
+    "bytes": 6938532,
+    "triangles": 64055,
+    "vertices": 66867,
+    "primitives": 58,
+    "encodedTextureBytes": 1097977,
+    "decodedGeometryAccessorBytesEstimate": 4792078,
+    "decodedAnimationAccessorBytesEstimate": 291396,
+    "decodedRgbaWithMipmapsBytesEstimate": 10573146
+  }
+}

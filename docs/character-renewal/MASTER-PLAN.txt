@@ -51,10 +51,11 @@ ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
 5. Distritos modulares -> Fase 11.
    Realizados y aprobados por el usuario.
 6. Visuales, colisiones y circulación -> Fase 7.
-   Implementados y comprobados. Se revisarán tras cambiar los personajes.
+   Revisados con los cuatro humanos aprobados: 1.455 m de rutas, 107
+   colisionadores y accesos a las tres misiones y arena, sin cambios urbanos.
 7. Iluminación, LOD y compresión -> Fases 8 y 9.
-   Implementados y aprobados visualmente. Faltan mediciones completas de
-   rendimiento en Samsung.
+   Materiales humanos revisados en Chromium. Copias Draco/KTX2 separadas
+   reducen la descarga un 61,79 %. Faltan mediciones completas en Samsung.
 8. Chromium y Samsung -> Fase 10.
    La versión actual pasó ambas validaciones. Cada nueva integración necesitará
    su propia comprobación.
@@ -97,7 +98,7 @@ el 9 de octubre de 2026. Registro verificable en
 assets/characters/alejandro-phase3/approval.json. La integración sigue en fase 5.
 Revisión solicitada después de aprobar: variante explorador tecnológico en
 assets/characters/alejandro-explorer/, aprobada por el usuario el 9 de octubre
-de 2026. Revisión cerrada; diseño seleccionado para la futura fase 5. Registro
+de 2026. Revisión cerrada; diseño integrado en el piloto de fase 5. Registro
 en assets/characters/alejandro-explorer/approval.json.
 El diseño anterior se conserva con su aprobación y hashes intactos.
 La ejecución de esta fase fue autorizada expresamente. Fuente editable, GLB,
@@ -130,6 +131,9 @@ Criterio de cierre: aprobación visual y modelos técnicamente utilizables.
 FASE 5. INTEGRACIÓN PILOTO DE LOS CINCO PERSONAJES
 Estado: parcial. Alejandro explorador y tres NPC aprobados integrados en
 stage11-approved-character-pilot, modo ?pilot=1&characters=approved.
+En stage12-character-quality hay copias optimizadas separadas, mediante
+?pilot=1&characters=approved&quality=optimized. El modo anterior conserva
+los GLB originales para comparar y recuperar.
 Ocho grupos de regresión y seis pruebas Chromium satisfactorios; capturas
 reales con controles y HUD existentes. Informe en PHASE-5-PILOT.md.
 La renovación de Warden queda pendiente del archivo Vanguard; se conserva
@@ -146,7 +150,10 @@ Criterio de cierre: controles, misiones, diálogos y combate funcionan con
 los nuevos modelos.
 
 FASE 6. CONSERVACIÓN Y REVISIÓN DEL PATRÓN URBANO
-Estado: base completada.
+Estado: base completada y revisión satisfactoria para los cuatro humanos.
+Se conserva la ciudad de cuatro distritos y 83 edificios. No se encontraron
+incompatibilidades que requieran reconstrucción. Informe PHASE-6-7-URBAN-REVIEW.md.
+El encaje del Vanguard se revisará cuando exista su modelo validado.
 Tareas:
 - Reutilizar la manzana y los distritos actuales.
 - Revisar que los nuevos personajes encajen en calles, andenes, accesos
@@ -157,7 +164,11 @@ Criterio de cierre: ciudad aprobada conservada y personajes correctamente
 situados.
 
 FASE 7. COLISIONES Y CIRCULACIÓN
-Estado: base completada; revisión pendiente.
+Estado: revisión satisfactoria para los cuatro humanos. Rutas de 1.455 m
+en 5.820 pasos, 107 colisionadores coincidentes, 428 aproximaciones bloqueadas
+y circulación fuera de los límites de 18 árboles. Tres misiones y entrada
+a la arena comprobadas. No se cambió lógica ni se añadió navegación.
+Pendientes Vanguard y recorrido táctil completo en Samsung.
 Tareas:
 - Mantener la separación entre modelos visuales y colisionadores, junto
   con las reglas de colocación existentes.
@@ -168,7 +179,10 @@ Criterio de cierre: sin bloqueos inesperados ni desajustes importantes entre
 apariencia y colisión.
 
 FASE 8. ILUMINACIÓN Y MATERIALES DE PERSONAJES
-Estado: pendiente sobre una base existente.
+Estado: materiales e iluminación de los cuatro humanos revisados en Chromium.
+Sin defectos de importación demostrados; se conservan colores y luces
+aprobados. Variante comprimida revisada mediante capturas reales.
+Informe PHASE-8-9-CHARACTER-QUALITY.md. Vanguard y Samsung pendientes.
 Tareas:
 - Conservar la iluminación urbana aprobada.
 - Ajustar piel, ropa, metal, normales y superficies luminosas de los nuevos
@@ -178,7 +192,11 @@ Entregable: personajes con materiales e iluminación coherentes con la ciudad.
 Criterio de cierre: personajes visibles y sin defectos de materiales o sombras.
 
 FASE 9. RENDIMIENTO MEDIDO
-Estado: parcialmente completado.
+Estado: parcial. Cuatro copias derivadas Draco/KTX2 verificadas, 2.651.288 bytes
+frente a 6.938.532 originales; 64.055 triángulos y animaciones conservados.
+Se verifican los 58 buffers en el decodificador real del motor. Comparación
+de descarga y memoria de texturas en Chromium documentada; los FPS del
+renderizador por software no representan el teléfono. Samsung pendiente.
 Tareas:
 - Reutilizar LOD, Draco y KTX2 donde corresponda.
 - Medir carga, FPS, caídas de fluidez y memoria estimada antes y después
@@ -190,7 +208,9 @@ Criterio de cierre: comportamiento aceptable en Samsung y comparaciones
 documentadas.
 
 FASE 10. VALIDACIÓN INTEGRAL DE LOS NUEVOS PERSONAJES
-Estado: pendiente.
+Estado: Chromium satisfactorio para los cuatro humanos, incluidos modelos
+comprimidos, orientación, apoyo, controles, misiones, combate y reinicio.
+Pendientes Vanguard y aprobación del piloto en Samsung; fase no cerrada.
 Tareas:
 - Ejecutar regresión, Chromium y pruebas en Samsung.
 - Comprobar orientación, animaciones, controles táctiles, cámara,
@@ -257,3 +277,7 @@ cerrada con Alejandro explorador aprobado. En fase 4 se aprobaron los tres
 NPC; la espalda de David se verificó corregida antes de continuar.
 Fase 5 parcial implementada para los cuatro humanos aprobados. Warden y
 Samsung pendientes. El juego público conserva 3e0ec79; no se ha promovido.
+Continuación autorizada: revisiones de 6 y 7 y trabajo de 8 y 9 ejecutados
+para los cuatro humanos, conservando ciudad, motor y reglas del juego.
+Los informes nuevos distinguen comprobaciones realizadas y validaciones
+pendientes; la ausencia del archivo Vanguard impide cerrar el conjunto.

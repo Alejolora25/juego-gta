@@ -1,0 +1,126 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "cast": [
+    {
+      "id": "stage4-player",
+      "url": "./assets/characters/runtime-optimized/alejandro.glb",
+      "approved": true,
+      "clip": "Idle",
+      "position": [
+        -107.69999694824219,
+        0,
+        56.5
+      ]
+    },
+    {
+      "id": "stage4-juan",
+      "url": "./assets/characters/runtime-optimized/juan.glb",
+      "approved": true,
+      "clip": "Idle",
+      "position": [
+        -28,
+        0,
+        74
+      ]
+    },
+    {
+      "id": "stage4-sara",
+      "url": "./assets/characters/runtime-optimized/sara.glb",
+      "approved": true,
+      "clip": "Idle",
+      "position": [
+        98,
+        0,
+        -12
+      ]
+    },
+    {
+      "id": "stage4-david",
+      "url": "./assets/characters/runtime-optimized/david.glb",
+      "approved": true,
+      "clip": "Idle",
+      "position": [
+        -108,
+        0,
+        54
+      ]
+    },
+    {
+      "id": "stage4-warden",
+      "url": "./assets/pilot/source/robot.glb",
+      "approved": false,
+      "clip": "Idle",
+      "position": [
+        0,
+        0,
+        -150
+      ]
+    }
+  ],
+  "buildings": 83,
+  "districts": 4,
+  "stage": 3,
+  "xp": 300,
+  "groundSurfaces": 187,
+  "quality": "optimized",
+  "captures": [
+    {
+      "name": "alejandro-idle",
+      "playerPosition": [
+        0,
+        0,
+        108
+      ],
+      "playerClip": "Idle",
+      "surface": 0.04999999888241291,
+      "stage": 0
+    },
+    {
+      "name": "alejandro-walk",
+      "playerPosition": [
+        0,
+        0,
+        101.00003051757812
+      ],
+      "playerClip": "Walk",
+      "surface": 0.04999999888241291,
+      "stage": 0
+    },
+    {
+      "name": "juan-in-city",
+      "playerPosition": [
+        -27.700000762939453,
+        0,
+        76.5
+      ],
+      "playerClip": "Idle",
+      "surface": 0.05999999865889549,
+      "stage": 0
+    },
+    {
+      "name": "sara-in-city",
+      "playerPosition": [
+        98.30000305175781,
+        0,
+        -9.5
+      ],
+      "playerClip": "Idle",
+      "surface": 0.1599999964237213,
+      "stage": 1
+    },
+    {
+      "name": "david-in-city",
+      "playerPosition": [
+        -107.69999694824219,
+        0,
+        56.5
+      ],
+      "playerClip": "Idle",
+      "surface": 0.054999999701976776,
+      "stage": 2
+    }
+  ],
+  "errors": [],
+  "samsungValidated": false,
+  "warden": "Existing pilot robot retained; selected Vanguard official source pending"
+}

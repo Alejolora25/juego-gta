@@ -5,7 +5,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const output=path.join(root,'docs/character-renewal/evidence/approved-pilot');
+const quality=process.argv[2]??'source';
+if(!['source','optimized'].includes(quality))throw new Error('Expected source or optimized');
+const output=process.argv[3]??path.join(root,'docs/character-renewal/evidence',quality==='optimized'?'optimized-pilot':'approved-pilot');
 await fs.mkdir(output,{recursive:true});
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--ignore-certificate-errors']});
 try{
@@ -14,7 +16,7 @@ try{
  page.on('pageerror',error=>errors.push(error.message));
  await page.route('**/Stage4Bootstrap.js*',route=>route.abort());
  await page.route('https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/build/playcanvas.mjs',route=>route.fulfill({path:path.join(root,'node_modules/playcanvas/build/playcanvas.mjs'),contentType:'application/javascript',headers:{'Access-Control-Allow-Origin':'*'}}));
- await page.goto('http://127.0.0.1:4173/?pilot=1&characters=approved',{waitUntil:'networkidle'});
+ await page.goto(`http://127.0.0.1:4173/?pilot=1&characters=approved&quality=${quality}`,{waitUntil:'networkidle'});
  await page.evaluate(async()=>{
   const [{PlayCanvasProbe},{TouchControls},{HudController}]=await Promise.all([
    import('/src/infrastructure/rendering/PlayCanvasProbe.js'),
@@ -62,7 +64,7 @@ try{
   return {engine:'PlayCanvas 2.23.0',cast:[...s.characters.characters.values()].map(c=>({id:c.id,url:c.assetUrl,approved:c.approvedVisual,clip:c.skeletal.current,position:Array.from(c.entity.getPosition().toArray())})),buildings:s.urbanPilot.buildings.length,districts:s.urbanPilot.districts.length,stage:s.state.stage,xp:s.state.xp,groundSurfaces:s.approvedPresentation.surfaces.length};
  });
  if(errors.length||result.stage!==3||result.xp!==300)throw new Error('Pilot review failed: '+JSON.stringify({errors,result}));
- await fs.writeFile(path.join(output,'report.json'),JSON.stringify({...result,captures,errors,samsungValidated:false,warden:'Existing pilot robot retained; selected Vanguard official source pending'},null,2)+'\n');
+ await fs.writeFile(path.join(output,'report.json'),JSON.stringify({...result,quality,captures,errors,samsungValidated:false,warden:'Existing pilot robot retained; selected Vanguard official source pending'},null,2)+'\n');
  await page.evaluate(()=>window.approvedPilotReview.probe.destroy());await context.close();
  console.log('APPROVED_CHARACTER_PILOT_CAPTURED',captures.map(c=>c.name));
 }finally{await browser.close();}

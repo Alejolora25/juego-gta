@@ -1,0 +1,145 @@
+{
+  "engine": "PlayCanvas 2.23.0",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "viewport": [
+    360,
+    640
+  ],
+  "resourceBytes": {
+    "sourceBytes": 6938532,
+    "runtimeBytes": 2651288,
+    "savedBytes": 4287244,
+    "savedPercent": 61.79,
+    "triangles": 64055
+  },
+  "runtimeSha256": {
+    "alejandro": "8b5410e055e5cc67c79d9d42a5c3858599bbdb0a0dba7b31cd4e6a83a0cd796a",
+    "juan": "17426500bae2fd7a67b6b631b8e4feb5a3993cc8af4c26529f037d5fd505b80a",
+    "sara": "255181b2ce7e7e0fd8bee247b03dc80cebf72a9df96d392056c15a140c42b230",
+    "david": "8d1583214de28cb035a8707912de58675cd6e26cd816d4b9b78c798bbab7f785"
+  },
+  "characterTextureGpuBytes": {
+    "source": 10573132,
+    "optimized": 1846064,
+    "saved": 8727068,
+    "savedPercent": 82.54
+  },
+  "wholeSceneTextureGpuBytes": {
+    "source": 18244712,
+    "optimized": 9517644
+  },
+  "wholeSceneVramEngineBytes": {
+    "source": 25132680,
+    "optimized": 15531292
+  },
+  "localReadyMs": {
+    "source": 715.2000000029802,
+    "optimized": 787.3999999985099,
+    "interpretation": "No measured improvement in local runtime initialization; compression reduces bytes, not necessarily decode/load time on this device"
+  },
+  "drawCallsUnchanged": true,
+  "softwareWebGLTimings": {
+    "source": [
+      {
+        "label": "start",
+        "frames": 45,
+        "meanFrameMs": 249.15333333346578,
+        "medianFrameMs": 245.39999999850988,
+        "p95FrameMs": 290.6000000014901,
+        "observedFps": 4.013592700610608,
+        "meanDrawCalls": 214,
+        "meanUpdateCpuMs": 0.8377777778440052
+      },
+      {
+        "label": "juan",
+        "frames": 45,
+        "meanFrameMs": 270.2644444444113,
+        "medianFrameMs": 269.1000000014901,
+        "p95FrameMs": 311,
+        "observedFps": 3.7000797572752218,
+        "meanDrawCalls": 160,
+        "meanUpdateCpuMs": 0.8222222223877906
+      },
+      {
+        "label": "sara",
+        "frames": 45,
+        "meanFrameMs": 273.21777777771155,
+        "medianFrameMs": 267.70000000298023,
+        "p95FrameMs": 305.3999999985099,
+        "observedFps": 3.660083937925864,
+        "meanDrawCalls": 112,
+        "meanUpdateCpuMs": 2.17999999937084
+      },
+      {
+        "label": "david",
+        "frames": 45,
+        "meanFrameMs": 417.67333333343265,
+        "medianFrameMs": 391.69999999552965,
+        "p95FrameMs": 579.7000000029802,
+        "observedFps": 2.394215575169819,
+        "meanDrawCalls": 170,
+        "meanUpdateCpuMs": 0.888888888226615
+      }
+    ],
+    "optimized": [
+      {
+        "label": "start",
+        "frames": 45,
+        "meanFrameMs": 254.20444444451067,
+        "medianFrameMs": 249.79999999701977,
+        "p95FrameMs": 299.8999999985099,
+        "observedFps": 3.933841527378512,
+        "meanDrawCalls": 214,
+        "meanUpdateCpuMs": 1.1555555548932817
+      },
+      {
+        "label": "juan",
+        "frames": 45,
+        "meanFrameMs": 255.30444444451066,
+        "medianFrameMs": 265.5,
+        "p95FrameMs": 305.20000000298023,
+        "observedFps": 3.9168922506452715,
+        "meanDrawCalls": 160,
+        "meanUpdateCpuMs": 0.8111111119389534
+      },
+      {
+        "label": "sara",
+        "frames": 45,
+        "meanFrameMs": 248.83999999993378,
+        "medianFrameMs": 248.80000000447035,
+        "p95FrameMs": 287.5,
+        "observedFps": 4.018646519853183,
+        "meanDrawCalls": 112,
+        "meanUpdateCpuMs": 0.8377777781751421
+      },
+      {
+        "label": "david",
+        "frames": 45,
+        "meanFrameMs": 390.137777777844,
+        "medianFrameMs": 391.8999999985099,
+        "p95FrameMs": 467.6000000014901,
+        "observedFps": 2.5631970471965664,
+        "meanDrawCalls": 170,
+        "meanUpdateCpuMs": 0.7688888882597288
+      }
+    ],
+    "interpretation": "Single sequential runs on SwiftShader; no causal mobile FPS claim"
+  },
+  "protectedFilesVerified": 56,
+  "originalAndApprovedAssetsUnmodified": true,
+  "optimizedHeightAndGameplayTestPassed": true,
+  "samsungValidated": false,
+  "mainPromoted": false,
+  "pending": [
+    "Selected Vanguard official source/adaptation/approval",
+    "Samsung gameplay and FPS/load/thermal measurement",
+    "Promotion authorization"
+  ],
+  "limitations": [
+    "Single run on local software WebGL; wall times include scheduler and shader compilation variability",
+    "Local HTTP and intercepted engine module do not represent mobile-network loading",
+    "GPU/heap counters are engine/browser estimates, not total process memory",
+    "Samsung FPS, thermals, memory and load times remain unmeasured",
+    "Skin CPU time is unavailable: the pinned engine does not update its skinTime counter; the zero counter was excluded from this report"
+  ]
+}

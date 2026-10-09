@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-test('approved human pilot preserves ground contact, facing, missions and combat in the existing city',async({page})=>{
+test('optimized approved human pilot preserves ground contact, facing, missions and combat in the existing city',async({page})=>{
  test.setTimeout(90000);
  const errors=[],loadedAssets=[];
  page.on('pageerror',error=>errors.push(error.message));
@@ -12,7 +12,7 @@ test('approved human pilot preserves ground contact, facing, missions and combat
   if(response.url().includes('/assets/characters/')&&response.url().endsWith('.glb'))loadedAssets.push({url:new URL(response.url()).pathname,status:response.status()});
  });
  await page.route('**/Stage4Bootstrap.js*',route=>route.abort());
- await page.goto('http://127.0.0.1:4173/?pilot=1&characters=approved',{waitUntil:'networkidle'});
+ await page.goto('http://127.0.0.1:4173/?pilot=1&characters=approved&quality=optimized',{waitUntil:'networkidle'});
  const result=await page.evaluate(async()=>{
   const {PlayCanvasProbe}=await import('/src/infrastructure/rendering/PlayCanvasProbe.js');
   const pc=await import('playcanvas');
@@ -77,6 +77,9 @@ test('approved human pilot preserves ground contact, facing, missions and combat
    const cast=[player,...npcs,warden].map(character=>withVisibleCharacter(character,()=>({name:character.name,url:character.assetUrl,approved:character.approvedVisual,ready:character.skeletal.ready,
     bones:new Set(character.visual.findComponents('render').flatMap(render=>render.meshInstances.flatMap(mesh=>mesh.skinInstance?.bones??[]))).size})));
    const culledRigRestored=npcs.every(character=>character.entity.enabled===false);
+   const playerTextures=(s.characters.pipeline.assets.get(player.assetId).resource.textures??[]).map(asset=>({
+    width:asset.resource.width,height:asset.resource.height,gpuBytes:asset.resource.gpuSize,mipmaps:asset.resource.mipmaps
+   }));
    const obstaclesBefore=JSON.stringify(s.world.obstacles);
    const physicsColliders=s.physics.staticColliders.length;
    advance(18);
@@ -139,7 +142,7 @@ test('approved human pilot preserves ground contact, facing, missions and combat
    const reset={stage:s.state.stage,xp:s.state.xp,hp:s.state.playerHP,bossHP:s.state.bossHP,bossActive:s.state.bossActive,finished:s.state.finished,
     root:position(player.entity),bounds:bounds(player),surface:s.approvedPresentation.heightAt(0,108),clip:player.skeletal.current,
     bossVisible:warden.entity.enabled,physicsY:s.physics.playerBody.translation().y,npcs:npcs.map(character=>character.skeletal.current)};
-   result={ok:true,cast,culledRigRestored,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
+   result={ok:true,cast,culledRigRestored,playerTextures,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
     encounter,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,hudEvents,physicsColliders,
     obstacleCount:s.world.obstacles.length,obstaclesUnchanged:obstaclesBefore===JSON.stringify(s.world.obstacles)};
   }catch(error){result={ok:false,error:error?.message??String(error),stack:error?.stack};}
@@ -150,14 +153,15 @@ test('approved human pilot preserves ground contact, facing, missions and combat
   return result;
  });
  expect(result.ok,result.error+'\n'+result.stack).toBe(true);
- const expectedPaths=['/assets/characters/alejandro-explorer/alejandro.glb','/assets/characters/npc-phase4/juan/juan.glb',
-  '/assets/characters/npc-phase4/sara/sara.glb','/assets/characters/npc-phase4/david/david.glb'];
+ const expectedPaths=['alejandro','juan','sara','david'].map(name=>`/assets/characters/runtime-optimized/${name}.glb`);
  expect(result.cast.map(character=>new URL(character.url,'http://127.0.0.1:4173/').pathname)).toEqual([...expectedPaths,'/assets/pilot/source/robot.glb']);
  expect(result.cast.map(character=>character.approved)).toEqual([true,true,true,true,false]);
  expect(result.cast.every(character=>character.ready)).toBe(true);
  for(const path of expectedPaths)expect(loadedAssets).toContainEqual({url:path,status:200});
  for(const npc of result.cast.slice(1,4))expect(npc.bones,npc.name+' skeleton').toBe(62);
  expect(result.culledRigRestored).toBe(true);
+ expect(result.playerTextures).toHaveLength(7);
+ expect(result.playerTextures.every(texture=>texture.width>=128&&texture.height>=128&&texture.gpuBytes>0&&texture.mipmaps)).toBe(true);
  const expectGrounded=(sample,label)=>{
   expect(Number.isFinite(sample.bounds.min+sample.bounds.max),label+' finite bounds').toBe(true);
   expect(sample.bounds.min,label+' feet').toBeGreaterThanOrEqual(sample.surface-.05);
