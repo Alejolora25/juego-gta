@@ -1,7 +1,8 @@
 # Alejandro — variante explorador tecnológico
 
 Revisión de la fase 3 solicitada por el usuario el 9 de octubre de 2026 a partir
-de su referencia visual. **Pendiente de nueva aprobación visual.** Se conservan
+de su referencia visual. **Aprobado visualmente con el mensaje «Si aprobado»
+el 9 de octubre de 2026; revisión de fase 3 cerrada.** Se conservan
 el modelo anterior y su aprobación en `../alejandro-phase3/approval.json`.
 
 ## Diseño
@@ -48,5 +49,6 @@ LORA25_ALEJANDRO_VARIANT=alejandro-explorer node tools/record-alejandro-phase3.m
 
 Informes: `build-report.json`, `package-report.json`, `geometry-validation.json`
 y `chromium-report.json`. El manifiesto `deliverable-checksums.json` identifica
-el resultado presentado. La integración en la ciudad pertenece a la fase 5 y
-requiere la aprobación visual de esta variante.
+el resultado presentado. La decisión y los hashes aprobados se registran en `approval.json`. Esta es
+la variante seleccionada para una futura integración autorizada en fase 5.
+Las pruebas integradas en la ciudad y en Samsung siguen pendientes.

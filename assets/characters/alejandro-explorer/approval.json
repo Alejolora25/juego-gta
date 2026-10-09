@@ -2,7 +2,12 @@
   "phase": 3,
   "revision": "explorer",
   "status": "visually-approved",
-  "files": {
+  "approved_on": "2026-10-09",
+  "approval_source": "User message in this chat",
+  "user_message": "Si aprobado",
+  "reviewed_commit": "5b6df8a895f845900d0d365689ca84f8f85de635",
+  "scope": "Appearance and presented animations of Alejandro explorer; selected design for future phase 5 integration",
+  "deliverables": {
     "alejandro.blend": {
       "bytes": 8775093,
       "sha256": "1b0ec09f46f09c1e17434bcf2d263ceb702576b6e6af48775244f19ec05ad88f"
@@ -24,6 +29,16 @@
       "sha256": "2033e827bbb6d90bf094cac21047495ab9809ca17b75426af1b9fa216127a073"
     }
   },
-  "previousApprovedDesignPreserved": true,
-  "approval_record": "approval.json"
+  "previous_approved_design": "../alejandro-phase3/approval.json",
+  "validation": {
+    "geometry_samples": 310,
+    "chromium_clips_loaded": 10,
+    "regression_test_groups_passed": 8
+  },
+  "pending": [
+    "Authorized phase 4 design of NPCs and Warden",
+    "Authorized phase 5 game integration",
+    "Integrated Chromium and Samsung validation",
+    "Authorized promotion to main"
+  ]
 }

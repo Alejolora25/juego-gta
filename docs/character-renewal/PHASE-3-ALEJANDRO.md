@@ -64,4 +64,12 @@ La variante tiene accesorios ligados al rig existente. Se ajusta el contacto
 del clip de derrota al nuevo volumen de la mochila. Se conservan orientación,
 escala, los otros nueve clips y el movimiento de raíz controlado por el juego.
 Las vistas de Blender, el vídeo y las comprobaciones de Chromium pertenecen al
-modelo real. La nueva apariencia queda pendiente de aprobación visual.
+modelo real.
+
+**Revisión cerrada: el usuario aprobó la variante explorador el 9 de octubre
+de 2026 con «Si aprobado».** Es el diseño seleccionado para una futura
+integración autorizada de fase 5. El registro
+`assets/characters/alejandro-explorer/approval.json` vincula la decisión al
+commit `5b6df8a` y a los hashes de la fuente Blender, GLB, vistas y vídeo
+presentados. Los archivos aprobados y la versión anterior quedan conservados.
+La aprobación visual no sustituye la validación integrada en Samsung.
