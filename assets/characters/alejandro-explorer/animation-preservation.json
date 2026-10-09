@@ -1,0 +1,40 @@
+{
+  "unchangedActions": [
+    "Combat",
+    "Hit",
+    "Idle",
+    "Interact",
+    "Run",
+    "Shoot",
+    "TurnLeft",
+    "TurnRight",
+    "Walk"
+  ],
+  "comparison": "Exact keyframe coordinates, interpolation, bone property and channel index",
+  "changedAction": "Defeated",
+  "reason": "Pelvis height adjusted to the larger backpack",
+  "approvedBaseSignatures": {
+    "Combat": "df8a6b0a123a95361bb739cb33d038319d6c26e6f82befe3d9635dd74988bfdf",
+    "Defeated": "a57d0fcf063277912d3838d6516961c5d47d28ec11ed82d2666e040ddddc555d",
+    "Hit": "2c6cc3d93cd95619ea912293e86428c7871ee2ec5a65a3b70ed99715669820e1",
+    "Idle": "b7a46eaef0b1b9e25d502a9cfd59653ab3e2cfd882bd44ce07a0b7478f373984",
+    "Interact": "95f4cb093f31cf541f052a02ff70c00f6b513ebf30f9477de0a072c7a4996d12",
+    "Run": "d1aa6cb07e2c23994928d8fbdc4d5e7688947a7160797c8a5a1a0485866f4457",
+    "Shoot": "640c527f06dc335368fecca82612c5c37929c4d80b9e590cce654eb71b507085",
+    "TurnLeft": "27ed6d78ae65d7844c8ca27a943c2f90c81318a8161a4e5b6cea90bf448f637a",
+    "TurnRight": "479d2e0e3d02c2f60329b59d583a320e9410087067882f12b85beae36f9cadb0",
+    "Walk": "95bc7cc185abcae497f85fa8d968ecdf56cb8dba116d8958c95d84844a3fc365"
+  },
+  "variantSignatures": {
+    "Combat": "df8a6b0a123a95361bb739cb33d038319d6c26e6f82befe3d9635dd74988bfdf",
+    "Defeated": "ccf81286c537943de36bec0887172d5f6837940ff0d092d537af8c512d0b0ebc",
+    "Hit": "2c6cc3d93cd95619ea912293e86428c7871ee2ec5a65a3b70ed99715669820e1",
+    "Idle": "b7a46eaef0b1b9e25d502a9cfd59653ab3e2cfd882bd44ce07a0b7478f373984",
+    "Interact": "95f4cb093f31cf541f052a02ff70c00f6b513ebf30f9477de0a072c7a4996d12",
+    "Run": "d1aa6cb07e2c23994928d8fbdc4d5e7688947a7160797c8a5a1a0485866f4457",
+    "Shoot": "640c527f06dc335368fecca82612c5c37929c4d80b9e590cce654eb71b507085",
+    "TurnLeft": "27ed6d78ae65d7844c8ca27a943c2f90c81318a8161a4e5b6cea90bf448f637a",
+    "TurnRight": "479d2e0e3d02c2f60329b59d583a320e9410087067882f12b85beae36f9cadb0",
+    "Walk": "95bc7cc185abcae497f85fa8d968ecdf56cb8dba116d8958c95d84844a3fc365"
+  }
+}

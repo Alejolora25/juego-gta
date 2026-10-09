@@ -1,6 +1,6 @@
-import bpy,json,math
+import bpy,json,math,os
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/characters/alejandro-phase3'
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/characters'/os.environ.get('LORA25_ALEJANDRO_VARIANT','alejandro-phase3')
 bpy.ops.wm.open_mainfile(filepath=str(OUT/'alejandro.blend'))
 scene=bpy.context.scene;arm=bpy.data.objects['AlejandroRig'];mesh=bpy.data.objects['AlejandroCharacterMesh']
 sole_indices={i for p in mesh.data.polygons if mesh.data.materials[p.material_index].name=='AlejandroRubberSole' for i in p.vertices}

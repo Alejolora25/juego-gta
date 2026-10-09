@@ -4,14 +4,16 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import fs from 'node:fs/promises';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const dir=path.join(root,'assets/characters/alejandro-phase3');
+const variant=process.env.LORA25_ALEJANDRO_VARIANT??'alejandro-phase3';
+if(!['alejandro-phase3','alejandro-explorer'].includes(variant))throw new Error('Unsupported isolated character variant');
+const dir=path.join(root,'assets/characters',variant);
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
 try{
  const page=await browser.newPage({viewport:{width:1100,height:900}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  await page.route('https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/build/playcanvas.mjs',r=>r.fulfill({path:path.join(root,'node_modules/playcanvas/build/playcanvas.mjs'),contentType:'application/javascript',headers:{'Access-Control-Allow-Origin':'*'}}));
- await page.goto('http://127.0.0.1:4173/assets/characters/alejandro-phase3/review/');
+ await page.goto(`http://127.0.0.1:4173/assets/characters/${variant}/review/`);
  await page.waitForFunction(()=>window.alejandroReview?.ready,{timeout:30000});
  await page.waitForTimeout(500);
  for(const view of ['front','quarter','side','back']){

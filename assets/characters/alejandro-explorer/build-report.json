@@ -1,0 +1,11 @@
+{
+  "phase": 3,
+  "revision": "explorer",
+  "status": "awaiting-visual-approval",
+  "previousApprovedBlendSHA256": "c5fb01700f5ea9d83630a4c96d27292ef76e8de1097e94d5ac78098a57dcbdec",
+  "originalsModified": false,
+  "animationChanges": "Defeated pelvis contact adjusted for the larger pack; other nine actions unchanged",
+  "gameplayChanged": false,
+  "license": "CC0 1.0 original Quaternius base; new geometric accessories authored for Lora25",
+  "referenceScope": "Human clothing and accessories; no dragon, borrowed logos or scenery integrated"
+}

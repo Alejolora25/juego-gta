@@ -1,0 +1,28 @@
+{
+  "phase": 3,
+  "revision": "explorer",
+  "status": "awaiting-visual-approval",
+  "files": {
+    "alejandro.blend": {
+      "bytes": 8775093,
+      "sha256": "1b0ec09f46f09c1e17434bcf2d263ceb702576b6e6af48775244f19ec05ad88f"
+    },
+    "alejandro.glb": {
+      "bytes": 3796564,
+      "sha256": "44f29cc2c0f50d381a42c55fce37438e96b6467b9e49401d680a0e6a8b5e78c2"
+    },
+    "review/alejandro-three-views.png": {
+      "bytes": 1778307,
+      "sha256": "66f461fca815730db19a7e2234070005219b1228535cf29b6f3b1687e7c3c885"
+    },
+    "review/alejandro-portrait.png": {
+      "bytes": 1104074,
+      "sha256": "bdbaf15c628507adad50291a796f66737f656577fb97f4b702078d13a01122cc"
+    },
+    "review/alejandro-motion.mp4": {
+      "bytes": 391590,
+      "sha256": "2033e827bbb6d90bf094cac21047495ab9809ca17b75426af1b9fa216127a073"
+    }
+  },
+  "previousApprovedDesignPreserved": true
+}

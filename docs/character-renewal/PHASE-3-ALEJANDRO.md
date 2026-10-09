@@ -50,3 +50,18 @@ Resultado: 310 poses muestreadas sin penetración del suelo; suelas de los
 clips de pie entre 2,6 y 19,1 mm. GLB de 3,38 MB, 30.967 triángulos y 11
 materiales. Diez clips cargados en Chromium sin errores; raíz de entidad fija.
 Vídeo de revisión en `review/alejandro-motion.mp4`. No son mediciones Samsung.
+
+## Revisión posterior: explorador tecnológico
+
+El usuario solicitó mejorar la apariencia tomando como guía una nueva imagen:
+gafas azules, barba, chaqueta técnica oscura, pantalón cargo beige y equipo de
+explorador. Se prepara una variante independiente en
+`assets/characters/alejandro-explorer/`, conservando el diseño anterior y sus
+hashes aprobados. La revisión reabre únicamente la aprobación del nuevo diseño;
+no comienza la fase 4 ni la integración de fase 5.
+
+La variante tiene accesorios ligados al rig existente. Se ajusta el contacto
+del clip de derrota al nuevo volumen de la mochila. Se conservan orientación,
+escala, los otros nueve clips y el movimiento de raíz controlado por el juego.
+Las vistas de Blender, el vídeo y las comprobaciones de Chromium pertenecen al
+modelo real. La nueva apariencia queda pendiente de aprobación visual.

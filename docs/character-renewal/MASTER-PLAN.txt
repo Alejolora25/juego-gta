@@ -93,6 +93,9 @@ FASE 3. DISEÑO DEFINITIVO DE ALEJANDRO
 Estado: completada; apariencia y animaciones aprobadas por el usuario
 el 9 de octubre de 2026. Registro verificable en
 assets/characters/alejandro-phase3/approval.json. La integración sigue en fase 5.
+Revisión solicitada después de aprobar: variante explorador tecnológico en
+assets/characters/alejandro-explorer/, pendiente de aprobación visual propia.
+El diseño anterior se conserva con su aprobación y hashes intactos.
 La ejecución de esta fase fue autorizada expresamente. Fuente editable, GLB,
 diez clips y vistas de revisión en assets/characters/alejandro-phase3/.
 Tareas:

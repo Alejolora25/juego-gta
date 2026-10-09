@@ -1,8 +1,8 @@
-import bpy, math
+import bpy, math, os
 from pathlib import Path
 from mathutils import Vector
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/characters/alejandro-phase3/review'
-bpy.ops.wm.open_mainfile(filepath=str(ROOT/'assets/characters/alejandro-phase3/alejandro.blend'))
+ROOT=Path(__file__).resolve().parents[1];DESIGN=os.environ.get('LORA25_ALEJANDRO_VARIANT','alejandro-phase3');OUT=ROOT/'assets/characters'/DESIGN/'review'
+bpy.ops.wm.open_mainfile(filepath=str(OUT.parent/'alejandro.blend'))
 scene=bpy.context.scene
 rig=bpy.data.objects['AlejandroRig'];rig.animation_data.action=bpy.data.actions['Idle'];scene.frame_set(0)
 root=bpy.data.objects['AlejandroVisual'];mesh=bpy.data.objects['AlejandroCharacterMesh']

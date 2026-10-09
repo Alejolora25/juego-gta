@@ -1,0 +1,73 @@
+{
+  "beforeBytes": 7822368,
+  "afterBytes": 3796564,
+  "triangles": 37121,
+  "materials": 15,
+  "joints": 65,
+  "clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Interact",
+    "Combat",
+    "Shoot",
+    "Hit",
+    "Defeated",
+    "TurnLeft",
+    "TurnRight"
+  ],
+  "textures": [
+    {
+      "name": "T_Superhero_Male_Normal-Design",
+      "mimeType": "image/png",
+      "bytes": 469341,
+      "width": 512,
+      "height": 512
+    },
+    {
+      "name": "T_Superhero_Male_Dark-Design",
+      "mimeType": "image/jpeg",
+      "bytes": 102674,
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "name": "T_Superhero_Male_Roughness-Design",
+      "mimeType": "image/jpeg",
+      "bytes": 14878,
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "T_Hair_1_Normal",
+      "mimeType": "image/png",
+      "bytes": 456705,
+      "width": 512,
+      "height": 512
+    },
+    {
+      "name": "T_Eye_Normal",
+      "mimeType": "image/png",
+      "bytes": 44349,
+      "width": 512,
+      "height": 512
+    },
+    {
+      "name": "T_Eye_Brown",
+      "mimeType": "image/jpeg",
+      "bytes": 7495,
+      "width": 256,
+      "height": 256
+    },
+    {
+      "name": "NavyFabric128",
+      "mimeType": "image/png",
+      "bytes": 2535,
+      "width": 128,
+      "height": 128
+    }
+  ],
+  "originalsModified": false,
+  "authoringBlendModified": false,
+  "gameplayChanged": false
+}
