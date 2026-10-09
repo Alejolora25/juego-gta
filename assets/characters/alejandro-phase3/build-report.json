@@ -1,0 +1,72 @@
+{
+  "authoringTool": "4.3.2",
+  "phase": 3,
+  "status": "awaiting-visual-approval",
+  "source": "Quaternius Standard Superhero Male, adapted",
+  "originalsModified": false,
+  "heightTargetMetres": 1.78,
+  "expectedForward": "-Z",
+  "clips": [
+    {
+      "name": "Idle",
+      "source": "Idle_Loop",
+      "frames": 76,
+      "durationSeconds": 2.5
+    },
+    {
+      "name": "Walk",
+      "source": "Walk_Loop",
+      "frames": 41,
+      "durationSeconds": 1.3333333333333333
+    },
+    {
+      "name": "Run",
+      "source": "Sprint_Loop",
+      "frames": 21,
+      "durationSeconds": 0.6666666666666666
+    },
+    {
+      "name": "Interact",
+      "source": "Interact",
+      "frames": 61,
+      "durationSeconds": 2.0
+    },
+    {
+      "name": "Combat",
+      "source": "Pistol_Aim_Neutral",
+      "frames": 6,
+      "durationSeconds": 0.16666666666666666
+    },
+    {
+      "name": "Shoot",
+      "source": "Pistol_Shoot",
+      "frames": 20,
+      "durationSeconds": 0.6333333333333333
+    },
+    {
+      "name": "Hit",
+      "source": "Hit_Chest",
+      "frames": 11,
+      "durationSeconds": 0.3333333333333333
+    },
+    {
+      "name": "Defeated",
+      "source": "Death01",
+      "frames": 73,
+      "durationSeconds": 2.4
+    },
+    {
+      "name": "TurnLeft",
+      "source": "authored above Idle_Loop",
+      "frames": 19,
+      "durationSeconds": 0.6
+    },
+    {
+      "name": "TurnRight",
+      "source": "authored above Idle_Loop",
+      "frames": 19,
+      "durationSeconds": 0.6
+    }
+  ],
+  "gameplayChanged": false
+}

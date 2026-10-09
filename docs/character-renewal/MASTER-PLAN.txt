@@ -90,7 +90,9 @@ Criterio de cierre: archivos accesibles, licencia compatible y limitaciones
 documentadas.
 
 FASE 3. DISEÑO DEFINITIVO DE ALEJANDRO
-Estado: pendiente.
+Estado: propuesta preparada en Blender y PlayCanvas; aprobación visual pendiente.
+La ejecución de esta fase fue autorizada expresamente. Fuente editable, GLB,
+diez clips y vistas de revisión en assets/characters/alejandro-phase3/.
 Tareas:
 - Preparar un humano reconocible como ingeniero tecnológico.
 - Definir rostro, cabello, chaqueta técnica, ropa urbana y accesorios coherentes.

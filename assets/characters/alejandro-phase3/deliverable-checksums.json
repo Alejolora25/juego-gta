@@ -1,0 +1,26 @@
+{
+  "phase": 3,
+  "status": "awaiting-visual-approval",
+  "files": {
+    "alejandro.blend": {
+      "bytes": 14528633,
+      "sha256": "c5fb01700f5ea9d83630a4c96d27292ef76e8de1097e94d5ac78098a57dcbdec"
+    },
+    "alejandro.glb": {
+      "bytes": 3384876,
+      "sha256": "f015a3442ba02a04ac219e08581694900b6e4388a3bfdd7844bd51ce9e7cafca"
+    },
+    "review/alejandro-motion.mp4": {
+      "bytes": 351706,
+      "sha256": "2ee3e522c26f0e947f9eacec9a9cfa090974459c7d8184d12ab6dd17213ecc2e"
+    },
+    "review/alejandro-three-views.png": {
+      "bytes": 1769508,
+      "sha256": "8e7e7a563c60d15bc9e1956977aa4cf97f261e51eaeb85eb7d9b0cabd5e5d86c"
+    },
+    "review/alejandro-portrait.png": {
+      "bytes": 1095731,
+      "sha256": "b23f9139aebb4e409a5352f4b6e40c57af2199426108abe096d6c6c3c15cb25a"
+    }
+  }
+}
