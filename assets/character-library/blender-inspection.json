@@ -1,0 +1,100 @@
+{
+  "blenderVersion": "4.3.2",
+  "models": [
+    {
+      "source": "universal-base/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf",
+      "meshes": 4,
+      "armatures": 1,
+      "bones": [
+        65
+      ],
+      "importedActions": 0,
+      "importSucceeded": true
+    },
+    {
+      "source": "universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_Buzzed.gltf",
+      "meshes": 1,
+      "armatures": 0,
+      "bones": [],
+      "importedActions": 0,
+      "importSucceeded": true
+    },
+    {
+      "source": "universal-base/Hairstyles/Origin at 0/glTF (Godot)/Hair_SimpleParted.gltf",
+      "meshes": 1,
+      "armatures": 0,
+      "bones": [],
+      "importedActions": 0,
+      "importSucceeded": true
+    },
+    {
+      "source": "universal-base/Hairstyles/Origin at 0/glTF (Godot)/Eyebrows_Regular.gltf",
+      "meshes": 1,
+      "armatures": 0,
+      "bones": [],
+      "importedActions": 0,
+      "importSucceeded": true
+    },
+    {
+      "source": "universal-animation/Unreal-Godot/UAL1_Standard.glb",
+      "meshes": 2,
+      "armatures": 1,
+      "bones": [
+        65
+      ],
+      "importedActions": 43,
+      "importSucceeded": true
+    },
+    {
+      "source": "modular-men/Individual Characters/glTF/Casual_Hoodie.gltf",
+      "meshes": 5,
+      "armatures": 1,
+      "bones": [
+        62
+      ],
+      "importedActions": 24,
+      "importSucceeded": true
+    },
+    {
+      "source": "modular-men/Individual Characters/glTF/Worker.gltf",
+      "meshes": 5,
+      "armatures": 1,
+      "bones": [
+        62
+      ],
+      "importedActions": 24,
+      "importSucceeded": true
+    },
+    {
+      "source": "modular-men/Individual Characters/glTF/Suit.gltf",
+      "meshes": 6,
+      "armatures": 1,
+      "bones": [
+        62
+      ],
+      "importedActions": 24,
+      "importSucceeded": true
+    },
+    {
+      "source": "modular-women/Individual Characters/glTF/Casual.gltf",
+      "meshes": 5,
+      "armatures": 1,
+      "bones": [
+        62
+      ],
+      "importedActions": 24,
+      "importSucceeded": true
+    },
+    {
+      "source": "modular-women/Individual Characters/glTF/Formal.gltf",
+      "meshes": 5,
+      "armatures": 1,
+      "bones": [
+        62
+      ],
+      "importedActions": 24,
+      "importSucceeded": true
+    }
+  ],
+  "originalsModified": false
+}

@@ -71,7 +71,9 @@ building chunk still stays below 350 KB.
 
 Initial Samsung review approved the humanoid facing and Warden rig fixes.
 Samsung also approved the four-district layout and new facade textures.
-The compressed-texture update needs another Samsung review. Automated Chromium
-screenshots cannot certify mobile GPU performance.
+Samsung approved the compressed-texture update at `3e0ec79`; small building
+appearance latency remains nonblocking. Automated Chromium screenshots cannot
+certify mobile GPU performance. Character renewal status and source validation
+are recorded under `docs/character-renewal/`.
 `node tools/check-urban-districts.mjs` produces four district screenshots and
 checks complete protected road sweeps in Rapier.

@@ -1,0 +1,236 @@
+LORA25: URBAN LEGACY
+PLAN MAESTRO ACTUALIZADO — 12 FASES Y ORDEN DE EJECUCIÓN
+Revisión: 9 de octubre de 2026
+
+BASE APROBADA
+Commit: 3e0ec79613a548fc0013ef60663dd22cd3cfdce5 (3e0ec79).
+Publicado en main, con CI satisfactorio y validación del usuario en Samsung.
+
+OBJETIVO
+Renovar los personajes y mejorar la calidad visual, conservando controles,
+cámara, movimiento, misiones, diálogos y combate.
+
+DECISIONES CORREGIDAS
+- Motor vigente: PlayCanvas 2.23.0. Three.js corresponde a la versión histórica.
+  Se conserva PlayCanvas; no cambiar de motor sin autorización.
+- Ciudad: cuatro distritos y 83 edificios, con distribución de calles, árboles
+  y mobiliario aprobada por el usuario.
+- Alejandro: Quaternius Universal Base Characters, edición gratuita Standard,
+  como base propuesta.
+  https://quaternius.com/packs/universalbasecharacters.html
+  https://quaternius.itch.io/universal-base-characters
+- Warden: Vanguard-Class Mech Titan (Game Ready), autor ThankSang0301,
+  como candidato principal. La ficha anuncia CC BY; falta acceder al archivo
+  y comprobar rig, animaciones, materiales y versión exacta de la licencia.
+  https://sketchfab.com/3d-models/vanguard-class-mech-titan-game-ready-84f5e9a69d734bbd97b10634e379b235
+- NPC: Quaternius Ultimate Modular Men para Juan y David, y Ultimate Modular
+  Women para Sara. Licencia publicada: CC0.
+  https://quaternius.com/packs/ultimatemodularcharacters.html
+  https://quaternius.com/packs/ultimatemodularwomen.html
+- Herramienta: Blender; exportación de recursos compatibles con PlayCanvas.
+- Validación: Chromium, CI y Samsung.
+- La latencia leve de edificios es secundaria: optimizar cuando las mediciones
+  indiquen una solución útil; no bloquea el avance de los personajes.
+- Recursos Quaternius seleccionados: descargados y comprobados en Blender y
+  PlayCanvas/Chromium. Originales preservados. No están adaptados ni integrados
+  en el juego. Warden: archivo pendiente de acceso y validación.
+
+ESTADO Y TRAZABILIDAD DE LAS OCHO ETAPAS ANTERIORES
+
+1. Respaldo y programación conservada -> Fase 1.
+   Base 3e0ec79 protegida con bundle, archivo de fuentes y tag remoto.
+   Restauración comprobada mediante igualdad de archivos y Chromium.
+2. Manzana piloto -> Fase 6.
+   Realizada; se conserva como patrón.
+3. Alejandro humanoide -> Fases 3 y 5.
+   Integración funcional conseguida. Falta su diseño definitivo.
+4. NPC y Warden -> Fases 4 y 5.
+   Prototipos funcionales. Falta renovar sus modelos e identidades.
+5. Distritos modulares -> Fase 11.
+   Realizados y aprobados por el usuario.
+6. Visuales, colisiones y circulación -> Fase 7.
+   Implementados y comprobados. Se revisarán tras cambiar los personajes.
+7. Iluminación, LOD y compresión -> Fases 8 y 9.
+   Implementados y aprobados visualmente. Faltan mediciones completas de
+   rendimiento en Samsung.
+8. Chromium y Samsung -> Fase 10.
+   La versión actual pasó ambas validaciones. Cada nueva integración necesitará
+   su propia comprobación.
+
+FASE 1. AUDITORÍA DE REFERENCIA Y RESPALDO RESTAURABLE
+Estado: completada el 9 de octubre de 2026.
+Respaldo local bundle + tar.gz; tag remoto de la base 3e0ec79.
+Restauración idéntica de 142 archivos; regresión y cinco pruebas Chromium
+satisfactorias sobre la copia recuperada.
+Tareas:
+- Registrar el estado de 3e0ec79 e inventariar las funcionalidades existentes.
+- Guardar las pruebas existentes como referencia.
+- Crear un respaldo específico con código, recursos, fuentes Blender,
+  licencias y dependencias declaradas.
+- Restaurarlo en una copia separada y comprobar su funcionamiento.
+Entregable: inventario, resultados de referencia y respaldo verificable.
+Criterio de cierre: recuperación demostrada y versión aprobada protegida.
+
+FASE 2. OBTENCIÓN Y VALIDACIÓN DE RECURSOS
+Estado: parcial. 26 archivos Quaternius preservados y verificados.
+La base gratuita obtenida es Superhero Male, con 65 huesos; la biblioteca
+Standard aporta 43 clips sin root motion. Los NPC candidatos tienen 24 clips.
+Warden sigue pendiente: Sketchfab deniega acceso al archivo desde este entorno.
+No se cierra la fase ni se sustituye el candidato sin revisión y aprobación.
+Tareas:
+- Obtener las ediciones gratuitas y conservar los originales.
+- Registrar procedencia, autor, licencia y modificaciones.
+- Inspeccionar geometría, texturas, escala, esqueleto y clips de animación.
+- Revisar especialmente Warden: "Game Ready" no demuestra que tenga
+  animaciones utilizables.
+- Si Warden no resulta viable, presentar una alternativa antes de sustituir
+  la elección.
+Entregable: biblioteca de recursos validada y registro de licencias.
+Criterio de cierre: archivos accesibles, licencia compatible y limitaciones
+documentadas.
+
+FASE 3. DISEÑO DEFINITIVO DE ALEJANDRO
+Estado: pendiente.
+Tareas:
+- Preparar un humano reconocible como ingeniero tecnológico.
+- Definir rostro, cabello, chaqueta técnica, ropa urbana y accesorios coherentes.
+- Adaptar las animaciones necesarias a las acciones existentes, manteniendo
+  el movimiento controlado por el juego.
+- Ajustar escala, orientación y contacto de los pies con el suelo.
+Entregable: Alejandro preparado en Blender, con vistas y animaciones revisables.
+Criterio de cierre: apariencia y animaciones aprobadas, escala correcta,
+pies sobre el suelo y orientación correcta.
+
+FASE 4. DISEÑO DE WARDEN Y TRES NPC
+Estado: pendiente.
+Tareas:
+- Dar a Warden una silueta amenazante, armadura tecnológica, visor y núcleo
+  luminoso.
+- Preparar las animaciones que necesite el combate actual.
+- Diferenciar a Juan, Sara y David mediante rostro, cabello, vestimenta
+  y silueta, conservando sus funciones narrativas.
+Entregable: Warden y tres NPC listos para revisión visual e integración.
+Criterio de cierre: aprobación visual y modelos técnicamente utilizables.
+
+FASE 5. INTEGRACIÓN PILOTO DE LOS CINCO PERSONAJES
+Estado: pendiente.
+Tareas:
+- Integrarlos en una rama de desarrollo sobre la ciudad aprobada.
+- Ajustar modelos, materiales, orientación y clips al contrato existente.
+- Conservar puntos de interacción, posiciones funcionales, colisiones
+  y reglas del juego.
+- Comprobar transiciones de animación y funcionamiento de las interacciones.
+Entregable: piloto funcional con Alejandro, Warden, Juan, Sara y David.
+Criterio de cierre: controles, misiones, diálogos y combate funcionan con
+los nuevos modelos.
+
+FASE 6. CONSERVACIÓN Y REVISIÓN DEL PATRÓN URBANO
+Estado: base completada.
+Tareas:
+- Reutilizar la manzana y los distritos actuales.
+- Revisar que los nuevos personajes encajen en calles, andenes, accesos
+  y arena.
+- Corregir únicamente incompatibilidades espaciales demostradas.
+Entregable: patrón urbano aprobado compatible con los personajes renovados.
+Criterio de cierre: ciudad aprobada conservada y personajes correctamente
+situados.
+
+FASE 7. COLISIONES Y CIRCULACIÓN
+Estado: base completada; revisión pendiente.
+Tareas:
+- Mantener la separación entre modelos visuales y colisionadores, junto
+  con las reglas de colocación existentes.
+- Comprobar recorridos, accesos y puntos de misión con los nuevos personajes.
+- Añadir navegación solo si una necesidad real de la IA lo exige.
+Entregable: recorridos y colisiones verificados con los personajes renovados.
+Criterio de cierre: sin bloqueos inesperados ni desajustes importantes entre
+apariencia y colisión.
+
+FASE 8. ILUMINACIÓN Y MATERIALES DE PERSONAJES
+Estado: pendiente sobre una base existente.
+Tareas:
+- Conservar la iluminación urbana aprobada.
+- Ajustar piel, ropa, metal, normales y superficies luminosas de los nuevos
+  modelos.
+- Mantener sombras de contacto y comprobar legibilidad de rostros y siluetas.
+Entregable: personajes con materiales e iluminación coherentes con la ciudad.
+Criterio de cierre: personajes visibles y sin defectos de materiales o sombras.
+
+FASE 9. RENDIMIENTO MEDIDO
+Estado: parcialmente completado.
+Tareas:
+- Reutilizar LOD, Draco y KTX2 donde corresponda.
+- Medir carga, FPS, caídas de fluidez y memoria estimada antes y después
+  de incorporar personajes.
+- Ajustar geometría, texturas y materiales según los resultados.
+- Mantener la latencia leve de edificios como mejora secundaria.
+Entregable: mediciones comparables y optimizaciones justificadas.
+Criterio de cierre: comportamiento aceptable en Samsung y comparaciones
+documentadas.
+
+FASE 10. VALIDACIÓN INTEGRAL DE LOS NUEVOS PERSONAJES
+Estado: pendiente.
+Tareas:
+- Ejecutar regresión, Chromium y pruebas en Samsung.
+- Comprobar orientación, animaciones, controles táctiles, cámara,
+  conversaciones, misiones, combate y reinicio.
+- Comparar con la referencia de la fase 1.
+Entregable: informe de validación y aprobación del piloto de personajes.
+Criterio de cierre: sin regresiones críticas y aprobación visual en el teléfono.
+
+FASE 11. CONSOLIDACIÓN DE LOS DISTRITOS EXISTENTES
+Estado: construcción completada.
+Tareas:
+- Revisar los cuatro distritos con los personajes definitivos.
+- Corregir incidencias concretas.
+- Realizar cualquier ampliación futura sector por sector, con validación previa.
+Entregable: ciudad existente consolidada con los nuevos personajes.
+Criterio de cierre: todos los sectores actuales conservan sus recorridos
+e interacciones.
+
+FASE 12. PRUEBAS FINALES Y VERSIÓN ESTABLE
+Estado: pendiente.
+Tareas:
+- Completar el recorrido del juego y revisar estabilidad y recursos.
+- Incorporar créditos, autores, enlaces, licencias y modificaciones.
+- Documentar los modelos y crear un respaldo final restaurable.
+- Publicar tras CI satisfactorio y autorización de promoción.
+Entregable: versión estable, documentada y recuperable de Lora25: Urban Legacy.
+Criterio de cierre: pruebas finales satisfactorias y respaldo comprobado.
+
+ORDEN DE EJECUCIÓN ACTUALIZADO
+
+1 -> 2 -> 3 y 4 -> 5 -> revisión de 6 y 7 -> 8 y 9 -> 10 -> 11 -> 12.
+
+Detalle:
+1. Cerrar auditoría y respaldo restaurable de la versión aprobada.
+2. Obtener y validar los recursos seleccionados.
+3. Preparar Alejandro y, en el bloque de diseño, Warden y los tres NPC.
+4. Aprobar su apariencia y animaciones antes de integrar los modelos.
+5. Integrar los cinco personajes en la rama de desarrollo.
+6. Revisar el encaje urbano, las colisiones y la circulación existentes.
+7. Ajustar materiales e iluminación y medir/optimizar el rendimiento.
+8. Validar integralmente en Chromium, CI y Samsung.
+9. Consolidar los cuatro distritos actuales.
+10. Completar pruebas finales, documentación, respaldo y publicación autorizada.
+
+Las fases urbanas ya realizadas se reutilizan. El trabajo principal pendiente
+está en los diseños definitivos de los personajes, su integración y validación.
+
+REGLAS OBLIGATORIAS
+- Ejecutar solo las fases autorizadas expresamente.
+- Validar el entregable de cada fase antes de avanzar.
+- No cambiar de motor sin autorización.
+- No eliminar ni reescribir funcionalidades existentes por conveniencia.
+- Explicar y obtener autorización para modificar lógica existente.
+- Conservar los originales y trabajar con versiones recuperables.
+- No incorporar modelos sin licencia compatible y registro de atribución.
+- Priorizar la experiencia en Samsung además de escritorio.
+- Reutilizar la ciudad aprobada y validar cualquier ampliación por sectores.
+- Obtener aprobación visual de los modelos antes de su integración.
+- Promover a main únicamente tras CI satisfactorio y autorización de promoción.
+- Mantener el trabajo en planificación hasta autorizar expresamente la ejecución.
+
+Ejecución autorizada de las primeras fases: fase 1 cerrada y fase 2 parcial.
+Las fases de diseño e integración permanecen pendientes de autorización y
+aprobación visual. El juego público conserva 3e0ec79.

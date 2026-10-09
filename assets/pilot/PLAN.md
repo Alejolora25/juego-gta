@@ -31,8 +31,13 @@
    review confirmed improvement but reported reversed human facing and Warden
    appearance issues. Human visual heading corrected without changing controls;
    Warden original rig retained. Samsung approved these fixes and the four
-   districts. The new compressed-texture build needs a fresh Samsung review
-   after CI passes and promotion is requested.
+   districts. Samsung also approved the compressed-texture build at `3e0ec79`.
+   Small building appearance latency remains a nonblocking observation.
 
 The pilot is opt-in with `?pilot=1`; initial pilot commit `89193c4` was promoted
 to main after CI #294 passed. Later fixes must pass CI before promotion.
+
+Character renewal now follows the updated twelve-phase plan: phase 1 backup
+and restoration verified; phase 2 Quaternius sources acquired and inspected,
+Warden file pending. No new character design or runtime integration yet.
+See `docs/character-renewal/PHASE-1-AUDIT.md` and `PHASE-2-RESOURCES.md`.
