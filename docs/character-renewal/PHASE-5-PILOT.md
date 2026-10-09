@@ -49,6 +49,10 @@ adornos elevados de la arena quedan excluidos del cálculo de suelo.
 - Regresión: **ocho grupos de archivos, cero fallos**, 643,6 ms.
 - Suite completa de Chromium: **seis pruebas, cero fallos**, 1,4 minutos.
   El test del nuevo piloto tardó 6,4 s; no reemplaza las cinco pruebas previas.
+- Comprobación del caso LOD: los tres NPC se desactivan deliberadamente antes
+  de contar sus 62 huesos. El test habilita cada entidad para leer los bindings
+  y los límites deformados, y restaura su visibilidad. Pasó en 6,2 s. Esto evita
+  confundir la liberación normal del skin al ocultar un NPC con un rig ausente.
 - Se verifican carga de los cuatro GLB, rigs, reposo estacionario de NPC,
   caminar/correr, orientación según cámara, siete superficies, colisiones,
   misiones y diálogos de Juan/Sara/David, combate, victoria, reinicio y

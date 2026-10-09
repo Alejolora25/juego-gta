@@ -37,10 +37,21 @@ test('approved human pilot preserves ground contact, facing, missions and combat
    // initial world; animation and gameplay assertions do not need new renders.
    probe.app.autoRender=false;
    const advance=(frames=1)=>{for(let i=0;i<frames;i++){probe.app.update(1/60);s.approvedPresentation.update();}};
+   const withVisibleCharacter=(character,read)=>{
+    const enabled=character.entity.enabled;
+    try{
+     // LOD disables distant characters, which releases their skin instances.
+     // Enabling recreates the real bindings synchronously; preserve the LOD
+     // state after sampling, without moving the camera or rendering a frame.
+     character.entity.enabled=true;
+     return read();
+    }finally{character.entity.enabled=enabled;}
+   };
    let skinIndex=1000000;
-   const bounds=character=>{
+   const bounds=character=>withVisibleCharacter(character,()=>{
     let min=Infinity,max=-Infinity;
     for(const render of character.visual.findComponents('render'))for(const mesh of render.meshInstances){
+     if(mesh.mesh.skin&&!mesh.skinInstance)throw new Error('Missing active skin binding: '+character.name);
      // The renderer normally refreshes these matrices before culling. Do the
      // same for each sampled skeletal pose without another expensive frame.
      mesh.skinInstance?.updateMatrices(mesh.node,++skinIndex);
@@ -48,7 +59,7 @@ test('approved human pilot preserves ground contact, facing, missions and combat
      max=Math.max(max,mesh.aabb.center.y+mesh.aabb.halfExtents.y);
     }
     return {min,max};
-   };
+   });
    const position=entity=>Array.from(entity.getPosition().toArray());
    const front=character=>{
     const direction=character.facing.getWorldTransform().transformVector(new pc.Vec3(0,0,-1));
@@ -60,8 +71,12 @@ test('approved human pilot preserves ground contact, facing, missions and combat
    });
    const player=s.characters.get('stage4-player'),warden=s.characters.get('stage4-warden');
    const npcs=['stage4-juan','stage4-sara','stage4-david'].map(id=>s.characters.get(id));
-   const cast=[player,...npcs,warden].map(character=>({name:character.name,url:character.assetUrl,approved:character.approvedVisual,ready:character.skeletal.ready,
-    bones:new Set(character.visual.findComponents('render').flatMap(render=>render.meshInstances.flatMap(mesh=>mesh.skinInstance?.bones??[]))).size}));
+   // Exercise the initially-culled case explicitly, so physics startup timing
+   // cannot determine whether the skeleton assertion sees skin instances.
+   for(const npc of npcs)npc.entity.enabled=false;
+   const cast=[player,...npcs,warden].map(character=>withVisibleCharacter(character,()=>({name:character.name,url:character.assetUrl,approved:character.approvedVisual,ready:character.skeletal.ready,
+    bones:new Set(character.visual.findComponents('render').flatMap(render=>render.meshInstances.flatMap(mesh=>mesh.skinInstance?.bones??[]))).size})));
+   const culledRigRestored=npcs.every(character=>character.entity.enabled===false);
    const obstaclesBefore=JSON.stringify(s.world.obstacles);
    const physicsColliders=s.physics.staticColliders.length;
    advance(18);
@@ -124,7 +139,7 @@ test('approved human pilot preserves ground contact, facing, missions and combat
    const reset={stage:s.state.stage,xp:s.state.xp,hp:s.state.playerHP,bossHP:s.state.bossHP,bossActive:s.state.bossActive,finished:s.state.finished,
     root:position(player.entity),bounds:bounds(player),surface:s.approvedPresentation.heightAt(0,108),clip:player.skeletal.current,
     bossVisible:warden.entity.enabled,physicsY:s.physics.playerBody.translation().y,npcs:npcs.map(character=>character.skeletal.current)};
-   result={ok:true,cast,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
+   result={ok:true,cast,culledRigRestored,idle,stationaryNpcs,moveBefore,walk,run,stopped,camera,surfaces,blocked,clearRoad,missions,completedState,
     encounter,playerShot,enemyShot,bossHPBefore,bossHPAfter,playerHPBefore,playerHPAfter,victory,reset,hudEvents,physicsColliders,
     obstacleCount:s.world.obstacles.length,obstaclesUnchanged:obstaclesBefore===JSON.stringify(s.world.obstacles)};
   }catch(error){result={ok:false,error:error?.message??String(error),stack:error?.stack};}
@@ -142,6 +157,7 @@ test('approved human pilot preserves ground contact, facing, missions and combat
  expect(result.cast.every(character=>character.ready)).toBe(true);
  for(const path of expectedPaths)expect(loadedAssets).toContainEqual({url:path,status:200});
  for(const npc of result.cast.slice(1,4))expect(npc.bones,npc.name+' skeleton').toBe(62);
+ expect(result.culledRigRestored).toBe(true);
  const expectGrounded=(sample,label)=>{
   expect(Number.isFinite(sample.bounds.min+sample.bounds.max),label+' finite bounds').toBe(true);
   expect(sample.bounds.min,label+' feet').toBeGreaterThanOrEqual(sample.surface-.05);

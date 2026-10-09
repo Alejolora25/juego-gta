@@ -19,7 +19,25 @@
       "reportedDuration": "1.4m",
       "newPilotTestSeconds": 6.4
     },
-    "remoteCI": "pending-push-and-verification"
+    "remoteCI": {
+      "initialRun": 310,
+      "initialConclusion": "failure",
+      "initialFailedAssertion": "Sara skeleton: expected 62, received 0",
+      "cause": "LOD disables distant NPC entities; PlayCanvas clears their render skin instances. The test counted a temporarily absent skin instance as a missing rig.",
+      "correction": "Test recreates real skin bindings while sampling, restores visibility and deliberately exercises all three initially-culled NPCs.",
+      "runtimeChangedByCorrection": false,
+      "correctedCommitStatus": "awaiting-push-and-CI"
+    },
+    "chromiumCulledRigRegression": {
+      "passed": 1,
+      "failed": 0,
+      "testSeconds": 6.2,
+      "suiteSeconds": 7.3,
+      "deliberatelyCulledNpcs": 3,
+      "requiredBonesPerNpc": 62,
+      "visibilityRestored": true,
+      "log": "chromium-culling.log"
+    }
   },
   "visualCaptureReport": "report.json",
   "davidBackReport": "../david-back/report.json",
@@ -231,5 +249,6 @@
     "Complete five-character pilot",
     "Samsung validation and measured performance",
     "Explicit main promotion authorization"
-  ]
+  ],
+  "capturedAt": "2026-10-09T04:44:04.350862+00:00"
 }
