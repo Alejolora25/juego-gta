@@ -57,7 +57,9 @@ Las alturas son de la malla en reposo, no una certificación de todas las poses.
 La copia Standard gratuita obtenida ofrece la base **Superhero Male**, no el
 Regular Male mostrado entre las seis proporciones del kit completo. No trae
 ropa de ingeniero ni animaciones propias. La fase 3 debe adaptar proporciones,
-vestimenta y accesorios; el diseño definitivo todavía no existe.
+vestimenta y accesorios. Esa adaptación se completó posteriormente en fase 3:
+el usuario aprobó Alejandro explorador, conservado con hashes verificables en
+`assets/characters/alejandro-explorer/approval.json`.
 
 La biblioteca conservada ofrece 43 clips reales, no los 120+ de la publicidad
 del kit completo. Los 65 nombres de huesos coinciden con la base. PlayCanvas
@@ -87,7 +89,9 @@ los clips/nombres correctos al contrato existente, sin reescribir el movimiento.
 Los cinco candidatos importaron y reprodujeron Idle en PlayCanvas. Incluyen
 interacción y otros 23 clips, aunque los NPC estacionarios utilizarán reposo.
 Usan materiales de color sin texturas externas; son bases estilizadas que aún
-necesitan identidad visual. La selección de Juan/David/Sara no es definitiva.
+necesitaban identidad visual al cerrar esta inspección. La fase 4 autorizada
+prepara propuestas independientes de Juan, Sara y David para aprobación visual
+en `assets/characters/npc-phase4/`; su integración todavía no está realizada.
 
 En la inspección produjeron entre 9 y 13 instancias de malla por personaje.
 La consolidación de materiales/meshes se evaluará con mediciones; no se afirma
@@ -107,7 +111,9 @@ haber optimizado ni aprobado estos modelos para Samsung.
   y aportar el ZIP con texturas y licencia/constancia de descarga.
 - Se identificó [Quaternius Animated Mech Pack](https://quaternius.com/packs/animatedmech.html)
   como posible alternativa CC0. No fue descargado ni elegido en sustitución
-  del Vanguard; cualquier cambio requiere aprobación.
+  del Vanguard. El usuario confirmó «Mantener Vanguard; avanzar con los NPC»
+  y reiteró que debe usarse el modelo elegido. Warden conserva Vanguard;
+  no se preparará otro robot como sustituto.
 
 ## Comprobaciones y archivos
 
@@ -125,5 +131,7 @@ haber optimizado ni aprobado estos modelos para Samsung.
   y `tools/check-character-library.mjs`.
 
 No se modifica lógica, motor, ciudad, controles ni personajes publicados.
-La fase 2 **no está cerrada** por Warden. Las fases 3 y 4 quedan pendientes de
-autorización y sus diseños deben aprobarse antes de la integración de fase 5.
+La fase 2 **no está cerrada** por Warden. La fase 3 ya fue aprobada y la fase 4
+está autorizada para diseñar los NPC sobre sus fuentes validadas. Los nuevos
+diseños deben aprobarse antes de la integración de fase 5. El pendiente de
+Warden conserva su estado y no se ha sustituido el recurso seleccionado.

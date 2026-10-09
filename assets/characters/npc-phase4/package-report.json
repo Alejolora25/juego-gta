@@ -1,0 +1,49 @@
+{
+  "results": [
+    {
+      "id": "juan",
+      "beforeBytes": 1056496,
+      "afterBytes": 974808,
+      "triangles": 9326,
+      "materials": 13,
+      "meshes": 1,
+      "bones": 62,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "gameplayChanged": false
+    },
+    {
+      "id": "sara",
+      "beforeBytes": 1056144,
+      "afterBytes": 991236,
+      "triangles": 8480,
+      "materials": 14,
+      "meshes": 1,
+      "bones": 62,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "gameplayChanged": false
+    },
+    {
+      "id": "david",
+      "beforeBytes": 1261144,
+      "afterBytes": 1175924,
+      "triangles": 9128,
+      "materials": 16,
+      "meshes": 1,
+      "bones": 62,
+      "clips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "gameplayChanged": false
+    }
+  ]
+}

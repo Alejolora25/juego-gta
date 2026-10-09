@@ -1,0 +1,11 @@
+{
+  "source": "/workspace/artifacts/npc-phase4/npc-motion.webm",
+  "sourceSHA256": "772125c5eb4416a6b2668e924c409c1a59d5326950c0bdddce854f467a5429ba",
+  "sourceDurationSeconds": 38.92,
+  "trimmedLoadingSeconds": 3.8,
+  "method": "First five consecutive canvas samples with a visible character",
+  "sampleIntervalSeconds": 0.2,
+  "recordedContent": "Actual PlayCanvas 2.23.0 in Chromium; three NPCs and their three clips",
+  "otherEdits": "None; recording transcoded to H.264",
+  "gameIntegrated": false
+}

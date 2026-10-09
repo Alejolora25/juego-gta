@@ -1,0 +1,54 @@
+{
+  "phase": 4,
+  "npcDesigns": [
+    {
+      "id": "juan",
+      "name": "Juan",
+      "role": "DevOps",
+      "source": "modular-men/Individual Characters/glTF/Casual_Hoodie.gltf",
+      "height": 1.76,
+      "bones": 62,
+      "exportedClips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "status": "awaiting-visual-approval",
+      "gameplayChanged": false,
+      "originalsModified": false
+    },
+    {
+      "id": "sara",
+      "name": "Sara",
+      "role": "Backend",
+      "source": "modular-women/Individual Characters/glTF/Casual.gltf",
+      "height": 1.7,
+      "bones": 62,
+      "exportedClips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "status": "awaiting-visual-approval",
+      "gameplayChanged": false,
+      "originalsModified": false
+    },
+    {
+      "id": "david",
+      "name": "David",
+      "role": "LAB",
+      "source": "modular-men/Individual Characters/glTF/Suit.gltf",
+      "height": 1.82,
+      "bones": 62,
+      "exportedClips": [
+        "Idle",
+        "Interact",
+        "Wave"
+      ],
+      "status": "awaiting-visual-approval",
+      "gameplayChanged": false,
+      "originalsModified": false
+    }
+  ],
+  "wardenStatus": "awaiting-selected-source-file"
+}

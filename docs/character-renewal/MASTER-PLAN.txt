@@ -111,7 +111,10 @@ Criterio de cierre: apariencia y animaciones aprobadas, escala correcta,
 pies sobre el suelo y orientación correcta.
 
 FASE 4. DISEÑO DE WARDEN Y TRES NPC
-Estado: pendiente.
+Estado: ejecución autorizada; tres NPC preparados para aprobación visual
+en assets/characters/npc-phase4/. Warden pendiente de obtener y validar
+el Vanguard elegido. El usuario confirmó mantenerlo; no se sustituirá por
+otro robot. Fase todavía parcial.
 Tareas:
 - Dar a Warden una silueta amenazante, armadura tecnológica, visor y núcleo
   luminoso.

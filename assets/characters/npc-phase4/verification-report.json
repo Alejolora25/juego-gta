@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-09",
+  "baseCommit": "3e0ec79613a548fc0013ef60663dd22cd3cfdce5",
+  "restoredBaseFilesVerified": 142,
+  "unchangedBaseRuntimeAndAssetFilesVerified": 140,
+  "earlierDocumentationChanges": [
+    "assets/pilot/PLAN.md",
+    "assets/pilot/README.md"
+  ],
+  "originalSourceFilesVerified": 26,
+  "approvedAlejandroDeliverablesVerified": 5,
+  "phase1": "closed; backup/restoration evidence in PHASE-1-AUDIT.md",
+  "phase2": "partial; selected Vanguard official file unavailable",
+  "phase3": "approved Alejandro explorer; preserved",
+  "phase4": "NPC proposals await visual approval; Warden awaits selected source",
+  "warden": {
+    "selectedModel": "Vanguard-Class Mech Titan (Game Ready)",
+    "author": "ThankSang0301",
+    "url": "https://sketchfab.com/3d-models/vanguard-class-mech-titan-game-ready-84f5e9a69d734bbd97b10634e379b235",
+    "userDecision": "Mantener Vanguard; avanzar con los NPC",
+    "substitution": false
+  },
+  "validation": {
+    "evaluatedPoses": 279,
+    "lowestSurfaceZMetres": 0.0039983890019357204,
+    "highestLowestSurfaceZMetres": 0.004002097062766552,
+    "idleHorizontalFootDriftMetres": 0.0,
+    "chromiumModels": 3,
+    "chromiumClips": 9,
+    "chromiumErrors": [],
+    "regressionGroupsPassed": 8,
+    "regressionLog": "/workspace/artifacts/npc-phase4-regression.log",
+    "samsungTested": false,
+    "chromiumGestureHandDistanceFromIdleMetres": {
+      "juan": {
+        "Interact": 0.3114676448317991,
+        "Wave": 0.5583884039199005
+      },
+      "sara": {
+        "Interact": 0.40755317246241224,
+        "Wave": 0.2086614020319883
+      },
+      "david": {
+        "Interact": 0.4547286205549021,
+        "Wave": 0.558372048235906
+      }
+    }
+  },
+  "gameIntegrated": false,
+  "mainPromoted": false
+}
